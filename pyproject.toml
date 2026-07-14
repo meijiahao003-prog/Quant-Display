@@ -16,6 +16,9 @@ dependencies = [
 dev = [
     "ruff>=0.5",
 ]
+reports = [
+    "matplotlib>=3.8",
+]
 
 [tool.setuptools.packages.find]
 where = ["src"]

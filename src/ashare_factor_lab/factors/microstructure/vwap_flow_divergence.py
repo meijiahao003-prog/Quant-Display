@@ -4,13 +4,14 @@ from __future__ import annotations
 
 import numpy as np
 
-from ..data import DataProvider
-from ..operators import purify, ts_corr, ts_mean
-from .base import Factor, FactorMetadata
+from ...data import DataProvider
+from ...operators import purify, ts_corr, ts_mean
+from ..base import Factor, FactorMetadata
 
 
 class VwapFlowDivergence(Factor):
     metadata = FactorMetadata(
+        factor_id="F05",
         name="vwap_flow_divergence",
         category="microstructure",
         direction="signed",

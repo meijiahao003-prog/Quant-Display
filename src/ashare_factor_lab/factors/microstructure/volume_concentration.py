@@ -4,13 +4,14 @@ from __future__ import annotations
 
 import numpy as np
 
-from ..data import DataProvider
-from ..operators import intraday_sum, purify, safe_divide, ts_mean
-from .base import Factor, FactorMetadata
+from ...data import DataProvider
+from ...operators import intraday_sum, purify, safe_divide, ts_mean
+from ..base import Factor, FactorMetadata
 
 
 class OpenCloseVolumeConcentration(Factor):
     metadata = FactorMetadata(
+        factor_id="F02",
         name="open_close_volume_concentration",
         category="microstructure",
         direction="negative",

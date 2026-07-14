@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import numpy as np
 
-from ..data import DataProvider
-from ..operators import (
+from ...data import DataProvider
+from ...operators import (
     cross_sectional_residual,
     cs_percentile_rank,
     purify,
@@ -13,11 +13,12 @@ from ..operators import (
     ts_mean,
     ts_std,
 )
-from .base import Factor, FactorMetadata
+from ..base import Factor, FactorMetadata
 
 
 class TurnoverStability(Factor):
     metadata = FactorMetadata(
+        factor_id="F08",
         name="turnover_stability",
         category="trading_activity",
         direction="negative",

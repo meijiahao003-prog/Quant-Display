@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import numpy as np
 
-from ..data import DataProvider
-from ..operators import (
+from ...data import DataProvider
+from ...operators import (
     cross_sectional_residual,
     cs_sum,
     intraday_sum,
@@ -15,13 +15,14 @@ from ..operators import (
     ts_mean,
     ts_shift,
 )
-from .base import Factor, FactorMetadata
+from ..base import Factor, FactorMetadata
 
 
 class OvernightTailFlowShock(Factor):
     """Five-day reversal signal from overnight shocks and late-session trading pressure."""
 
     metadata = FactorMetadata(
+        factor_id="F01",
         name="overnight_tail_flow_shock",
         category="microstructure",
         direction="negative",

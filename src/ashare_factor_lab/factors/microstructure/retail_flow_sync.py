@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import numpy as np
 
-from ..data import DataProvider
-from ..operators import (
+from ...data import DataProvider
+from ...operators import (
     intraday_sum,
     purify,
     safe_divide,
@@ -13,11 +13,12 @@ from ..operators import (
     ts_percentile_rank_full,
     ts_shift,
 )
-from .base import Factor, FactorMetadata
+from ..base import Factor, FactorMetadata
 
 
 class RetailFlowSynchronization(Factor):
     metadata = FactorMetadata(
+        factor_id="F03",
         name="retail_flow_synchronization",
         category="microstructure",
         direction="negative",

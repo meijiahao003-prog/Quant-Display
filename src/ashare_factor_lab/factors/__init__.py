@@ -1,15 +1,16 @@
 """Public factor catalogue."""
 
 from .base import Factor, FactorMetadata
-from .composite_quality import CompositeQuality
-from .dollar_volume_stability import DollarVolumeStability
-from .fp_idiosyncratic_skew import MixedHorizonIdiosyncraticSkewness
-from .institutional_tail_acceleration import InstitutionalTailAcceleration
-from .overnight_tail_flow import OvernightTailFlowShock
-from .retail_flow_sync import RetailFlowSynchronization
-from .turnover_stability import TurnoverStability
-from .volume_concentration import OpenCloseVolumeConcentration
-from .vwap_flow_divergence import VwapFlowDivergence
+from .fundamental import CompositeQuality
+from .microstructure import (
+    InstitutionalTailAcceleration,
+    OpenCloseVolumeConcentration,
+    OvernightTailFlowShock,
+    RetailFlowSynchronization,
+    VwapFlowDivergence,
+)
+from .risk import MixedHorizonIdiosyncraticSkewness
+from .trading_activity import DollarVolumeStability, TurnoverStability
 
 ALL_FACTORS = (
     OvernightTailFlowShock,
@@ -23,8 +24,16 @@ ALL_FACTORS = (
     CompositeQuality,
 )
 
+FACTOR_GROUPS = {
+    "microstructure": ALL_FACTORS[:5],
+    "risk": ALL_FACTORS[5:6],
+    "trading_activity": ALL_FACTORS[6:8],
+    "fundamental": ALL_FACTORS[8:],
+}
+
 __all__ = [
     "ALL_FACTORS",
+    "FACTOR_GROUPS",
     "CompositeQuality",
     "DollarVolumeStability",
     "MixedHorizonIdiosyncraticSkewness",

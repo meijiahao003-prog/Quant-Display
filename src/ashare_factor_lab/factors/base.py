@@ -12,6 +12,7 @@ from ..data import DataProvider
 
 @dataclass(frozen=True)
 class FactorMetadata:
+    factor_id: str
     name: str
     category: str
     direction: str

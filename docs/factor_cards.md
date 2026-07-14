@@ -4,7 +4,11 @@ These cards document what each implementation measures, the sign convention, and
 important falsification tests. Formulas describe the raw signal before optional winsorization,
 neutralization, and cross-sectional ranking.
 
-## 1. Overnight Tail-Flow Shock
+## Microstructure
+
+### F01 — Overnight Tail-Flow Shock
+
+**Results:** [View the empirical report](../results/factor_reports/f01_overnight_tail_flow_shock.md).
 
 **Hypothesis.** A large market-adjusted overnight gap followed by unusually concentrated,
 one-sided closing-hour trading may represent temporary pressure rather than durable information.
@@ -25,7 +29,9 @@ The implementation removes the final cross-sectional exposure to 20-day momentum
 noisy. Compare against direct market subtraction, longer windows, signed imbalance, and separate
 positive/negative gap legs.
 
-## 2. Open/Close Volume Concentration
+### F02 — Open/Close Volume Concentration
+
+**Results:** [View the empirical report](../results/factor_reports/f02_open_close_volume_concentration.md).
 
 **Hypothesis.** Stocks whose activity is persistently concentrated at session boundaries may be
 more exposed to crowded attention, liquidity demand, and temporary price pressure.
@@ -39,7 +45,9 @@ raw            = -[0.5 × mean(open_share) + 0.5 × mean(close_share)]
 **Required checks.** Treat opening/closing auctions consistently, vary the 15-minute window, and
 test the open and close components independently.
 
-## 3. Retail Flow Synchronization
+### F03 — Retail Flow Synchronization
+
+**Results:** [View the empirical report](../results/factor_reports/f03_retail_flow_synchronization.md).
 
 **Hypothesis.** Small-trade flow that closely follows lagged price changes is consistent with
 extrapolative demand and may predict reversal.
@@ -53,7 +61,9 @@ raw = -corr_time(rank(return(t-1)), rank(retail_strength(t)))
 **Required checks.** “Retail” is a trade-size proxy, not investor identity. Vary the trade-size
 threshold and require adequate five-minute coverage before daily aggregation.
 
-## 4. Institutional Tail Acceleration
+### F04 — Institutional Tail Acceleration
+
+**Results:** [View the empirical report](../results/factor_reports/f04_institutional_tail_acceleration.md).
 
 **Hypothesis.** Persistent large-trade net buying contains information, while the change from
 morning to closing-session pressure adds a timing dimension.
@@ -71,7 +81,9 @@ component additionally controls for the two full-session flow measures.
 **Required checks.** “Institutional” is also a trade-size proxy. Report results before and after
 orthogonalization because aggressive residualization can remove economically meaningful signal.
 
-## 5. VWAP–Flow Divergence
+### F05 — VWAP–Flow Divergence
+
+**Results:** [View the empirical report](../results/factor_reports/f05_vwap_flow_divergence.md).
 
 **Hypothesis.** The relationship between early-session price formation and directional order
 flow can identify confirmation versus divergence regimes.
@@ -85,7 +97,11 @@ raw = corr_time(early_30m_vwap, morning_buy_ratio)
 trend or scale. A stronger robustness specification replaces VWAP level with its deviation from
 the open, previous close, or full-day VWAP.
 
-## 6. Mixed-Horizon Idiosyncratic Skewness
+## Risk
+
+### F06 — Mixed-Horizon Idiosyncratic Skewness
+
+**Results:** [View the empirical report](../results/factor_reports/f06_mixed_horizon_idiosyncratic_skewness.md).
 
 **Hypothesis.** Investors may overpay for lottery-like positive residual skewness, producing a
 negative relationship between idiosyncratic skewness and subsequent returns.
@@ -102,7 +118,11 @@ replication of their BAB beta because this implementation does not apply beta sh
 **Required checks.** Compare equal-weighted and investable-cap-weighted market returns, beta
 shrinkage, weekly-return correlation, and minimum-history filters.
 
-## 7. Dollar-Volume Stability
+## Trading activity
+
+### F07 — Dollar-Volume Stability
+
+**Results:** [View the empirical report](../results/factor_reports/f07_dollar_volume_stability.md).
 
 **Hypothesis.** Stable traded value reflects a more persistent liquidity regime, while highly
 variable traded value may capture event-driven attention or speculative participation.
@@ -114,7 +134,9 @@ raw = -std_126d(traded_value) / mean_126d(traded_value)
 **Required checks.** Compare raw versus log traded value, remove market-wide activity shocks,
 and inspect size and liquidity exposure.
 
-## 8. Turnover Stability
+### F08 — Turnover Stability
+
+**Results:** [View the empirical report](../results/factor_reports/f08_turnover_stability.md).
 
 **Hypothesis.** Stable share turnover contains information distinct from the stability of dollar
 volume.
@@ -130,7 +152,11 @@ raw         = 0.75 × rank(base) + 0.25 × rank(residual(base ~ proxy))
 parameter was 75 days. This public version reports the actual 75-day horizon. Test both horizons
 out of sample rather than selecting between them on full-sample IC.
 
-## 9. Composite Quality
+## Fundamental
+
+### F09 — Composite Quality
+
+**Results:** [View the empirical report](../results/factor_reports/f09_composite_quality.md).
 
 **Hypothesis.** Profitable, cash-generative, operationally efficient, conservatively financed
 companies with improving growth should earn a quality premium.

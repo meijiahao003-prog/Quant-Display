@@ -4,15 +4,16 @@ from __future__ import annotations
 
 import numpy as np
 
-from ..data import DataProvider
-from ..operators import cs_mean, purify, safe_divide, ts_corr, ts_shift, ts_skew, ts_std
-from .base import Factor, FactorMetadata
+from ...data import DataProvider
+from ...operators import cs_mean, purify, safe_divide, ts_corr, ts_shift, ts_skew, ts_std
+from ..base import Factor, FactorMetadata
 
 
 class MixedHorizonIdiosyncraticSkewness(Factor):
     """Low residual-skewness signal using long-correlation/short-volatility beta inputs."""
 
     metadata = FactorMetadata(
+        factor_id="F06",
         name="mixed_horizon_idiosyncratic_skewness",
         category="risk",
         direction="negative",

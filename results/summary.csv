@@ -1,0 +1,10 @@
+factor_id,factor_name,display_name,category,start_date,end_date,ic,ic_5d,rank_ic,percentile_ic,ic_ir,ic_5d_ir,rank_ic_ir,percentile_ic_ir,coverage,days,max_ic_correlation,max_rank_ic_correlation,status
+F01,overnight_tail_flow_shock,Overnight Tail-Flow Shock,microstructure,2016-01-04,2020-05-29,0.0227,0.0217,0.0172,0.0104,0.4457,0.4401,0.2999,0.1778,0.9826,1071,0.6080,0.6146,passed
+F02,open_close_volume_concentration,Open/Close Volume Concentration,microstructure,2016-01-04,2020-05-29,0.0408,0.0537,0.0404,0.0346,0.6297,0.7457,0.5214,0.4301,0.9999,1071,0.5570,0.5148,passed
+F03,retail_flow_synchronization,Retail Flow Synchronization,microstructure,2016-01-04,2020-05-29,0.0206,0.0203,0.0150,0.0066,0.3382,0.3617,0.2453,0.1131,0.8190,1071,0.7218,0.7275,diagnostic
+F04,institutional_tail_acceleration,Institutional Tail Acceleration,microstructure,2016-01-04,2020-05-29,0.0123,0.0176,0.0095,0.0100,0.2987,0.4301,0.1842,0.2058,0.7816,1071,0.4233,0.4248,passed
+F05,vwap_flow_divergence,VWAP-Flow Divergence,microstructure,2016-01-04,2020-05-29,0.0112,0.0190,0.0159,0.0122,0.2509,0.4117,0.3219,0.2624,0.9996,1071,0.4003,0.4078,passed
+F06,mixed_horizon_idiosyncratic_skewness,Mixed-Horizon Idiosyncratic Skewness,risk,2016-01-04,2020-05-29,0.0226,0.0260,0.0296,0.0252,0.5136,0.6087,0.6033,0.5396,1.0000,1071,0.5325,0.6032,passed
+F07,dollar_volume_stability,Dollar-Volume Stability,trading_activity,2016-01-04,2020-05-29,0.0227,0.0274,0.0263,0.0240,0.2938,0.3258,0.3001,0.2794,1.0000,1071,0.6030,0.6467,passed
+F08,turnover_stability,Turnover Stability,trading_activity,2016-01-04,2020-05-29,0.0128,0.0153,0.0191,0.0102,0.2780,0.3141,0.3632,0.2156,1.0000,1071,0.4104,0.5046,passed
+F09,composite_quality,Composite Quality,fundamental,2016-01-04,2018-05-31,0.0107,0.0192,0.0129,0.0119,0.1805,0.2745,0.2019,0.1962,1.0000,586,0.5735,0.6557,diagnostic

@@ -2,13 +2,14 @@
 
 from __future__ import annotations
 
-from ..data import DataProvider
-from ..operators import purify, safe_divide, ts_mean, ts_std
-from .base import Factor, FactorMetadata
+from ...data import DataProvider
+from ...operators import purify, safe_divide, ts_mean, ts_std
+from ..base import Factor, FactorMetadata
 
 
 class DollarVolumeStability(Factor):
     metadata = FactorMetadata(
+        factor_id="F07",
         name="dollar_volume_stability",
         category="trading_activity",
         direction="negative",

@@ -4,17 +4,18 @@ from __future__ import annotations
 
 import numpy as np
 
-from ..data import DataProvider
-from ..operators import cs_percentile_rank, purify, safe_divide
-from .base import Factor, FactorMetadata
+from ...data import DataProvider
+from ...operators import cs_percentile_rank, purify, safe_divide
+from ..base import Factor, FactorMetadata
 
 
 class CompositeQuality(Factor):
     """Profitability, growth, earnings-quality, efficiency, and safety composite."""
 
     metadata = FactorMetadata(
+        factor_id="F09",
         name="composite_quality",
-        category="fundamentals",
+        category="fundamental",
         direction="positive",
         description="Rank composite of five observable company-quality dimensions.",
     )

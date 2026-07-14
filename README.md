@@ -1,31 +1,51 @@
 # Quant Factor Display
 
-A compact, research-oriented toolkit for prototyping cross-sectional equity factors on
-Chinese A-share data. The project separates data access, signal construction, cross-sectional
-post-processing, and evaluation so that the same research logic can be tested with different
-data vendors.
+A compact, research-oriented toolkit for prototyping and documenting cross-sectional equity
+factors on Chinese A-share data. The project separates data access, signal construction,
+cross-sectional post-processing, and evaluation so that the same research logic can be tested
+with different data vendors.
 
-The repository contains **nine independently implemented factors** covering market
-microstructure, trading activity, risk, and fundamental quality.
+The repository contains **nine independently implemented factors** plus sanitized historical
+evaluation summaries covering market microstructure, trading activity, risk, and fundamental
+quality.
 
 > This is a sanitized portfolio project. It contains no proprietary datasets, internal research
-> infrastructure, credentials, production paths, or employer-owned source code. The included
-> synthetic data is designed only to test software behavior and does not demonstrate investment
-> performance.
+> infrastructure, credentials, production paths, or employer-owned source code. Synthetic data
+> is used for reproducible software tests; the separately labelled empirical section reports
+> archived research diagnostics without distributing the underlying market data.
 
 ## Factor catalogue
 
-| Theme | Factor | Core intuition | Horizon |
-|---|---|---|---:|
-| Microstructure | Overnight Tail-Flow Shock | Large overnight residual shocks combined with abnormal closing-hour order-flow imbalance may revert | 5 days |
-| Microstructure | Open/Close Volume Concentration | Persistent concentration of trading at the open and close captures crowded attention and liquidity demand | 20 days |
-| Microstructure | Retail Flow Synchronization | Retail flow that closely follows lagged returns may indicate extrapolative trading and subsequent reversal | 20 days |
-| Microstructure | Institutional Tail Acceleration | Combines persistent institutional net flow with the change from morning to closing-session pressure | 20 days |
-| Microstructure | VWAP–Flow Divergence | Disagreement between early-session VWAP behavior and directional order flow may reveal price-pressure divergence | 20 days |
-| Risk | Mixed-Horizon Idiosyncratic Skewness | Penalizes lottery-like residual return distributions using an FP-inspired mixed-horizon beta estimate | 21/252/750 days |
-| Trading activity | Dollar-Volume Stability | Lower variation in traded value represents a more stable liquidity regime | 126 days |
-| Trading activity | Turnover Stability | Measures turnover stability and partially removes overlapping dollar-volume variation | 75 days |
-| Fundamentals | Composite Quality | Combines profitability, growth, earnings quality, operating efficiency, and balance-sheet safety | Quarterly |
+| ID | Theme | Factor | Core intuition | Horizon |
+|---|---|---|---|---:|
+| F01 | Microstructure | [Overnight Tail-Flow Shock](src/ashare_factor_lab/factors/microstructure/overnight_tail_flow.py) | Overnight residual shocks combined with abnormal closing-hour order-flow imbalance may revert | 5 days |
+| F02 | Microstructure | [Open/Close Volume Concentration](src/ashare_factor_lab/factors/microstructure/volume_concentration.py) | Persistent session-boundary activity captures crowded attention and liquidity demand | 20 days |
+| F03 | Microstructure | [Retail Flow Synchronization](src/ashare_factor_lab/factors/microstructure/retail_flow_sync.py) | Retail-proxy flow that follows lagged returns may indicate extrapolative trading | 20 days |
+| F04 | Microstructure | [Institutional Tail Acceleration](src/ashare_factor_lab/factors/microstructure/institutional_tail_acceleration.py) | Persistent large-trade flow is combined with closing-session acceleration | 20 days |
+| F05 | Microstructure | [VWAP–Flow Divergence](src/ashare_factor_lab/factors/microstructure/vwap_flow_divergence.py) | Early-session price formation is compared with directional order flow | 20 days |
+| F06 | Risk | [Mixed-Horizon Idiosyncratic Skewness](src/ashare_factor_lab/factors/risk/fp_idiosyncratic_skew.py) | Lottery-like residual return distributions are penalized using a mixed-horizon beta | 21/252/750 days |
+| F07 | Trading activity | [Dollar-Volume Stability](src/ashare_factor_lab/factors/trading_activity/dollar_volume_stability.py) | Lower variation in traded value represents a more stable liquidity regime | 126 days |
+| F08 | Trading activity | [Turnover Stability](src/ashare_factor_lab/factors/trading_activity/turnover_stability.py) | Turnover stability is separated from overlapping dollar-volume variation | 75 days |
+| F09 | Fundamental | [Composite Quality](src/ashare_factor_lab/factors/fundamental/composite_quality.py) | Profitability, growth, earnings quality, efficiency, and balance-sheet safety are combined | Quarterly |
+
+Detailed definitions, sign conventions, and falsification tests are in
+[`docs/factor_cards.md`](docs/factor_cards.md).
+
+## Empirical snapshot
+
+The public result catalogue contains the supplied historical evaluator outputs, normalized into
+machine-readable full-sample and annual tables. Seven of nine factors passed the configured
+research gate; F03 and F09 are deliberately retained as diagnostic cases instead of being hidden.
+F02 has the strongest full-sample IC and 5-day IC, while F06 has the highest rank ICIR.
+
+[Open the complete result catalogue →](results/README.md)
+
+![Predictive metrics across nine factors](results/figures/predictive_metrics.png)
+
+![Annual IC stability](results/figures/annual_ic_heatmap.png)
+
+These are research diagnostics, not live returns. The public summaries do not include raw
+parquet data, transaction costs, capacity estimates, or a claim of future persistence.
 
 ## Design
 
@@ -43,7 +63,13 @@ SDK. This keeps the research layer testable and makes timing conventions explici
 
 ```bash
 python -m venv .venv
+
+# macOS / Linux
 source .venv/bin/activate
+
+# Windows PowerShell
+# .venv\Scripts\Activate.ps1
+
 pip install -e ".[dev]"
 python -m unittest discover -s tests
 python examples/run_synthetic_demo.py
@@ -77,6 +103,33 @@ and cross-sectional coverage. A serious empirical study should additionally repo
 
 Synthetic demo outputs must not be interpreted as backtest results.
 
+## Repository layout
+
+```text
+src/ashare_factor_lab/factors/
+├── microstructure/       # F01–F05
+├── risk/                 # F06
+├── trading_activity/     # F07–F08
+└── fundamental/          # F09
+results/
+├── summary.csv           # normalized full-sample metrics
+├── annual_metrics.csv    # year-level stability metrics
+├── factor_reports/       # one evidence card per factor
+├── figures/              # regenerated comparison charts
+└── full_reports/         # archived evaluator panels
+```
+
+To regenerate the public result pages and charts:
+
+```bash
+pip install -e ".[reports]"
+python tools/generate_result_assets.py
+```
+
+The category registry is exposed as `FACTOR_GROUPS`. See
+[`docs/adding_factors.md`](docs/adding_factors.md) for the checklist used to add a factor without
+breaking numbering, documentation, or result coverage.
+
 ## Research lineage
 
 The factor set includes adaptations inspired by the global characteristic literature and mixed-
@@ -93,8 +146,7 @@ horizon beta estimation. Relevant primary references include:
   *The Review of Financial Studies* 23(1), 169–202.
 
 The microstructure combinations are research hypotheses rather than replications of the cited
-papers. See [`docs/factor_cards.md`](docs/factor_cards.md) for definitions and implementation
-notes.
+papers.
 
 ## Reproducibility and disclosure
 

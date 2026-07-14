@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import numpy as np
 
-from ..data import DataProvider
-from ..operators import (
+from ...data import DataProvider
+from ...operators import (
     cross_sectional_residual,
     cs_zscore,
     intraday_sum,
@@ -15,11 +15,12 @@ from ..operators import (
     ts_std,
     ts_sum,
 )
-from .base import Factor, FactorMetadata
+from ..base import Factor, FactorMetadata
 
 
 class InstitutionalTailAcceleration(Factor):
     metadata = FactorMetadata(
+        factor_id="F04",
         name="institutional_tail_acceleration",
         category="microstructure",
         direction="positive",
