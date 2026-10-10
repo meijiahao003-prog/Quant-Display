@@ -46,7 +46,7 @@ from sklearn.linear_model import Ridge
 from sklearn.preprocessing import StandardScaler
 
 
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 
 EXPECTED_INDEX_NAMES = ("Date", "Contract", "Datetime")
 EXPECTED_GROUPS = tuple(f"G{number:02d}" for number in range(1, 13))
@@ -223,6 +223,49 @@ def _series_fingerprint(series: pd.Series) -> str:
     digest.update(_index_fingerprint(series.index).encode("ascii"))
     digest.update(np.ascontiguousarray(values).tobytes())
     return digest.hexdigest()
+
+
+def _oof_feature_fingerprint(frame: pd.DataFrame) -> str:
+    return _sha256_json({
+        "index": _index_fingerprint(frame.index),
+        "columns": list(frame.columns),
+        "values": hashlib.sha256(
+            np.ascontiguousarray(frame.to_numpy(np.float64)).tobytes()
+        ).hexdigest(),
+    })
+
+
+def _validate_oof_binding(result: WalkForwardOOFResult) -> None:
+    """A frozen dataclass does not make its pandas payload immutable."""
+    _validate_index(result.features, "OOF features")
+    if result.group_order != EXPECTED_GROUPS:
+        raise ValueError("OOF group order differs from its frozen schema")
+    if not result.features.index.equals(result.fold_ids.index):
+        raise ValueError("OOF fold IDs and features indices differ")
+    expected = {
+        "oof_index_sha256": _index_fingerprint(result.features.index),
+        "oof_target_sha256": _series_fingerprint(result.target),
+        "oof_feature_sha256": _oof_feature_fingerprint(result.features),
+        "oof_fold_ids_sha256": frame_fingerprint(result.fold_ids.to_frame()),
+        "oof_temporal_metadata": temporal_metadata_for(result.features.index)[1],
+        "group_feature_schema_sha256": {
+            group: _sha256_json(result.group_feature_names[group]) for group in EXPECTED_GROUPS
+        },
+    }
+    for name, value in expected.items():
+        if result.audit.get(name) != value:
+            raise ValueError(f"OOF audit binding mismatch: {name}; regenerate OOF after input changes")
+    folds = result.audit.get("folds", {})
+    times = result.features.index.get_level_values("Datetime")
+    if result.fold_ids.isna().any() or not set(result.fold_ids).issubset(folds):
+        raise ValueError("OOF fold IDs are missing or absent from the audited folds")
+    for fold_id, details in folds.items():
+        selected = np.asarray(result.fold_ids == fold_id)
+        if selected.any() and not (
+            (times[selected] >= pd.Timestamp(details["predict_start"])) &
+            (times[selected] <= pd.Timestamp(details["predict_end"]))
+        ).all():
+            raise ValueError("OOF rows fall outside their audited prediction fold")
 
 
 def _atomic_json(path: Path, payload: Mapping[str, Any]) -> None:
@@ -943,15 +986,9 @@ def run_walk_forward_oof(
         "oof_row_count": len(oof_features),
         "oof_index_sha256": _index_fingerprint(oof_features.index),
         "oof_target_sha256": _series_fingerprint(oof_target),
-        "oof_feature_sha256": _sha256_json(
-            {
-                "index": _index_fingerprint(oof_features.index),
-                "columns": list(oof_features.columns),
-                "values": hashlib.sha256(
-                    np.ascontiguousarray(oof_features.to_numpy(np.float64)).tobytes()
-                ).hexdigest(),
-            }
-        ),
+        "oof_feature_sha256": _oof_feature_fingerprint(oof_features),
+        "oof_fold_ids_sha256": frame_fingerprint(oof_fold_ids.to_frame()),
+        "oof_temporal_metadata": temporal_metadata_for(oof_features.index)[1],
         "all_base_predictions_are_out_of_sample": True,
         "plans_frozen_at_caller_declared": pd.Timestamp(plans_frozen_at),
         "temporal_audit": temporal_audit,
@@ -1068,6 +1105,7 @@ def fit_ridge_meta_model(
         raise ValueError("OOF feature schema/order differs from the frozen 12-group schema")
     if not oof_result.features.index.equals(oof_result.target.index):
         raise ValueError("OOF features and target indices differ")
+    _validate_oof_binding(oof_result)
     meta_label_ends, temporal_audit = temporal_metadata_for(oof_result.features.index)
     if not oof_result.audit.get("purge_check_executed"):
         raise ValueError("OOF result has no label-end purge evidence")
@@ -1151,6 +1189,8 @@ def fit_ridge_meta_model(
         "target": str(oof_result.target.name),
         "group_order": list(EXPECTED_GROUPS),
         "standard_scaler_fitted": True,
+        "source_group_feature_names": deepcopy(dict(oof_result.group_feature_names)),
+        "source_group_plan_sha256": deepcopy(dict(oof_result.audit["group_plan_sha256"])),
         "scaler_fit_rows": len(X),
         "scaler_fit_index_sha256": _index_fingerprint(oof_result.features.index),
         "ridge_alpha": float(alpha),
@@ -1360,6 +1400,7 @@ def fit_final_base_models(
         "group_feature_names": {
             group: list(group_feature_names[group]) for group in EXPECTED_GROUPS
         },
+        "group_plan_sha256": {group: _sha256_json(plans[group]) for group in EXPECTED_GROUPS},
         "group_audits": group_audits,
         "test_was_read": None,
         "elapsed_seconds": time.perf_counter() - started,
@@ -1448,6 +1489,12 @@ def evaluate_final_ridge_stack(
     for group in EXPECTED_GROUPS:
         if tuple(test_feature_names[group]) != tuple(final_base.group_feature_names[group]):
             raise ValueError(f"Test factor names/order differ for {group}")
+        if tuple(final_base.group_feature_names[group]) != tuple(
+            ridge_meta.audit.get("source_group_feature_names", {}).get(group, ())
+        ):
+            raise ValueError(f"final {group} features differ from the Ridge OOF source")
+    if final_base.audit.get("group_plan_sha256") != ridge_meta.audit.get("source_group_plan_sha256"):
+        raise ValueError("final base-model plans differ from the Ridge OOF source")
 
     ts, te = pd.Timestamp(test_start), pd.Timestamp(test_end)
     datetimes = pd.DatetimeIndex(reference_index.get_level_values("Datetime"))
@@ -1464,6 +1511,8 @@ def evaluate_final_ridge_stack(
         raise ValueError("Test begins before the declared final fit time")
     if datetimes.min() <= final_training_end:
         raise RuntimeError("Test begins before the final base-model training end")
+    for frame in grouped_x_test.values():
+        validate_preprocessing_boundary(frame, final_base.audit["as_of_time"])
 
     base_predictions = pd.DataFrame(index=reference_index)
     for group in EXPECTED_GROUPS:

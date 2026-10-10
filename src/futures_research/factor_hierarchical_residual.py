@@ -14,6 +14,7 @@ from dataclasses import dataclass
 from hashlib import sha256
 import importlib.metadata
 import json
+import marshal
 import os
 from pathlib import Path
 import platform
@@ -27,7 +28,7 @@ from .factor_runtime import (temporal_operation, temporal_metadata_for, fit_as_o
                              require_plan_frozen_before, frame_fingerprint, CPU_THREADS, validate_preprocessing_boundary)
 
 
-__version__ = "1.1.0"
+__version__ = "1.2.0"
 
 EXPECTED_INDEX_NAMES = ("Date", "Contract", "Datetime")
 EXPECTED_GROUPS = tuple(f"G{number:02d}" for number in range(1, 13))
@@ -614,9 +615,14 @@ def _fit_signature(
     y_train: pd.Series,
     prediction_index: pd.MultiIndex,
     x_prediction: pd.DataFrame,
+    fit_fn: Optional[Callable] = None,
+    predict_fn: Optional[Callable] = None,
 ) -> dict[str, Any]:
     return {
         "module_version": __version__,
+        "runtime_versions": _common_audit()["versions"],
+        "fit_implementation": _callable_identity(fit_fn or _default_final_fit),
+        "prediction_implementation": _callable_identity(predict_fn or _default_predict),
         "role": role,
         "plan": plan,
         "feature_names": list(map(str, x_train.columns)),
@@ -632,6 +638,30 @@ def _fit_signature(
         "processing_fingerprint": x_train.attrs.get("processing_fingerprint"),
         "sampling_result_fingerprint": x_train.attrs.get("sampling_result_fingerprint"),
         "target_name": str(y_train.name),
+    }
+
+
+def _callable_identity(function: Callable) -> dict[str, Any]:
+    """Bind cache to callback code and immutable captured configuration.
+
+    Mutable external state cannot be proven by introspection. Callers using
+    stateful callbacks must set resume=False when that external state changes.
+    """
+    code = getattr(function, "__code__", None)
+    closure = getattr(function, "__closure__", None) or ()
+    immutable = (str, int, float, bool, type(None))
+    captured = {}
+    for name, cell in zip(getattr(code, "co_freevars", ()), closure):
+        value = cell.cell_contents
+        if isinstance(value, immutable):
+            captured[name] = value
+    return {
+        "module": getattr(function, "__module__", None),
+        "qualname": getattr(function, "__qualname__", type(function).__qualname__),
+        "code_sha256": sha256(marshal.dumps(code)).hexdigest() if code is not None else None,
+        "defaults_sha256": sha256(repr(getattr(function, "__defaults__", None)).encode()).hexdigest(),
+        "keyword_defaults_sha256": sha256(repr(getattr(function, "__kwdefaults__", None)).encode()).hexdigest(),
+        "captured_immutable_sha256": _sha256_json(captured),
     }
 
 
@@ -749,6 +779,7 @@ def generate_monthly_core_oof(
             y_train=y_train,
             prediction_index=x_prediction.index,
             x_prediction=x_prediction,
+            fit_fn=fit, predict_fn=predict,
         )
         temporal_metadata_for(x_prediction.index)
         cached = _load_prediction_cache(root, "core_oof", block.block_id, signature) if resume else None
@@ -840,6 +871,9 @@ def generate_monthly_core_oof(
                 row["strictly_past_training"] for row in monthly_audits
             ),
             "residual_definition": "actual - monthly_OOF_pred_G01",
+            "predictions_sha256": frame_fingerprint(predictions),
+            "prediction_temporal_metadata": temporal_metadata_for(predictions.index)[1],
+            "group_feature_names": deepcopy(feature_names),
         }
     )
     audit_path = root / "audit" / "core_oof_audit.json"
@@ -868,6 +902,14 @@ def _require_core_frame(core_oof: Union[CoreOOFResult, pd.DataFrame]) -> pd.Data
     if not required.issubset(frame.columns):
         raise KeyError(f"core_oof is missing {sorted(required.difference(frame.columns))}")
     _validate_index(frame, "core_oof")
+    if core_oof.audit.get("predictions_sha256") != frame_fingerprint(frame):
+        raise ValueError("core OOF audit binding mismatch: predictions changed; regenerate OOF")
+    if core_oof.audit.get("prediction_temporal_metadata") != temporal_metadata_for(frame.index)[1]:
+        raise ValueError("core OOF audit binding mismatch: temporal metadata changed; regenerate OOF")
+    if _sha256_json(core_oof.audit.get("group_feature_names")) != _sha256_json(core_oof.group_feature_names):
+        raise ValueError("core OOF audit binding mismatch: feature schema changed")
+    if not np.isfinite(frame[["pred_G01", "actual", "core_residual"]].to_numpy(np.float64)).all():
+        raise ValueError("core OOF contains non-finite predictions, labels or residuals")
     expected = frame["actual"] - frame["pred_G01"]
     if not np.allclose(frame["core_residual"], expected, rtol=0.0, atol=0.0, equal_nan=True):
         raise RuntimeError("core_oof residual is not exactly actual - pred_G01")
@@ -925,6 +967,8 @@ def run_residual_parameter_selection(
             raise KeyError(f"missing {group}")
         raw = grouped_x[group]
         _validate_index(raw, group)
+        if tuple(map(str, raw.columns)) != tuple(core_oof.group_feature_names[group]):
+            raise ValueError(f"{group} feature schema differs from the core OOF source")
         if not used_core.index.isin(raw.index).all():
             raise ValueError(f"{group} does not cover all residual selection rows")
         x = raw.loc[used_core.index]
@@ -1137,11 +1181,14 @@ def run_monthly_residual_promotion(
     predict = predict_fn or _default_predict
     core_dt = _datetimes(core.index)
     core_label_ends, _ = temporal_metadata_for(core.index)
+    selection_available = np.asarray(core_label_ends < pd.Timestamp(test_start))
+    promotion_mask = _between(core_dt, promotion_start, promotion_end)
+    purged_selection_rows = int((promotion_mask & ~selection_available).sum())
     prediction_parts: list[pd.DataFrame] = []
     monthly_audits: list[dict[str, Any]] = []
     latest_models: dict[str, Optional[str]] = {}
     for block in make_monthly_blocks(promotion_start, promotion_end):
-        prediction_mask = _between(core_dt, block.start, block.end)
+        prediction_mask = _between(core_dt, block.start, block.end) & selection_available
         if not prediction_mask.any():
             continue
         current_core = core.loc[prediction_mask]
@@ -1156,6 +1203,9 @@ def run_monthly_residual_promotion(
             raise ValueError(f"no residual training rows before {block.start}")
         for group in RESIDUAL_GROUPS:
             raw = grouped_x[group]
+            _validate_index(raw, group)
+            if tuple(map(str, raw.columns)) != tuple(core_oof.group_feature_names[group]):
+                raise ValueError(f"{group} feature schema differs from the core OOF source")
             if not core.index.isin(raw.index).all():
                 raise ValueError(f"{group} does not cover core_oof index")
             x_train = _residual_features(
@@ -1173,6 +1223,7 @@ def run_monthly_residual_promotion(
                 y_train=y_train,
                 prediction_index=x_prediction.index,
                 x_prediction=x_prediction,
+                fit_fn=fit, predict_fn=predict,
             )
             key = f"{block.block_id}_{group}"
             cached = _load_prediction_cache(root, "residual_promotion", key, signature) if resume else None
@@ -1265,6 +1316,9 @@ def run_monthly_residual_promotion(
             "selection_mode": selection_mode,
             "ensemble_gate": ensemble_gate,
             "monthly_blocks": monthly_audits,
+            "purged_selection_labels_unavailable_before_test": purged_selection_rows,
+            "max_selection_label_end": str(temporal_metadata_for(predictions.index)[0].max()),
+            "predictions_sha256": frame_fingerprint(predictions),
         }
     )
     prediction_path = root / "predictions" / "residual_promotion.pkl"
@@ -1324,11 +1378,31 @@ def run_research_walk_forward_test(
     selected_groups = tuple(promotion.selected_groups)
     if any(group not in RESIDUAL_GROUPS for group in selected_groups):
         raise ValueError("promotion contains an unknown residual group")
+    if len(set(selected_groups)) != len(selected_groups):
+        raise ValueError("promotion contains duplicate residual groups")
+    if tuple(promotion.audit.get("selected_groups", ())) != selected_groups:
+        raise ValueError("promotion selected groups differ from the frozen audit")
+    if promotion.audit.get("predictions_sha256") != frame_fingerprint(promotion.predictions):
+        raise ValueError("promotion predictions differ from the frozen audit")
+    if _sha256_json(promotion.audit.get("plans")) != _sha256_json(residual_plans_valid):
+        raise ValueError("residual Test plans differ from the frozen promotion plans")
+    if _sha256_json(history_core_oof.audit.get("core_plan")) != _sha256_json(core_plan_valid):
+        raise ValueError("core Test plan differs from the frozen core OOF plan")
+    if not core_history.index.isin(history_index).all():
+        raise ValueError("history features/labels do not cover the core OOF history")
+    if not np.array_equal(core_history["actual"].to_numpy(), selected_history_y.loc[core_history.index].to_numpy()):
+        raise ValueError("history target differs from the core OOF source target")
+    for group in EXPECTED_GROUPS:
+        if tuple(history_feature_names[group]) != tuple(history_core_oof.group_feature_names[group]):
+            raise ValueError(f"{group} history schema differs from the core OOF source")
     start, end = pd.Timestamp(test_start), pd.Timestamp(test_end)
     require_plan_frozen_before(plans_frozen_at, start)
     promotion_end = promotion.audit.get("promotion_validation", [None, None])[1]
     if promotion_end is None or pd.Timestamp(promotion_end) >= start:
         raise ValueError("promotion selection must be completed before Test")
+    promotion_label_ends, _ = temporal_metadata_for(promotion.predictions.index)
+    if len(promotion_label_ends) == 0 or not (promotion_label_ends < start).all():
+        raise ValueError("promotion selection used labels unavailable before Test")
     temporal_metadata_for(history_index)
     history_dt = _datetimes(history_index)
     if (history_dt >= start).any():
@@ -1358,6 +1432,7 @@ def run_research_walk_forward_test(
         if (current_dt < block.start).any() or (current_dt > block.end).any():
             raise RuntimeError("feature_loader returned rows outside requested month block")
         for group in required_groups:
+            validate_preprocessing_boundary(loaded[group], block.start)
             if loaded_names[group] != history_feature_names[group]:
                 raise ValueError(f"{group} Test feature names/order changed")
             if target in loaded[group].columns:
@@ -1379,6 +1454,7 @@ def run_research_walk_forward_test(
             y_train=y_core_train,
             prediction_index=current_index,
             x_prediction=loaded[CORE_GROUP],
+            fit_fn=fit, predict_fn=predict,
         )
         cached_core = _load_prediction_cache(root, "research_test_core", block.block_id, signature) if resume else None
         core_cache_hit = cached_core is not None
@@ -1431,6 +1507,7 @@ def run_research_walk_forward_test(
                 y_train=y_residual_train,
                 prediction_index=current_index,
                 x_prediction=current_group_x,
+                fit_fn=fit, predict_fn=predict,
             )
             key = f"{block.block_id}_{group}"
             cached = _load_prediction_cache(root, "research_test_residual", key, signature) if resume else None

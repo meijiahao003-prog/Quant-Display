@@ -34,7 +34,7 @@
 
 返回元数据指纹及检查审计。`metadata_origin_verified=False` 明确表示这些声明未经过独立数据源核验。时间元数据必须覆盖实际参与标签计算的最长 horizon；例如目标使用未来多个 bar 的均价，则终点不能只填写第一个 bar。
 
-`purged_time_split(index, *, intervals, label_end, feature_available_at, embargo='0s')` 返回 `SamplingSplit.masks` 和 `.audit`。`intervals` 是按时间顺序排列的 `{名称: (start, end)}`，区间端点包含在内，区间之间严格不重叠。一个样本仅在 `label_end <= 本区间end` 时保留；有下一分区时还要求 `label_end + embargo < 下一分区start`。掩码与输入位置一致，不改变样本顺序；审计记录每区候选数、保留数、清理数与保留索引指纹。空区间可能得到全 False，训练调用方必须检查是否有足够样本。
+`purged_time_split(index, *, intervals, label_end, feature_available_at, embargo='0s')` 返回 `SamplingSplit.masks` 和 `.audit`。`intervals` 是按时间顺序排列的 `{名称: (start, end)}`，区间端点包含在内，区间之间严格不重叠。一个样本仅在 `label_end <= 本区间end` 时保留；有下一分区时还要求 `label_end + embargo < 下一分区start`。掩码与输入位置一致，不改变样本顺序；审计记录每区候选数、保留数、清理数与保留索引指纹。空区间可能得到全 False，训练调用方必须检查是否有足够样本。这个掩码用于训练/评分资格，不能用于 Test 预测的选券资格：未来标签是否完成不得改变当时可预测的特征集合。
 
 这里 `embargo` 是施加在前一区标签终点之后的额外实时时间缓冲，不是行数或交易日数。交易所日历、停牌和不规则间隔场景应提供实际 `label_end`，不能机械地把一行当一分钟。抽样本身不会重算标签，也不能把连续分钟标签的 horizon 直接当成抽样后的行数。
 

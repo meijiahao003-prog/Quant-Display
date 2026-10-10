@@ -85,6 +85,8 @@ def ensemble_predictions(predictions: pd.DataFrame, *, model_weights: Mapping[st
                   duplicate_keys=KEYS + ["model"])
     data["prediction"] = _finite(data.prediction, "prediction")
     _timestamps(data, ["signal_available_at"])
+    if (data.signal_available_at < data.Datetime).any():
+        raise ValueError("signal availability cannot precede its decision timestamp")
     if set(data.model) != set(frozen):
         raise ValueError("prediction models must exactly match frozen model_weights")
     models_per_sample = data.groupby(KEYS, sort=False).model.nunique()
@@ -159,6 +161,8 @@ def build_sector_weights(
     data = _panel(signals, KEYS + ["sector", "prediction", "signal_available_at"])
     data["prediction"] = _finite(data.prediction, "prediction")
     _timestamps(data, ["signal_available_at"])
+    if (data.signal_available_at < data.Datetime).any():
+        raise ValueError("signal availability cannot precede its decision timestamp")
     metadata, metadata_keys = _metadata_frame(contract_metadata)
     metadata = metadata.rename(columns={"sector": "metadata_sector"})
     data = data.merge(metadata, on=metadata_keys, how="left", validate="many_to_one", indicator=True)
@@ -235,8 +239,12 @@ def research_backtest(
     a research notional-return calculation, not futures settlement accounting.
 
     `returns` must contain Date, Contract, Datetime, return_start, return_end,
-    and return. Optional label_available_at must be at/after return_end. Supply
-    raw simple asset returns; statistical prediction labels are not P&L.
+    and return. Optional label_available_at must be at/after return_end for
+    every held instrument; without that field, availability is return_end.
+    Before each next entry, the preceding held outcomes must be available so
+    position sizing cannot compound equity that was not yet observable.
+    Unknown/delayed outcomes of zero positions do not affect portfolio equity.
+    Supply raw simple asset returns; statistical prediction labels are not P&L.
     """
     costs = np.asarray([commission_bps, slippage_bps], dtype=float)
     if not np.isfinite(costs).all() or (costs < 0).any():
@@ -246,15 +254,21 @@ def research_backtest(
     w = _panel(weights, KEYS + ["weight", "signal_available_at"])
     w["weight"] = _finite(w.weight, "weight")
     _timestamps(w, ["signal_available_at"])
+    if (w.signal_available_at < w.Datetime).any():
+        raise ValueError("signal availability cannot precede its decision timestamp")
     return_columns = KEYS + ["return_start", "return_end", "return"]
     if "label_available_at" in returns:
         return_columns.append("label_available_at")
     r = _panel(returns, return_columns)
     _timestamps(r, ["return_start", "return_end"])
     if "label_available_at" in r:
-        _timestamps(r, ["label_available_at"])
-        if (r.label_available_at < r.return_end).any():
-            raise ValueError("realized returns cannot be available before return_end")
+        # Non-held outcomes may be unknown, just like non-held returns. The
+        # actual holdings are joined below before enforcing availability.
+        r["label_available_at"] = pd.to_datetime(r.label_available_at, errors="raise")
+        if r.label_available_at.dt.tz is not None:
+            raise ValueError("label_available_at must contain timezone-naive timestamps")
+    else:
+        r["label_available_at"] = r.return_end
     if (r.return_start < r.Datetime).any() or (r.return_end <= r.return_start).any():
         raise ValueError("returns require Datetime <= return_start < return_end")
     w_bars = w[BARS].drop_duplicates()
@@ -278,6 +292,11 @@ def research_backtest(
     held = data.weight.ne(0)
     if data.loc[held, "_merge"].ne("both").any():
         raise ValueError("missing return for a held instrument")
+    held_availability = data.loc[held, "label_available_at"]
+    if held_availability.isna().any():
+        raise ValueError("held instrument label_available_at must be finite")
+    if (held_availability < data.loc[held, "return_end"]).any():
+        raise ValueError("realized returns cannot be available before return_end")
     held_returns = _finite(data.loc[held, "return"], "held instrument return")
     if (held_returns < -1).any():
         raise ValueError("simple returns below -100% are unsupported by this notional research model")
@@ -287,7 +306,14 @@ def research_backtest(
     data.loc[held, "held_return"] = held_returns
     rate = float(costs.sum() / 1e4)
     nav, high_water, rows = 1., 1., []
+    equity_available_at = None
     for (date, timestamp), group in data.groupby(BARS, sort=False):
+        entry_time = group.return_start.iloc[0]
+        if equity_available_at is not None and equity_available_at > entry_time:
+            raise ValueError("previous held outcomes/equity are unavailable at the next return_start")
+        group_held = group.weight.ne(0)
+        equity_available_at = (group.loc[group_held, "label_available_at"].max()
+                               if group_held.any() else group.return_end.iloc[0])
         target = group.weight.to_numpy()
         realized = group.held_return.to_numpy()
         entry_turnover = float(np.abs(target).sum())
@@ -308,6 +334,7 @@ def research_backtest(
         high_water = max(high_water, nav)
         rows.append({"Date": date, "Datetime": timestamp,
                      "return_start": group.return_start.iloc[0], "return_end": group.return_end.iloc[0],
+                     "equity_available_at": equity_available_at,
                      "gross_return": gross_return, "entry_turnover": entry_turnover,
                      "exit_turnover": exit_turnover, "turnover": turnover,
                      "commission": float(costs[0] / 1e4 * turnover),
@@ -336,6 +363,9 @@ def research_backtest(
         "interval_policy": "common_cross_section_intervals_non_overlapping",
         "position_policy": "reset_to_cash_at_every_interval_end",
         "position_sizing": "target_notional_as_fraction_of_pre_entry_cost_equity",
+        "equity_availability_policy": "held_outcomes_available_no_later_than_next_entry",
+        "return_availability_default": "return_end_when_label_available_at_omitted",
+        "zero_position_outcome_availability": "ignored",
         "exit_notional": "entry_notional_times_one_plus_raw_return",
         "final_liquidation_charged": True,
         "turnover_definition": "absolute_entry_plus_marked_exit_notional_over_start_equity",

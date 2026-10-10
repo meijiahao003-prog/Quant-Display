@@ -20,6 +20,8 @@ import pandas as pd
 from sklearn.decomposition import PCA
 from pandas.api.types import is_numeric_dtype
 
+from .factor_runtime import validate_preprocessing_boundary
+
 
 def _stable_json(value: Any) -> str:
     return json.dumps(
@@ -193,6 +195,11 @@ def transform_factor_group(
 
     if not isinstance(x, pd.DataFrame):
         raise TypeError("x 必须是 pandas.DataFrame。")
+    if not isinstance(state, PCACompressionState):
+        raise TypeError("state must be a PCACompressionState")
+    # Preserve the latest upstream information boundary before overwriting
+    # compression attrs. A second PCA cannot undo an earlier future-fitted PCA.
+    validate_preprocessing_boundary(x, state.fit_end + pd.Timedelta(nanoseconds=1))
     if tuple(map(str, x.columns)) != state.input_features:
         raise ValueError("待转换 X 的因子名称或顺序与 PCA state 不一致。")
     grouping_fingerprint = x.attrs.get("factor_grouping_fingerprint")
@@ -416,6 +423,7 @@ def compress_factor_group(
         raise ValueError("fit_start and fit_end must be finite timestamps")
     if fit_start > fit_end:
         raise ValueError("fit_start 不能晚于 fit_end。")
+    validate_preprocessing_boundary(x, fit_end + pd.Timedelta(nanoseconds=1))
     datetime_level = str(compression_plan.get("datetime_level", "Datetime"))
     fit_mask = _get_fit_mask(x, fit_start, fit_end, datetime_level)
     rule = _resolve_component_rule(compression_plan)

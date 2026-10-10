@@ -60,3 +60,31 @@ python examples/run_sector_cta_demo.py --models xgboost,lightgbm,transformer,itr
 ```
 
 演示合约、日期、特征与执行收益全部为合成数据。研究曲线仅验证非重叠区间的名义收益记账；手续费与滑点是示例常量，不是任何真实交易所费率。未验证真实因子有效性、历史身份真实性、真实成交、保证金、强平、容量、连续持仓或移仓。完整执行引擎仍待接入。
+
+
+## 全系统数据泄漏与逻辑复核
+
+基线为 `fe77ce2d48622fa43a17d4aae3574f5621aa22a0`。本轮[复核报告](../system/leakage_audit.md)列出可复现问题、修复、旧结果兼容性及未覆盖边界；上方旧版测试数量仅记录当时完成的检查。
+
+| 检查 | 本轮结果 |
+|---|---|
+| 完整回归 | 200 项测试、26 个子测试通过；比基线增加 69 项回归 |
+| 模型选择与口径 | 真实 XGBoost / LightGBM 各轮 IC 对照、CPU Torch 独立 IC 标签窗口对齐、误差与 IC 目标分离 |
+| 未来扰动 | Test 标签值/缺失/延迟不改预测与仓位；未来合约不改 Fit 增广；未来预处理不能通过重复变换隐藏来源 |
+| 融合研究 | 真实后端 OOF→Ridge 与分层核心/残差研究测试通过；补充晋级 label_end、OOF/折/计划/缓存绑定回归 |
+| 四模型通用编排 | 选轮数、冻结重训、延后 Test、预测指标与审计产物完成 |
+| 四板块 × 四模型 CTA | 16 个最终模型、排名融合、固定板块仓位及区间研究回测完成 |
+| 回测记账 | 非重叠区间、双边费用、缺失持仓收益、报告截止、上一期权益可得性回归通过 |
+| 独立因子诊断 | Rank IC 交集内重新排名、形状错配与收益 horizon 类型检查通过；未重算旧历史档案 |
+| 发布质量 | Ruff、Git 空白检查、文档相对链接检查通过；67 个公开文件脱敏扫描零命中；wheel / 源代码包构建成功 |
+
+```bash
+python -m pytest -q
+python -m ruff check src/futures_research src/quant_research tests/futures tests/test_factor_bridge.py src/ashare_factor_lab/evaluation/ic.py tests/test_ic_audit_regressions.py tools/check_public_release.py
+python tools/check_public_release.py
+python -m build --no-isolation
+quant-research demo --models xgboost,lightgbm,transformer,itransformer --output runs/audit-general
+python examples/run_sector_cta_demo.py --models xgboost,lightgbm,transformer,itransformer --output runs/audit-sector
+```
+
+本地为相同的 macOS arm64 / Python 3.12 环境。远端检查由仓库 GitHub Actions 对最终提交运行 Python 3.11 / 3.12；以相应提交的状态为准。所有数据均为合成数据；没有执行私人 Notebook、真实行情重算或实盘交易。代码审计和合成测试不能证明真实数据的时点真实性、交易可实现性或盈利能力。

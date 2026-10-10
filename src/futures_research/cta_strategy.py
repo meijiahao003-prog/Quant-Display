@@ -21,7 +21,7 @@ from .cta_sector import prepare_sector_dataset, augment_fit_samples
 from .cta_portfolio import ensemble_predictions, build_sector_weights, research_backtest
 from .factor_model_training import make_training_config, train_factor_model
 from .factor_model_testing import evaluate_factor_model
-from .factor_runtime import frame_fingerprint
+from .factor_runtime import frame_fingerprint, validate_preprocessing_boundary
 from .pipeline import ResearchDataset, _purge, _sample, validate_config, write_json
 
 
@@ -31,8 +31,8 @@ def _fingerprint(ds):
                                                     ds.label_end.rename("label_end")], axis=1))}
 
 
-def _span(ds, interval, name):
-    ds.validate()
+def _span(ds, interval, name, *, allow_missing_labels=False):
+    ds.validate(allow_missing_labels=allow_missing_labels)
     times = pd.DatetimeIndex(ds.x.index.get_level_values("Datetime"))
     start, end = map(pd.Timestamp, interval)
     if len(times) == 0 or (times < start).any() or (times >= end).any():
@@ -86,6 +86,7 @@ def run_sector_strategy(train_valid: ResearchDataset, test_loader: Callable[[], 
         raise ValueError("selection_rule must be chosen before Test")
     _span(train_valid, [cfg["intervals"]["fit"][0], cfg["intervals"]["valid"][1]], "Train/Valid")
     _metadata_timing(train_valid, metadata)
+    validate_preprocessing_boundary(train_valid.x, cfg["intervals"]["fit"][1])
     output = Path(output)
     if output.exists():
         raise FileExistsError("choose a new run directory for provenance")
@@ -123,17 +124,34 @@ def run_sector_strategy(train_valid: ResearchDataset, test_loader: Callable[[], 
             selection[key] = {"iterations": int(count), "selection_rule": selection_rule, "audit": selected.audit}
     write_json(output / "selection.json", selection)
     raw_test = test_loader()  # All sectors and model configurations are frozen above.
-    _span(raw_test, cfg["intervals"]["test"], "Test")
+    _span(raw_test, cfg["intervals"]["test"], "Test", allow_missing_labels=True)
     _metadata_timing(raw_test, metadata)
-    test_prepared = prepare_sector_dataset(raw_test, mapping, target_mode=cfg.get("target_mode", "sector_median_excess"))
-    test, test_audit = _purge(_sample(test_prepared, cfg), cfg, ("test",))
+    validate_preprocessing_boundary(raw_test.x, cfg["intervals"]["test"][0])
+    test_prepared = prepare_sector_dataset(
+        raw_test, mapping, target_mode=cfg.get("target_mode", "sector_median_excess"),
+        allow_missing_labels=True)
+    # Only the declared decision span and ex-ante sampling schedule define the
+    # Test book. A future label's completion/availability may never remove a
+    # contract or whole sector from inference and cross-sectional ranking.
+    test = _sample(test_prepared, cfg, allow_missing_labels=True)
+    test_audit = {"boundary_rule": "decision_time_and_frozen_sampling_only",
+                  "label_end_used_for_signal_selection": False,
+                  "input_rows": len(raw_test.x), "retained_rows": len(test.x),
+                  "labels_missing_for_metrics": int((test.y.isna() |
+                      (test.label_end >= pd.Timestamp(cfg["intervals"]["test"][1]))).sum()),
+                  "labels_available_after_declared_test_end": int(
+                      (test.label_end >= pd.Timestamp(cfg["intervals"]["test"][1])).sum())}
+    metric_cutoff = pd.Timestamp(cfg["intervals"]["test"][1])
     signals, metrics = [], []
     for sector in sectors:
         mask = test.x.index.get_level_values("Contract").map(mapping) == sector
         ds = test.subset(test.x.index[mask])
+        metric_target = ds.y.where(ds.label_end < metric_cutoff)
+        metric_raw = raw_test.y.loc[ds.x.index].where(
+            raw_test.label_end.loc[ds.x.index] < metric_cutoff)
         for method in cfg["models"]:
-            result = evaluate_factor_model(finals[f"{sector}/{method}"], ds.x, ds.y, target=ds.y.name,
-                                            ic_y=raw_test.y.loc[ds.x.index], label_end=ds.label_end,
+            result = evaluate_factor_model(finals[f"{sector}/{method}"], ds.x, metric_target, target=ds.y.name,
+                                            ic_y=metric_raw, label_end=ds.label_end,
                                             feature_available_at=ds.feature_available_at,
                                             output_dir=output / "evaluation" / sector / method,
                                             rolling_window=24, block_size=48)
@@ -164,8 +182,22 @@ def run_sector_strategy(train_valid: ResearchDataset, test_loader: Callable[[], 
     execution_subset = execution_returns.merge(positions[["Date", "Datetime"]].drop_duplicates(),
                                                on=["Date", "Datetime"], how="inner", validate="many_to_one")
     execution_subset = execution_subset.sort_values(["Datetime", "Date", "Contract"])
+    interval_ends = pd.to_datetime(execution_subset["return_end"], errors="raise")
+    if (interval_ends >= metric_cutoff).any():
+        raise ValueError("execution outcomes must be available before the declared Test end; "
+                         "choose a fixed decision schedule with fully settled intervals")
+    if "label_available_at" in execution_subset:
+        held_keys = positions.loc[positions.weight.ne(0), ["Date", "Contract", "Datetime"]]
+        held_outcomes = execution_subset.merge(held_keys, on=["Date", "Contract", "Datetime"],
+                                               how="inner", validate="one_to_one")
+        if (pd.to_datetime(held_outcomes.label_available_at, errors="raise") >= metric_cutoff).any():
+            raise ValueError("execution outcomes must be available before the declared Test end; "
+                             "held outcomes cannot be reported before they are known")
     bt = research_backtest(positions, execution_subset,
                           commission_bps=cfg.get("commission_bps", .2), slippage_bps=cfg.get("slippage_bps", 1.0))
+    if (bt.curves.equity_available_at >= metric_cutoff).any():
+        raise ValueError("execution outcomes must be available before the declared Test end; "
+                         "held outcomes cannot be reported before they are known")
     usable.to_csv(output / "model_signals.csv", index=False)
     ensemble.to_csv(output / "ensemble_signals.csv", index=False)
     positions.to_csv(output / "target_weights.csv", index=False)
@@ -184,6 +216,8 @@ def run_sector_strategy(train_valid: ResearchDataset, test_loader: Callable[[], 
                 "caller_prior_test_access": "not_observable", "selection": selection,
                 "excluded_model_rows_without_all_predictions": int((~eligible).sum()),
                 "prediction_eligibility_uses_future_returns": False,
+                "evaluation_outcome_cutoff_exclusive": str(metric_cutoff),
+                "unavailable_evaluation_targets": "unknown_metrics_preserve_predictions",
                 "contract_metadata_timing_checked_on_all_inputs": True,
                 "contract_metadata_scope": "fixed_mapping_over_declared_run",
                 "ensemble": ensemble.attrs.get("ensemble_audit", {}),

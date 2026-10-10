@@ -62,7 +62,7 @@ flowchart TB
 | 约束 | 实现与核验方式 |
 | --- | --- |
 | 信息时点 | 样本携带 `feature_available_at` 与 `label_end`；连续合约在 T 收盘决策、下一交易日生效，保留原始价格与换约记录 |
-| 样本隔离 | 按时间切分 Fit / Valid / Test，跨边界标签执行 purge / embargo；抽样与缺失处理遵守显式规则 |
+| 样本隔离 | 按时间切分；训练/选参标签执行 purge / embargo，Test 未知标签只影响评分，不影响信号成员 |
 | 处理器冻结 | 时间序列标准化与 PCA 在 Fit 上拟合；CTA 截面标准化只使用同刻板块信息；OOF 各折遵守训练边界 |
 | 训练与评估 | Fit 训练、Valid 选择轮数，随后以固定轮数在 Fit+Valid 重训；全部模型冻结后再由流水线加载 Test |
 | 可追溯与复现 | 保存随机种子、配置、数据指纹、处理器状态、源码及产物 SHA-256，并记录依赖环境 |
@@ -167,7 +167,7 @@ python tools/check_public_release.py
 | 使用与模块说明 | [研究系统指南](docs/futures/README.md) · [数据与复现](docs/futures/reproducibility.md) · [训练与融合](docs/futures/training.md) |
 | 工程边界 | [连续合约](docs/futures/continuous.md) · [因子处理与 QC](docs/futures/factors.md) · [回测契约](docs/system/backtest_contract.md) |
 | 研究来源 | [阶段工作总结](docs/futures/research_summary.md) · [18 份材料的来源哈希](docs/futures/source_manifest.json) |
-| 公开验证 | [脱敏说明](docs/futures/sanitization.md) · [软件验证记录](docs/futures/verification.md) · [GitHub Actions](https://github.com/meijiahao003-prog/Quant-Display/actions) |
+| 公开验证 | [脱敏说明](docs/futures/sanitization.md) · [软件验证记录](docs/futures/verification.md) · [泄漏与逻辑复核](docs/system/leakage_audit.md) · [GitHub Actions](https://github.com/meijiahao003-prog/Quant-Display/actions) |
 
 <details>
 <summary>仓库目录</summary>

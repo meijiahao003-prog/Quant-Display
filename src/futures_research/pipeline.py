@@ -6,6 +6,7 @@ This module evaluates predictions; it does not execute trades or calculate P&L.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from copy import deepcopy
 import hashlib
 import importlib.metadata
 import json
@@ -22,7 +23,7 @@ from .factor_grouping import extract_factor_groups
 from .factor_model_testing import evaluate_factor_model
 from .factor_model_training import make_training_config, train_factor_model
 from .factor_processing import process_factor_data, transform_zscore, validate_processing_inputs
-from .factor_runtime import frame_fingerprint
+from .factor_runtime import frame_fingerprint, validate_preprocessing_boundary
 from .factor_sampling import purged_time_split, sample_factor_data, validate_point_in_time
 
 
@@ -52,11 +53,25 @@ class ResearchDataset:
     feature_available_at: pd.Series
     label_end: pd.Series
 
-    def validate(self) -> None:
+    def validate(self, *, allow_missing_labels: bool = False) -> None:
+        if not isinstance(self.y, pd.Series):
+            raise TypeError("ResearchDataset requires a single target Series")
         validate_processing_inputs(self.x, self.y)
+        if self.y.name is not None and self.y.name in self.x.columns:
+            raise ValueError("the target column cannot also be a feature")
+        dates = pd.DatetimeIndex(self.x.index.get_level_values("Date"))
+        times = pd.DatetimeIndex(self.x.index.get_level_values("Datetime"))
+        contracts = self.x.index.get_level_values("Contract")
+        if dates.isna().any() or dates.tz is not None or times.tz is not None or not dates.equals(dates.normalize()):
+            raise ValueError("use normalized Date and finite timezone-naive exchange timestamps")
+        if any(not isinstance(c, str) or not c.strip() for c in contracts):
+            raise ValueError("Contract must contain non-empty string identifiers")
+        if pd.MultiIndex.from_arrays([contracts, times]).has_duplicates:
+            raise ValueError("a Contract/Datetime cannot occur under multiple Date values")
         validate_point_in_time(self.x.index, feature_available_at=self.feature_available_at,
                                label_end=self.label_end)
-        if not np.isfinite(self.y.to_numpy(dtype=float)).all():
+        values = self.y.to_numpy(dtype=float)
+        if np.isinf(values).any() or (not allow_missing_labels and not np.isfinite(values).all()):
             raise ValueError("labels must be finite; explicitly quarantine unavailable targets")
 
     def subset(self, index: pd.Index) -> "ResearchDataset":
@@ -64,7 +79,8 @@ class ResearchDataset:
                                self.feature_available_at.loc[index], self.label_end.loc[index])
 
     @classmethod
-    def from_frame(cls, frame: pd.DataFrame, *, features: list[str], target: str):
+    def from_frame(cls, frame: pd.DataFrame, *, features: list[str], target: str,
+                   allow_missing_labels: bool = False):
         reserved = {"Date", "Contract", "Datetime", "feature_available_at", "label_end", target}
         if not features or len(features) != len(set(features)) or reserved.intersection(features):
             raise ValueError("features must be unique and exclude keys, targets and timing metadata")
@@ -83,11 +99,12 @@ class ResearchDataset:
         data["Contract"] = data["Contract"].astype(str)
         data = data.set_index(["Date", "Contract", "Datetime"]).sort_index()
         result = cls(data[features], data[target], data["feature_available_at"], data["label_end"])
-        result.validate()
+        result.validate(allow_missing_labels=allow_missing_labels)
         return result
 
 
-def load_dataset(path: Path, *, features: list[str], target: str) -> ResearchDataset:
+def load_dataset(path: Path, *, features: list[str], target: str,
+                 allow_missing_labels: bool = False) -> ResearchDataset:
     if path.suffix == ".csv":
         frame = pd.read_csv(path)
     elif path.suffix == ".parquet":
@@ -96,14 +113,19 @@ def load_dataset(path: Path, *, features: list[str], target: str) -> ResearchDat
             frame = frame.reset_index()
     else:
         raise ValueError("only explicit CSV or Parquet datasets are accepted")
-    return ResearchDataset.from_frame(frame, features=features, target=target)
+    return ResearchDataset.from_frame(frame, features=features, target=target,
+                                      allow_missing_labels=allow_missing_labels)
 
 
 def validate_config(config: Mapping) -> dict:
-    cfg = dict(config)
+    # Freeze nested lists/mappings too: a deferred loader must not mutate the
+    # already-selected model, feature universe or declared Test interval.
+    cfg = deepcopy(dict(config))
     for key in ("seed", "timezone", "intervals", "models", "groups"):
         if key not in cfg:
             raise ValueError(f"missing configuration field: {key}")
+    if isinstance(cfg["seed"], (bool, np.bool_)) or not isinstance(cfg["seed"], (int, np.integer)) or cfg["seed"] < 0:
+        raise ValueError("seed must be a non-negative integer")
     from zoneinfo import ZoneInfo
     ZoneInfo(cfg["timezone"])
     intervals = cfg["intervals"]
@@ -120,11 +142,14 @@ def validate_config(config: Mapping) -> dict:
     allowed = {"xgboost", "lightgbm", "catboost", "transformer", "itransformer"}
     if not cfg["models"] or len(set(cfg["models"])) != len(cfg["models"]) or not set(cfg["models"]) <= allowed:
         raise ValueError("models must be distinct supported method names")
+    for iterations in cfg.get("iterations", {}).values():
+        if isinstance(iterations, (bool, np.bool_)) or not isinstance(iterations, (int, np.integer)) or iterations < 1:
+            raise ValueError("iterations must be positive integers, never silently rounded")
     return cfg
 
 
-def _sample(ds: ResearchDataset, cfg: Mapping) -> ResearchDataset:
-    ds.validate()
+def _sample(ds: ResearchDataset, cfg: Mapping, *, allow_missing_labels: bool = False) -> ResearchDataset:
+    ds.validate(allow_missing_labels=allow_missing_labels)
     if cfg.get("sampling_times"):
         sample = sample_factor_data(ds.x, ds.y, cfg["sampling_times"],
                                     strict_complete_grid=bool(cfg.get("strict_complete_grid", False)))
@@ -145,6 +170,9 @@ def _purge(ds: ResearchDataset, cfg: Mapping, names: tuple[str, ...]):
 
 def _prepare(ds: ResearchDataset, cfg: Mapping):
     fit_start, fit_end = map(pd.Timestamp, cfg["intervals"]["fit"])
+    # Do not erase known future-fitted upstream transforms by attaching a new
+    # (earlier) Fit timestamp to their already-contaminated numeric output.
+    validate_preprocessing_boundary(ds.x, fit_end)
     processed = process_factor_data(ds.x, ds.y, fit_start=fit_start,
                                     fit_end=fit_end - pd.Timedelta("1ns"))
     grouped = extract_factor_groups(processed.x, {"groups": cfg["groups"], "unassigned_policy": "error"})
@@ -176,6 +204,7 @@ def _prepare(ds: ResearchDataset, cfg: Mapping):
 
 
 def _transform(ds: ResearchDataset, cfg: Mapping, zstate, pca_states) -> pd.DataFrame:
+    validate_preprocessing_boundary(ds.x, pd.Timestamp(cfg["intervals"]["test"][0]))
     x = transform_zscore(ds.x, zstate)
     grouped = extract_factor_groups(x, {"groups": cfg["groups"], "unassigned_policy": "error"})
     blocks = []
@@ -231,12 +260,21 @@ def run_research(train_valid: ResearchDataset, test_loader: Callable[[], Researc
     t0, t1 = map(pd.Timestamp, cfg["intervals"]["test"])
     if (test_times < t0).any() or (test_times >= t1).any():
         raise ValueError("Test file contains observations outside its declared half-open interval")
-    test = _sample(raw_test, cfg)
-    test, test_split_audit = _purge(test, cfg, ("test",))
+    # Prediction membership is determined only by the predeclared decision
+    # times. Future label completion/missingness can censor metrics, never X.
+    test = _sample(raw_test, cfg, allow_missing_labels=True)
+    scoreable = (test.label_end < t1) & np.isfinite(test.y)
+    evaluation_y = test.y.where(scoreable)
+    test_split_audit = {
+        "prediction_rows": len(test.x), "scoreable_target_rows": int(scoreable.sum()),
+        "unavailable_or_out_of_span_target_rows": int((~scoreable).sum()),
+        "prediction_membership_uses_label_end": False,
+        "metric_boundary_rule": "finite target and label_end < declared test end",
+    }
     xt = _transform(test, cfg, zstate, pca_states)
     metrics, signal_blocks = [], []
     for method, model in final_models.items():
-        result = evaluate_factor_model(model, xt, test.y, target=test.y.name,
+        result = evaluate_factor_model(model, xt, evaluation_y, target=test.y.name,
                                         label_end=test.label_end, feature_available_at=test.feature_available_at,
                                         output_dir=output / "evaluation", rolling_window=24, block_size=48)
         metrics.append({"model": method, **result.overall_metrics.to_dict()})

@@ -18,10 +18,10 @@ from .factor_runtime import frame_fingerprint
 from .pipeline import ResearchDataset
 
 
-def _validate(ds: ResearchDataset, mapping: Mapping[str, str]) -> np.ndarray:
+def _validate(ds: ResearchDataset, mapping: Mapping[str, str], *, allow_missing_labels: bool = False) -> np.ndarray:
     if not isinstance(ds, ResearchDataset) or not isinstance(ds.y, pd.Series):
         raise TypeError("ds must be a ResearchDataset with one target Series")
-    ds.validate()
+    ds.validate(allow_missing_labels=allow_missing_labels)
     if ds.x.empty:
         raise ValueError("sector preparation requires rows and feature columns")
     if not isinstance(mapping, Mapping) or not mapping:
@@ -77,6 +77,7 @@ def prepare_sector_dataset(
     contract_to_sector: Mapping[str, str],
     *,
     target_mode: str = "sector_median_excess",
+    allow_missing_labels: bool = False,
 ) -> ResearchDataset:
     """Normalize real features and targets within each Datetime/sector.
 
@@ -88,16 +89,22 @@ def prepare_sector_dataset(
     Every output row inherits the group's maximum feature availability and
     label end: cross-sectional statistics depend on the other group members.
     Supply all intended members before splitting by sector or filtering rows.
+    For frozen Test inference, ``allow_missing_labels=True`` preserves every
+    feature row. If any sector peer has an unknown target, the entire group
+    target is unknown; incomplete future outcomes never redefine its median.
     """
     if target_mode not in {"sector_median_excess", "sector_zscore"}:
         raise ValueError("target_mode must be sector_median_excess or sector_zscore")
-    sectors = _validate(ds, contract_to_sector)
+    sectors = _validate(ds, contract_to_sector, allow_missing_labels=allow_missing_labels)
     keys = [ds.x.index.get_level_values("Datetime"), sectors]
     x = _zscore(ds.x, keys)
     if target_mode == "sector_median_excess":
         y = ds.y - ds.y.groupby(keys, sort=False).transform("median")
     else:
         y = _zscore(ds.y.to_frame(), keys).iloc[:, 0]
+    if allow_missing_labels:
+        complete = ds.y.notna().groupby(keys, sort=False).transform("all")
+        y = y.where(complete)
     y.name = f"{target_mode}_return_30m"
     x.attrs = dict(ds.x.attrs)
     x.attrs.update(sector_feature_normalization="same_datetime_zscore_ddof0",
@@ -105,7 +112,7 @@ def prepare_sector_dataset(
     available = ds.feature_available_at.groupby(keys, sort=False).transform("max")
     label_end = ds.label_end.groupby(keys, sort=False).transform("max")
     result = ResearchDataset(x, y, available, label_end)
-    result.validate()
+    result.validate(allow_missing_labels=allow_missing_labels)
     return result
 
 
@@ -122,7 +129,7 @@ def augment_fit_samples(
     """Append fixed-weight virtual contracts derived only from eligible Fit rows.
 
     Use already prepared real cross-sections. Draw K Dirichlet weight vectors
-    per sector once, in sorted mapping-member order, and reuse them at every Fit
+    per sector once, in sorted eligible Fit-member order, and reuse them at every Fit
     timestamp. Absent/ineligible members receive zero weight; the rest are
     renormalized. At least two eligible members are required. A missing feature
     in any participating member makes that synthetic feature missing; nothing
@@ -156,6 +163,7 @@ def augment_fit_samples(
         "synthetic_rows": 0, "skipped_groups_fewer_than_two": 0,
         "missing_features": "strict_nan_propagation_no_imputation",
         "original_rows_preserved": True,
+        "weight_universe": "eligible_fit_contracts_only",
         "input_fingerprints": {
             "x": frame_fingerprint(ds.x), "y": frame_fingerprint(ds.y.to_frame()),
             "timing": frame_fingerprint(pd.concat([ds.feature_available_at.rename("feature_available_at"),
@@ -169,7 +177,10 @@ def augment_fit_samples(
     positions = pd.DataFrame({"Datetime": times, "sector": sectors,
                               "position": np.arange(len(ds.x))})
     for sector in sorted(set(sectors[eligible])):
-        members = sorted(c for c, s in contract_to_sector.items() if s == sector)
+        # Valid/Test-only contracts must not alter the random weight space
+        # or any historical Fit sample, even when included in the run mapping.
+        member_mask = eligible & (sectors == sector)
+        members = sorted(set(ds.x.index.get_level_values("Contract")[member_mask]))
         # A sector's weights do not change when an unrelated sector is added.
         sector_seed = int.from_bytes(sha256(sector.encode("utf-8")).digest()[:8], "little")
         rng = np.random.default_rng(np.random.SeedSequence([int(seed), sector_seed]))

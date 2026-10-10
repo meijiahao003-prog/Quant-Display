@@ -28,7 +28,7 @@ def main(argv=None):
             raise ValueError("train-valid and Test must be separate files")
         kwargs = {"features": data["features"], "target": data["target"]}
         train = load_dataset(train_path, **kwargs)
-        result = run_research(train, lambda: load_dataset(test_path, **kwargs), cfg, args.output)
+        result = run_research(train, lambda: load_dataset(test_path, **kwargs, allow_missing_labels=True), cfg, args.output)
     print(json.dumps({"status": result["status"], "synthetic": result["synthetic"],
                       "models": result["models"], "output": str(args.output)}, ensure_ascii=False))
 

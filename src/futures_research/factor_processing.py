@@ -28,6 +28,8 @@ import numpy as np
 import pandas as pd
 from pandas.api.types import is_numeric_dtype
 
+from .factor_runtime import validate_preprocessing_boundary
+
 
 __all__ = [
     "EXPECTED_INDEX_NAMES",
@@ -41,7 +43,7 @@ __all__ = [
     "validate_processing_inputs",
 ]
 
-__version__ = "1.1.0"
+__version__ = "1.2.0"
 
 EXPECTED_INDEX_NAMES = ("Date", "Contract", "Datetime")
 Target = Union[pd.Series, pd.DataFrame]
@@ -165,6 +167,10 @@ def fit_zscore_state(
         raise ValueError("ddof must be a non-negative integer")
 
     start, end = _normalise_interval(fit_start, fit_end)
+    # Re-fitting an earlier scaler cannot remove information already learned
+    # by an upstream transform. Endpoints here are inclusive; equal Fit
+    # cutoffs are legitimate for a standardize-then-compress workflow.
+    validate_preprocessing_boundary(x, end + pd.Timedelta(nanoseconds=1))
     fit_mask = (datetimes >= start) & (datetimes <= end)
     if not bool(fit_mask.any()):
         raise ValueError(f"x has no rows inside the Fit interval {start} -> {end}")
@@ -229,6 +235,7 @@ def transform_zscore(
     if not isinstance(state, ZScoreState):
         raise TypeError("state must be a ZScoreState")
     validate_processing_inputs(x, x)
+    validate_preprocessing_boundary(x, state.fit_end + pd.Timedelta(nanoseconds=1))
     current_fingerprint = _state_fingerprint(
         pd.concat([state.mean, state.std, state.valid_count], axis=1),
         state.fit_start, state.fit_end, state.ddof,
@@ -426,6 +433,8 @@ def process_factor_data(
         )
     if fit_start is None or fit_end is None:
         raise ValueError("fit_start and fit_end are required when execute=True")
+    _, upstream_cutoff = _normalise_interval(fit_start, fit_end)
+    validate_preprocessing_boundary(x, upstream_cutoff + pd.Timedelta(nanoseconds=1))
 
     parameters = dict(method_params or {})
     forbidden = {"x", "y", "fit_start", "fit_end"}.intersection(parameters)

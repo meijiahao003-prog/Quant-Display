@@ -1,4 +1,4 @@
-#_pearson_ic 的单核约束我保留了（没关）。理由：1-D 点积开多线程零收益，关掉既不能提速、又会重新引入瞬时叠加。节流 + 单核是互补的两道防线，各管一段。
+"""Auditable two-stage model training with exact per-iteration validation metrics."""
 from __future__ import annotations
 
 from copy import deepcopy
@@ -46,7 +46,7 @@ __all__ = [
     "validate_training_inputs",
 ]
 
-__version__ = "3.2.0"
+__version__ = "3.3.0"
 
 EXPECTED_INDEX_NAMES = ("Date", "Contract", "Datetime")
 Target = Union[pd.Series, pd.DataFrame]
@@ -337,7 +337,7 @@ def validate_training_inputs(
                 f"target={target!r} does not match y.name={y.name!r}"
             )
         selected_y = y
-        target = str(y.name) if y.name is not None else "target"
+        target = str(y.name) if y.name is not None else (target or "target")
 
     if not is_numeric_dtype(selected_y):
         raise TypeError(f"selected target {target!r} must be numeric")
@@ -345,7 +345,8 @@ def validate_training_inputs(
     datetimes = pd.DatetimeIndex(x.index.get_level_values("Datetime"))
     if datetimes.isna().any():
         raise ValueError("Datetime index contains NaT")
-    if str(selected_y.name) in x.columns:
+    effective_target = str(selected_y.name) if selected_y.name is not None else str(target)
+    if effective_target in x.columns:
         raise ValueError("label leakage: target name appears among feature columns")
     return selected_y, datetimes, tuple(x.columns)
 
@@ -1080,9 +1081,9 @@ def _select_best_from_history(
     return best_idx, best_ic_iteration, best_ic, best_valid_loss
 
 
-# 诊断用 Pearson IC 的计算节流间隔：每 N 轮才真正算一次 IC，其余轮复用缓存值，
-# 避免每轮触发 BLAS 多线程与训练本身的 OpenMP 线程叠加（阶段1满核的根因）。
-_IC_INTERVAL = 30
+# Every recorded IC must belong to that exact model iteration. Cached values
+# cannot be used to select a fixed iteration in a downstream strategy.
+_IC_INTERVAL = 1
 
 
 class _PearsonICMetric:
@@ -1159,23 +1160,15 @@ class _XGBoostAdapter(_BaseAdapter):
         )
         history: dict[str, Any] = {}
 
-        # 2. 自定义 metric：每 _IC_INTERVAL 轮算两个 IC（诊断用）——
-        #    pearson_ic = prediction vs 原始收益(ic_y)；label_ic = prediction vs 训练标签(target)。
-        _ic_state: dict[str, Any] = {"tick": 0, "value_return": float("nan"), "value_label": float("nan")}
-
-        def _maybe_recompute_ic(prediction):
-            _ic_state["tick"] += 1
-            if _ic_state["tick"] == 1 or _ic_state["tick"] % _IC_INTERVAL == 0:
-                _ic_state["value_return"] = _pearson_ic(prediction, ic_valid)
-                _ic_state["value_label"] = _pearson_ic(prediction, y_valid)
+        # Record both IC definitions from this exact checkpoint, on Validation only.
 
         def pearson_ic_metric(prediction, matrix):
-            if matrix is dvalid:  # 只对验证集计数
-                _maybe_recompute_ic(prediction)
-            return "pearson_ic", _ic_state["value_return"]
+            value = _pearson_ic(prediction, ic_valid) if matrix is dvalid else float("nan")
+            return "pearson_ic", value
 
         def label_ic_metric(prediction, matrix):
-            return "label_ic", _ic_state["value_label"]
+            value = _pearson_ic(prediction, y_valid) if matrix is dvalid else float("nan")
+            return "label_ic", value
 
         # 3. 训练回调：把每轮 Train/Valid RMSE 与 IC 喂给实时绘图。
         class LiveCallback(xgb.callback.TrainingCallback):
@@ -1324,24 +1317,15 @@ class _LightGBMAdapter(_BaseAdapter):
         )
         history: dict[str, Any] = {}
 
-        # 2. 自定义 feval：每 _IC_INTERVAL 轮算两个 IC（诊断用）——
-        #    pearson_ic = prediction vs 原始收益(ic_y)；label_ic = prediction vs 训练标签(target)。
-        #    只对 valid 计数，train 集复用缓存，避免每轮触发 BLAS 多线程与训练线程叠加。
-        _ic_state: dict[str, Any] = {"tick": 0, "value_return": float("nan"), "value_label": float("nan")}
-
-        def _maybe_recompute_ic(prediction):
-            _ic_state["tick"] += 1
-            if _ic_state["tick"] == 1 or _ic_state["tick"] % _IC_INTERVAL == 0:
-                _ic_state["value_return"] = _pearson_ic(prediction, ic_valid)
-                _ic_state["value_label"] = _pearson_ic(prediction, y_valid)
+        # Record both IC definitions from this exact checkpoint, on Validation only.
 
         def pearson_ic_metric(prediction, dataset):
-            if dataset is dvalid:  # 只对验证集计数
-                _maybe_recompute_ic(prediction)
-            return "pearson_ic", _ic_state["value_return"], True
+            value = _pearson_ic(prediction, ic_valid) if dataset is dvalid else float("nan")
+            return "pearson_ic", value, True
 
         def label_ic_metric(prediction, dataset):
-            return "label_ic", _ic_state["value_label"], True
+            value = _pearson_ic(prediction, y_valid) if dataset is dvalid else float("nan")
+            return "label_ic", value, True
 
         # 3. 训练回调：收集每轮 Train/Valid RMSE 与 IC，喂给实时绘图。
         def live_callback(env):
@@ -1750,6 +1734,10 @@ def _build_window_dataset(split: _SplitData, config: Mapping[str, Any], torch: A
     ends = torch.from_numpy(end_positions)
 
     class WindowDataset(torch.utils.data.Dataset):
+        # Prediction/label endpoints are sorted together; missing independent IC
+        # labels never change the training windows or the training loss.
+        ic_targets = (split.ic_y if split.ic_y is not None else split.y)[order][end_positions]
+
         def __len__(self):
             return int(len(ends))
 
@@ -1929,8 +1917,10 @@ def _epoch_rmse(torch: Any, model: Any, loader: Any, device: Any, optimizer: Any
     return math.sqrt(squared_error / count)
 
 
-def _validation_rmse_ic(torch: Any, model: Any, loader: Any, device: Any) -> tuple[float, float]:
-    """Evaluate one PyTorch sequence checkpoint once and return RMSE plus IC."""
+def _validation_rmse_ic(
+    torch: Any, model: Any, loader: Any, device: Any, *, ic_targets: np.ndarray,
+) -> tuple[float, float, float]:
+    """Evaluate RMSE on training labels and IC on independently aligned labels."""
     model.eval()
     predictions: list[np.ndarray] = []
     targets: list[np.ndarray] = []
@@ -1948,7 +1938,10 @@ def _validation_rmse_ic(torch: Any, model: Any, loader: Any, device: Any) -> tup
     rmse = float(
         np.sqrt(np.mean(np.square(prediction_values - target_values), dtype=np.float64))
     )
-    return rmse, _pearson_ic(prediction_values, target_values)
+    if len(ic_targets) != len(prediction_values):
+        raise RuntimeError("independent Validation IC targets differ from sequence endpoints")
+    return (rmse, _pearson_ic(prediction_values, ic_targets),
+            _pearson_ic(prediction_values, target_values))
 
 
 @register_training_method("itransformer")
@@ -1984,6 +1977,7 @@ class _ITransformerAdapter(_BaseAdapter):
         train_values: list[float] = []
         valid_values: list[float] = []
         valid_ic_values: list[float] = []
+        valid_label_ic_values: list[float] = []
         best_loss = float("inf")
         best_iteration = 0
         best_state = None
@@ -1993,12 +1987,13 @@ class _ITransformerAdapter(_BaseAdapter):
                 torch, model, train_loader, device, optimizer,
                 float(self.config["params"]["gradient_clip_norm"]),
             )
-            valid_rmse, valid_ic = _validation_rmse_ic(
-                torch, model, valid_loader, device
+            valid_rmse, valid_ic, valid_label_ic = _validation_rmse_ic(
+                torch, model, valid_loader, device, ic_targets=valid_dataset.ic_targets
             )
             train_values.append(train_rmse)
             valid_values.append(valid_rmse)
             valid_ic_values.append(valid_ic)
+            valid_label_ic_values.append(valid_label_ic)
             if valid_rmse < best_loss:
                 best_loss = valid_rmse
                 best_iteration = epoch
@@ -2009,7 +2004,7 @@ class _ITransformerAdapter(_BaseAdapter):
             raise RuntimeError(f"{method} did not produce a valid checkpoint")
         model.load_state_dict(best_state)
         model.to(device)
-        frame = _history_frame(train_values, valid_values, valid_ic_values)
+        frame = _history_frame(train_values, valid_values, valid_ic_values, valid_label_ic_values)
         best_ic_iteration, best_ic = _best_ic(valid_ic_values)
         plotter.update(train_values, valid_values, valid_ic_values, final=True)
         return _FitOutcome(
@@ -2158,6 +2153,8 @@ def train_factor_model(
     target_name = str(selected_y.name) if selected_y.name is not None else (target or "target")
     # 独立的 IC 评估标签：提供 ic_y 时用它算 IC，否则 IC 用训练 label（target）。
     ic_label = _extract_ic_series(ic_y, x) if ic_y is not None else None
+    if ic_label is not None and ic_label.name is not None and str(ic_label.name) in x.columns:
+        raise ValueError("label leakage: independent IC target name appears among feature columns")
     fs, fe, vs, ve = _normalise_bounds(fit_start, fit_end, valid_start, valid_end)
     normalised_config = _normalise_config(
         method,
@@ -2352,6 +2349,9 @@ def train_factor_model(
         "sampling_result_fingerprint": x.attrs.get("sampling_result_fingerprint"),
         "fit_target_sha256": _target_fingerprint(selected_y.loc[fit_mask]),
         "valid_target_sha256": _target_fingerprint(selected_y.loc[valid_mask]),
+        "valid_ic_target_sha256": _target_fingerprint(
+            (ic_label if ic_label is not None else selected_y).loc[valid_mask]
+        ),
     }
     run_id = _sha256_json(data_binding)[:16]
     if stage == "selection":
@@ -2429,6 +2429,9 @@ def train_factor_model(
         "sampling_result_fingerprint": x.attrs.get("sampling_result_fingerprint"),
         "fit_target_sha256": data_binding["fit_target_sha256"],
         "valid_target_sha256": data_binding["valid_target_sha256"],
+        "valid_ic_target_sha256": data_binding["valid_ic_target_sha256"],
+        "validation_ic_computed_every_iteration": stage == "selection" and normalised_method != "catboost",
+        "validation_ic_target_name": str((ic_label if ic_label is not None else selected_y).name),
         "runtime_threads": runtime_thread_snapshot(),
         "source_sha256": {
             "factor_model_training": _sha256_file(Path(__file__)),

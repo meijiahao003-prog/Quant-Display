@@ -15,8 +15,10 @@ def forward_returns(close: Array, horizon: int = 1) -> Array:
     """Align simple forward returns with the signal date."""
 
     price = purify(close)
-    if horizon <= 0:
-        raise ValueError("horizon must be positive")
+    if isinstance(horizon, (bool, np.bool_)) or not isinstance(horizon, (int, np.integer)) or horizon <= 0:
+        raise ValueError("horizon must be a positive integer")
+    if price.ndim != 2:
+        raise ValueError("close must have shape dates × assets")
     out = np.full_like(price, np.nan)
     if horizon < price.shape[0]:
         out[:-horizon] = price[horizon:] / price[:-horizon] - 1.0
@@ -32,10 +34,11 @@ def information_coefficient(
 ) -> Array:
     """Compute one Pearson or Spearman-style IC per date."""
 
-    factor, target = np.broadcast_arrays(purify(signal), purify(future_return))
-    if rank:
-        factor = cs_percentile_rank(factor)
-        target = cs_percentile_rank(target)
+    factor, target = purify(signal), purify(future_return)
+    if factor.ndim != 2 or factor.shape != target.shape:
+        raise ValueError("signal and future_return must have identical dates × assets shapes")
+    if isinstance(min_assets, (bool, np.bool_)) or not isinstance(min_assets, (int, np.integer)) or min_assets < 2:
+        raise ValueError("min_assets must be an integer of at least two")
     output = np.full(factor.shape[0], np.nan)
     for row in range(factor.shape[0]):
         valid = np.isfinite(factor[row]) & np.isfinite(target[row])
@@ -43,6 +46,11 @@ def information_coefficient(
             continue
         x = factor[row, valid]
         y = target[row, valid]
+        # Spearman ranks belong to the common observed asset set. Ranking each
+        # full side before pairwise filtering leaves different gaps in ranks.
+        if rank:
+            x = cs_percentile_rank(x[None, :])[0]
+            y = cs_percentile_rank(y[None, :])[0]
         if np.std(x) <= 1e-12 or np.std(y) <= 1e-12:
             continue
         output[row] = np.corrcoef(x, y)[0, 1]

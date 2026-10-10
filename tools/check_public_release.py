@@ -14,7 +14,7 @@ import re
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-SCOPES = ["src/futures_research", "src/quant_research", "docs/futures", "docs/system", "docs/strategies",
+SCOPES = ["src/ashare_factor_lab/evaluation/ic.py", "tests/test_ic_audit_regressions.py", "src/futures_research", "src/quant_research", "docs/futures", "docs/system", "docs/strategies",
           "tests/futures", "tests/test_factor_bridge.py", "configs", "README.md",
           ".github", "pyproject.toml", "MANIFEST.in", ".gitignore", "requirements",
           "examples/run_sector_cta_demo.py", "examples/run_research_pipeline.py", "examples/run_factor_bridge_demo.py",

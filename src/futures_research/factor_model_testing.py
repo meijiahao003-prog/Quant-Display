@@ -34,7 +34,7 @@ import pandas as pd
 from pandas.api.types import is_numeric_dtype
 
 from .factor_runtime import (
-    temporal_operation, temporal_metadata_for,
+    temporal_operation, temporal_metadata_for, validate_preprocessing_boundary,
     CPU_THREADS,
     configure_torch_threads,
     index_fingerprint as _index_fingerprint,
@@ -66,14 +66,18 @@ __all__ = [
     "validate_test_inputs",
 ]
 
-__version__ = "1.1.0"
+__version__ = "1.2.0"
 EXPECTED_INDEX_NAMES = ("Date", "Contract", "Datetime")
 Target = Union[pd.Series, pd.DataFrame]
 
 
 @dataclass(frozen=True)
 class TestingResult:
-    """All outputs from one immutable frozen-Test evaluation."""
+    """Outputs from an evaluation that does not fit or update the supplied model.
+
+    The final-stage identity/config/time protocol is checked, but this container
+    does not make a caller-owned native model or pandas payload immutable.
+    """
 
     model: Any
     method: str
@@ -200,7 +204,7 @@ def validate_test_inputs(
     *,
     require_single_contract: bool = False,
 ) -> tuple[pd.Series, pd.DatetimeIndex, tuple[str, ...], tuple[str, ...]]:
-    """Validate the immutable Test pair and return the selected label."""
+    """Validate the aligned Test pair and return the selected label."""
     if not isinstance(x_test, pd.DataFrame):
         raise TypeError("x_test must be a pandas DataFrame")
     if not isinstance(y_test, (pd.Series, pd.DataFrame)):
@@ -351,6 +355,14 @@ def _verify_test_is_after_training(
         raise ValueError(
             "Test data overlaps or precedes the final training period: "
             f"test_start={test_start}, training_end={training_end}"
+        )
+    frozen_at = temporal_audit.get("fit_as_of")
+    if frozen_at is None or pd.isna(pd.Timestamp(frozen_at)):
+        raise ValueError("training result lacks a declared final model freeze time")
+    if test_start < pd.Timestamp(frozen_at):
+        raise ValueError(
+            "Test starts before the final model freeze time: "
+            f"test_start={test_start}, frozen_at={frozen_at}"
         )
     return training_end
 
@@ -548,13 +560,16 @@ def _monthly_metrics(predictions: pd.DataFrame) -> pd.DataFrame:
         block = predictions.loc[np.asarray(months == month)]
         pred = block["prediction"].to_numpy(np.float64)
         actual = block["actual"].to_numpy(np.float64)
-        rmse, mae, pair_count = _error_metrics(pred, actual)
+        metric_target = block["target"].to_numpy(np.float64) if "target" in block else actual
+        rmse, mae, error_pair_count = _error_metrics(pred, metric_target)
+        pair_count = int((np.isfinite(pred) & np.isfinite(actual)).sum())
         finite = np.isfinite(pred) & np.isfinite(actual)
         rows.append(
             {
                 "month": str(month),
                 "n_total": int(len(block)),
                 "n_pairwise_finite": pair_count,
+                "n_error_pairwise_finite": error_pair_count,
                 "pairwise_finite_ratio": float(pair_count / len(block)),
                 "pearson_ic": _correlation(pred, actual),
                 "spearman_ic": _correlation(pred, actual, rank=True),
@@ -747,6 +762,7 @@ def evaluate_factor_model(
         )
     _check_training_contract(result, target_name, chosen_method, x_features)
     training_end = _verify_test_is_after_training(result, datetimes)
+    validate_preprocessing_boundary(x_test, datetimes.min())
 
     config = deepcopy(
         dict(
@@ -782,6 +798,7 @@ def evaluate_factor_model(
     predictions = pd.DataFrame(
         {
             "actual": ic_series.to_numpy(np.float64),
+            "target": selected_y.to_numpy(np.float64),
             "prediction": prediction_values,
         },
         index=x_test.index.copy(),
@@ -792,13 +809,10 @@ def evaluate_factor_model(
     )
     pred = predictions["prediction"].to_numpy(np.float64)
     actual = predictions["actual"].to_numpy(np.float64)
-    rmse, mae, pair_count = _error_metrics(pred, actual)
+    rmse, mae, error_pair_count = _error_metrics(pred, selected_y.to_numpy(np.float64))
+    pair_count = int((np.isfinite(pred) & np.isfinite(actual)).sum())
     pooled_pearson = _correlation(pred, actual)
     pooled_spearman = _correlation(pred, actual, rank=True)
-    if not np.isfinite(pooled_pearson):
-        raise RuntimeError(
-            "pooled Pearson IC is undefined; inspect finite rows and prediction/target variance"
-        )
 
     monthly = _monthly_metrics(predictions)
     mean_monthly_pearson, std_monthly_pearson, pearson_months, pearson_icir = _mean_and_ir(
@@ -807,8 +821,6 @@ def evaluate_factor_model(
     mean_monthly_spearman, std_monthly_spearman, spearman_months, spearman_icir = _mean_and_ir(
         monthly["spearman_ic"]
     )
-    if pearson_months == 0:
-        raise RuntimeError("monthly Pearson IC is undefined for every Test month")
 
     ordered, session_segments, session_names = _qc_order_and_segments(predictions)
     prediction_qc = run_factor_qc(
@@ -828,8 +840,10 @@ def evaluate_factor_model(
         {
             "n_test_rows": int(len(predictions)),
             "n_prediction_finite": int(np.isfinite(pred).sum()),
-            "n_target_finite": int(np.isfinite(actual).sum()),
+            "n_target_finite": int(np.isfinite(selected_y.to_numpy(np.float64)).sum()),
+            "n_ic_target_finite": int(np.isfinite(actual).sum()),
             "n_pairwise_finite": pair_count,
+            "n_error_pairwise_finite": error_pair_count,
             "pairwise_finite_ratio": float(pair_count / len(predictions)),
             "pooled_pearson_ic": pooled_pearson,
             "pooled_spearman_ic": pooled_spearman,
@@ -867,6 +881,7 @@ def evaluate_factor_model(
         "feature_schema_sha256": _sha256_json(x_features),
         "test_index_sha256": index_hash,
         "test_target_sha256": target_hash,
+        "test_ic_target_sha256": _series_fingerprint(ic_series),
         "prediction_sha256": prediction_hash,
         "training_run_id": training_run_id,
     }
@@ -881,6 +896,7 @@ def evaluate_factor_model(
         "require_single_contract": False,
         "test_start": datetimes.min().isoformat(),
         "test_end": datetimes.max().isoformat(),
+        "final_model_frozen_at": result.audit["temporal_audit"]["fit_as_of"],
         "final_training_actual_end": (
             training_end.isoformat() if training_end is not None else None
         ),
@@ -893,16 +909,23 @@ def evaluate_factor_model(
         "feature_schema_sha256": binding["feature_schema_sha256"],
         "test_index_sha256": index_hash,
         "test_target_sha256": target_hash,
+        "test_ic_target_sha256": _series_fingerprint(ic_series),
         "prediction_sha256": prediction_hash,
         "training_run_id": training_run_id,
         "training_stage_verified_final": result is not None,
         "final_model_identity_verified": result is not None,
+        "native_model_state_integrity_verified": False,
         "x_y_index_exactly_equal": True,
         "target_shift_applied": False,
         "test_rows_used_for_fit": 0,
         "fit_or_update_called": False,
         "test_used_for_early_stopping": False,
         "test_used_for_hyperparameter_selection": False,
+        "pooled_ic_defined": bool(np.isfinite(pooled_pearson)),
+        "monthly_ic_defined": pearson_months > 0,
+        "undefined_metrics_preserve_predictions": True,
+        "error_metrics_target": target_name,
+        "ic_target_name": str(ic_series.name),
         "pooled_ic_definition": (
             "Pearson correlation across all pairwise-finite Test prediction/target rows"
         ),

@@ -29,13 +29,13 @@ CSV 与 Parquet 使用同一组字段：
 | `Contract` | 非空资产 ID，三列样本键唯一 |
 | `Datetime` | 特征信息截止及预测决策时刻 |
 | 因子列 | 显式列入 dataset.features，不含目标或键字段 |
-| 目标列 | 显式列入 dataset.target，可用且数值有限 |
+| 目标列 | 显式列入 dataset.target；训练必须有限，Test 可用 NaN 表示未知 |
 | `feature_available_at` | 所有特征和上游变换最晚可用时间，不晚于 Datetime |
 | `label_end` | 标签真正可用的最晚时点，含预测期限及额外发布/计算延迟，不早于 Datetime |
 
 索引为 `Date, Contract, Datetime`。表内使用无时区时间戳，在配置 timezone 中声明交易所时区，不混用 UTC 与本地时间。财报、复权、主连判定、成交量汇总与历史成分股都需要真实可用时点证据；给泄漏数据补一列合法时间不能使其变成因果数据。
 
-未实现、缺失或非有限标签在上游明确隔离；特征缺失按冻结状态处理，不利用未来样本估计填补值。分组需明确覆盖输入特征，未分组特征会报错。
+训练标签的缺失或非有限值在上游明确隔离。Test 标签允许 NaN，不能因未来结果缺失删除特征行；正负无穷仍拒绝。独立构造测试表时显式使用 `ResearchDataset.from_frame(..., allow_missing_labels=True)`；CLI 已启用这一测试选项。特征缺失按冻结状态处理，不利用未来样本估计填补值。分组需明确覆盖输入特征，未分组特征会报错。
 
 原股票因子通过[快照桥接](../system/factor_bridge.md)形成面板；期货行情通过[连续合约接口](continuous.md)得到映射、原价与审计，再由调用方显式接入因子计算。两者按同一契约训练。
 
@@ -43,7 +43,7 @@ CSV 与 Parquet 使用同一组字段：
 
 参考 [research.example.json](../../configs/research.example.json)。dataset.train_valid 与 dataset.test 必须是两个不同文件；路径相对配置文件目录解析。真实数据默认留在忽略目录 data/。
 
-Fit/Valid/Test 使用有序、不重叠的半开区间 `[start, end)`。两个文件只包含各自声明的开发/测试时段。跨边界标签先 purge，再拟合处理器和模型；embargo 的单位显式给出，零值不等于证明所有标签独立。
+Fit/Valid/Test 使用有序、不重叠的半开区间 `[start, end)`。两个文件只包含各自声明的开发/测试时段。训练与选参的跨边界标签先 purge，再拟合处理器和模型。Test 预测保留已声明决策行，`label_end >= test_end` 的标签只从指标计算中遮罩；embargo 的单位显式给出，零值不等于证明所有标签独立。
 
 ```bash
 quant-research run --config configs/research.example.json --output runs/real
