@@ -14,10 +14,10 @@ import re
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-SCOPES = ["src/futures_research", "src/quant_research", "docs/futures", "docs/system",
+SCOPES = ["src/futures_research", "src/quant_research", "docs/futures", "docs/system", "docs/strategies",
           "tests/futures", "tests/test_factor_bridge.py", "configs", "README.md",
           ".github", "pyproject.toml", "MANIFEST.in", ".gitignore", "requirements",
-          "examples/run_research_pipeline.py", "examples/run_factor_bridge_demo.py",
+          "examples/run_sector_cta_demo.py", "examples/run_research_pipeline.py", "examples/run_factor_bridge_demo.py",
           "tools/check_public_release.py", "tests/test_public_release.py"]
 PATTERNS = {
     "private_absolute_path": re.compile(r"/(?:Users|home)/[A-Za-z0-9._-]+/|[A-Za-z]:[\\/]Users[\\/]"),

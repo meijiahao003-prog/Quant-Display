@@ -23,3 +23,4 @@ jobs:
       - run: python tools/check_public_release.py
       - run: python -m build --wheel
       - run: quant-research demo --models xgboost,lightgbm,transformer,itransformer --output runs/ci-demo
+      - run: python examples/run_sector_cta_demo.py --models xgboost,lightgbm,transformer,itransformer --output runs/ci-sector-cta

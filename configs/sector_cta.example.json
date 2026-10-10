@@ -1,0 +1,254 @@
+{
+  "seed": 42,
+  "timezone": "Asia/Shanghai",
+  "models": [
+    "lightgbm"
+  ],
+  "groups": {
+    "all": [
+      "factor_0",
+      "factor_1",
+      "factor_2",
+      "factor_3"
+    ]
+  },
+  "sampling_times": [
+    "09:00",
+    "09:30",
+    "10:00",
+    "10:30",
+    "11:00",
+    "11:30"
+  ],
+  "embargo": "0s",
+  "intervals": {
+    "fit": [
+      "2030-01-02 00:00:00",
+      "2030-02-21 00:00:00"
+    ],
+    "valid": [
+      "2030-02-21 00:00:00",
+      "2030-03-11 00:00:00"
+    ],
+    "test": [
+      "2030-03-11 00:00:00",
+      "2030-03-27 00:00:00"
+    ]
+  },
+  "raw_target_definition": "uncentered_forward_simple_return_30m",
+  "target_mode": "sector_median_excess",
+  "contract_metadata": [
+    {
+      "Contract": "DEMO_black_0_main",
+      "sector": "black",
+      "product": "DEMO_black_0",
+      "role": "main",
+      "metadata_available_at": "2030-01-01 00:00:00"
+    },
+    {
+      "Contract": "DEMO_black_0_secondary",
+      "sector": "black",
+      "product": "DEMO_black_0",
+      "role": "secondary",
+      "metadata_available_at": "2030-01-01 00:00:00"
+    },
+    {
+      "Contract": "DEMO_black_1_main",
+      "sector": "black",
+      "product": "DEMO_black_1",
+      "role": "main",
+      "metadata_available_at": "2030-01-01 00:00:00"
+    },
+    {
+      "Contract": "DEMO_black_1_secondary",
+      "sector": "black",
+      "product": "DEMO_black_1",
+      "role": "secondary",
+      "metadata_available_at": "2030-01-01 00:00:00"
+    },
+    {
+      "Contract": "DEMO_black_2_main",
+      "sector": "black",
+      "product": "DEMO_black_2",
+      "role": "main",
+      "metadata_available_at": "2030-01-01 00:00:00"
+    },
+    {
+      "Contract": "DEMO_black_2_secondary",
+      "sector": "black",
+      "product": "DEMO_black_2",
+      "role": "secondary",
+      "metadata_available_at": "2030-01-01 00:00:00"
+    },
+    {
+      "Contract": "DEMO_metals_0_main",
+      "sector": "metals",
+      "product": "DEMO_metals_0",
+      "role": "main",
+      "metadata_available_at": "2030-01-01 00:00:00"
+    },
+    {
+      "Contract": "DEMO_metals_0_secondary",
+      "sector": "metals",
+      "product": "DEMO_metals_0",
+      "role": "secondary",
+      "metadata_available_at": "2030-01-01 00:00:00"
+    },
+    {
+      "Contract": "DEMO_metals_1_main",
+      "sector": "metals",
+      "product": "DEMO_metals_1",
+      "role": "main",
+      "metadata_available_at": "2030-01-01 00:00:00"
+    },
+    {
+      "Contract": "DEMO_metals_1_secondary",
+      "sector": "metals",
+      "product": "DEMO_metals_1",
+      "role": "secondary",
+      "metadata_available_at": "2030-01-01 00:00:00"
+    },
+    {
+      "Contract": "DEMO_metals_2_main",
+      "sector": "metals",
+      "product": "DEMO_metals_2",
+      "role": "main",
+      "metadata_available_at": "2030-01-01 00:00:00"
+    },
+    {
+      "Contract": "DEMO_metals_2_secondary",
+      "sector": "metals",
+      "product": "DEMO_metals_2",
+      "role": "secondary",
+      "metadata_available_at": "2030-01-01 00:00:00"
+    },
+    {
+      "Contract": "DEMO_energy_chem_0_main",
+      "sector": "energy_chem",
+      "product": "DEMO_energy_chem_0",
+      "role": "main",
+      "metadata_available_at": "2030-01-01 00:00:00"
+    },
+    {
+      "Contract": "DEMO_energy_chem_0_secondary",
+      "sector": "energy_chem",
+      "product": "DEMO_energy_chem_0",
+      "role": "secondary",
+      "metadata_available_at": "2030-01-01 00:00:00"
+    },
+    {
+      "Contract": "DEMO_energy_chem_1_main",
+      "sector": "energy_chem",
+      "product": "DEMO_energy_chem_1",
+      "role": "main",
+      "metadata_available_at": "2030-01-01 00:00:00"
+    },
+    {
+      "Contract": "DEMO_energy_chem_1_secondary",
+      "sector": "energy_chem",
+      "product": "DEMO_energy_chem_1",
+      "role": "secondary",
+      "metadata_available_at": "2030-01-01 00:00:00"
+    },
+    {
+      "Contract": "DEMO_energy_chem_2_main",
+      "sector": "energy_chem",
+      "product": "DEMO_energy_chem_2",
+      "role": "main",
+      "metadata_available_at": "2030-01-01 00:00:00"
+    },
+    {
+      "Contract": "DEMO_energy_chem_2_secondary",
+      "sector": "energy_chem",
+      "product": "DEMO_energy_chem_2",
+      "role": "secondary",
+      "metadata_available_at": "2030-01-01 00:00:00"
+    },
+    {
+      "Contract": "DEMO_agri_0_main",
+      "sector": "agri",
+      "product": "DEMO_agri_0",
+      "role": "main",
+      "metadata_available_at": "2030-01-01 00:00:00"
+    },
+    {
+      "Contract": "DEMO_agri_0_secondary",
+      "sector": "agri",
+      "product": "DEMO_agri_0",
+      "role": "secondary",
+      "metadata_available_at": "2030-01-01 00:00:00"
+    },
+    {
+      "Contract": "DEMO_agri_1_main",
+      "sector": "agri",
+      "product": "DEMO_agri_1",
+      "role": "main",
+      "metadata_available_at": "2030-01-01 00:00:00"
+    },
+    {
+      "Contract": "DEMO_agri_1_secondary",
+      "sector": "agri",
+      "product": "DEMO_agri_1",
+      "role": "secondary",
+      "metadata_available_at": "2030-01-01 00:00:00"
+    },
+    {
+      "Contract": "DEMO_agri_2_main",
+      "sector": "agri",
+      "product": "DEMO_agri_2",
+      "role": "main",
+      "metadata_available_at": "2030-01-01 00:00:00"
+    },
+    {
+      "Contract": "DEMO_agri_2_secondary",
+      "sector": "agri",
+      "product": "DEMO_agri_2",
+      "role": "secondary",
+      "metadata_available_at": "2030-01-01 00:00:00"
+    }
+  ],
+  "model_weights": {
+    "lightgbm": 1.0
+  },
+  "sector_allocations": {
+    "black": 0.25,
+    "metals": 0.25,
+    "energy_chem": 0.25,
+    "agri": 0.25
+  },
+  "contract_set": "both",
+  "selection_rule": "validation_raw_ic",
+  "long_quantile": 0.8,
+  "short_quantile": 0.2,
+  "commission_bps": 0.2,
+  "slippage_bps": 1.0,
+  "augmentation": {
+    "n_synthetic_per_sector": 2,
+    "alpha": 1.0
+  },
+  "iterations": {
+    "xgboost": 8,
+    "lightgbm": 8,
+    "transformer": 2,
+    "itransformer": 2
+  },
+  "model_params": {
+    "xgboost": {
+      "eta": 0.1
+    },
+    "lightgbm": {
+      "learning_rate": 0.1,
+      "min_data_in_leaf": 5
+    },
+    "transformer": {
+      "d_model": 8,
+      "n_heads": 2,
+      "encoder_layers": 1
+    },
+    "itransformer": {
+      "d_model": 8,
+      "n_heads": 2,
+      "encoder_layers": 1
+    }
+  }
+}

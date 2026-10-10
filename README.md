@@ -6,9 +6,9 @@
 
 以统一数据契约连接行情与合约构造、因子接入、样本工程、机器学习实验和预测交付，支持商品期货研究，并提供股票因子面板的可选接入方式。
 
-**当前范围：数据与模型研究模块已实现，交易回测保留后续接入契约。** 已实现的部分因子库作为独立成果展示；公开内容包括工程代码、研究文档与合成示例。
+**当前范围：数据与模型研究、商品期货截面多空 CTA 策略及区间研究回测。** 完整交易执行与账户引擎保留后续接入契约；部分因子库与 CTA 策略分别作为独立成果展示。公开内容包括工程代码、研究文档与合成示例。
 
-[全流程架构](#全流程架构) · [模块与入口](#模块与入口) · [研究工程约束](#研究工程约束) · [因子成果展示](#已实现的部分因子库展示) · [快速开始](#快速开始) · [回测接入](#回测后续接入)
+[全流程架构](#全流程架构) · [模块与入口](#模块与入口) · [研究工程约束](#研究工程约束) · [因子成果展示](#已实现的部分因子库展示) · [CTA 策略展示](#商品期货截面多空-cta-策略展示) · [快速开始](#快速开始) · [回测接入](#回测后续接入)
 
 ## 全流程架构
 
@@ -24,12 +24,17 @@ flowchart TB
     end
     R["融合研究 · 独立 API<br/>时间 OOF · Ridge · 分层残差"]
     O["研究交付<br/>信号 · 评估 · 运行清单"]
-    B["交易回测<br/>后续接入"]
+    B["完整执行与账户引擎<br/>后续接入"]
+    S["CTA 策略 · 独立入口<br/>板块模型 → 信号集成 → 多空组合"]
+    H["区间研究回测<br/>非重叠收益 · 双边成本"]
     D -. "调用方因子计算" .-> F
     F --> P
     T --> O
     F -. "分折接入" .-> R
     R -. "按契约导出" .-> O
+    F -. "策略编排" .-> S
+    S --> H
+    H -. "执行细化" .-> B
     O -. "预测信号接口" .-> B
     style B stroke-dasharray: 5 5
 ```
@@ -46,6 +51,7 @@ flowchart TB
 | 模型训练与测试 | 验证期选择轮数、冻结后重训、独立 Test、按时间与资产分析预测 | [CLI 与训练 API](docs/futures/training.md) |
 | 融合研究 | 时间顺序 OOF、Ridge stacking、分层核心与残差模型 | [独立研究 API](docs/futures/training.md) |
 | 研究交付 | 预测信号、模型比较、冻结状态、输入指纹与产物哈希 | [运行产物与复现](docs/futures/reproducibility.md) |
+| CTA 策略 | 板块独立训练、固定权重排名融合、主次力多空组合、区间研究回测 | [独立策略入口](docs/strategies/sector_cta.md) |
 
 已完成合成流程验证的模型包括 **XGBoost、LightGBM、Transformer、iTransformer**。Transformer 使用时间 token，iTransformer 使用因子 token；具体输入与训练协议见[模型文档](docs/futures/training.md)。
 
@@ -57,7 +63,7 @@ flowchart TB
 | --- | --- |
 | 信息时点 | 样本携带 `feature_available_at` 与 `label_end`；连续合约在 T 收盘决策、下一交易日生效，保留原始价格与换约记录 |
 | 样本隔离 | 按时间切分 Fit / Valid / Test，跨边界标签执行 purge / embargo；抽样与缺失处理遵守显式规则 |
-| 处理器冻结 | 标准化与 PCA 在 Fit 上拟合，验证和测试使用冻结状态；OOF 各折另行遵守训练边界 |
+| 处理器冻结 | 时间序列标准化与 PCA 在 Fit 上拟合；CTA 截面标准化只使用同刻板块信息；OOF 各折遵守训练边界 |
 | 训练与评估 | Fit 训练、Valid 选择轮数，随后以固定轮数在 Fit+Valid 重训；全部模型冻结后再由流水线加载 Test |
 | 可追溯与复现 | 保存随机种子、配置、数据指纹、处理器状态、源码及产物 SHA-256，并记录依赖环境 |
 
@@ -77,6 +83,22 @@ flowchart TB
 [展示说明](docs/ashare_factor_research.md) · [因子卡片与检验思路](docs/factor_cards.md) · [历史研究结果](results/README.md) · [全样本汇总](results/summary.csv) · [年度汇总](results/annual_metrics.csv)
 
 历史结果作为研究档案保留，本次系统整理未重新运行其底层真实数据，也未重新确认收益有效性。
+
+## 商品期货截面多空 CTA 策略展示
+
+**按商品板块独立建模，预测未来 30 分钟相对板块收益，并由集成信号构建主力、次主力合约的多空组合。** 这是独立策略成果，贯通数据契约、训练、预测、组合和研究回测。
+
+| 环节 | 策略实现 |
+| --- | --- |
+| 板块建模 | 黑色、金属、能源化工、农产品分别训练；分组为研究配置 |
+| 预测目标 | 未来 30 分钟原始收益 − 同时点所属板块收益中位数 |
+| 模型与融合 | XGBoost、LightGBM、Transformer、iTransformer；板块内预测排名后以冻结权重融合 |
+| 组合构建 | 显式区分主力 / 次主力；板块内多空配权、固定板块资金比例 |
+| 研究评估 | 非重叠区间收益、双边交易成本、净值与回撤；保留独立执行引擎接入口 |
+
+以最新分板块 Notebook 为主要研究依据：原件实际默认训练 **LightGBM**、标签采用板块内 z-score；公开版以 **减板块中位数**为默认标签，保留 z-score 可选模式，并新增四模型排名集成。这些差异及来源位置均可追溯，未公开原始数据或历史私人业绩。
+
+[策略说明与来源证据](docs/strategies/sector_cta.md) · [合成演示](examples/run_sector_cta_demo.py) · [配置示例](configs/sector_cta.example.json) · [策略编排](src/futures_research/cta_strategy.py)
 
 ## 快速开始
 
@@ -120,6 +142,9 @@ python examples/run_synthetic_demo.py
 # 用示例因子演示可选快照桥接和模型训练
 python examples/run_factor_bridge_demo.py --output runs/equity-bridge
 
+# 商品期货 CTA：默认 LightGBM；可用 --models 指定四模型
+python examples/run_sector_cta_demo.py --output runs/sector-cta
+
 # 软件回归与公开发布检查
 python -m pytest -q
 python tools/check_public_release.py
@@ -131,9 +156,9 @@ python tools/check_public_release.py
 
 ## 回测后续接入
 
-已定义[研究预测到交易回测的接入契约](docs/system/backtest_contract.md)。后续模块将以预测信号、真实合约映射和运行清单为输入，补充仓位规则、成交模拟、持仓与资金账本、费用及风险约束。
+已定义[研究预测到交易回测的接入契约](docs/system/backtest_contract.md)。后续模块将以预测信号或策略目标仓位、真实合约映射和运行清单为输入，补充成交模拟、持续持仓与资金账本、保证金、移仓及风险约束。
 
-**当前未实现交易回测引擎。** `signals.csv` 是预测输出，不自动等于仓位或交易指令；当前信号时间采用零推理/传输延迟的研究假设。接入时需要核验实际可用时刻、可成交价格、换约处理和交易成本，再计算策略损益。
+**CTA 策略已包含受限的区间研究回测；完整交易执行引擎仍待接入。** 研究回测每区间独立开平，不能替代真实期货持仓、保证金及结算账本。通用 CLI 的 `signals.csv` 仍是预测输出；CTA 独立入口另行输出 `target_weights.csv` 和研究曲线。两者都采用零推理/传输延迟的研究假设，实际交易须核验信号可得时间、成交价格、换约和成本。
 
 ## 文档与研究资料
 
@@ -141,7 +166,7 @@ python tools/check_public_release.py
 | --- | --- |
 | 使用与模块说明 | [研究系统指南](docs/futures/README.md) · [数据与复现](docs/futures/reproducibility.md) · [训练与融合](docs/futures/training.md) |
 | 工程边界 | [连续合约](docs/futures/continuous.md) · [因子处理与 QC](docs/futures/factors.md) · [回测契约](docs/system/backtest_contract.md) |
-| 研究来源 | [阶段工作总结](docs/futures/research_summary.md) · [17 份材料的来源哈希](docs/futures/source_manifest.json) |
+| 研究来源 | [阶段工作总结](docs/futures/research_summary.md) · [18 份材料的来源哈希](docs/futures/source_manifest.json) |
 | 公开验证 | [脱敏说明](docs/futures/sanitization.md) · [软件验证记录](docs/futures/verification.md) · [GitHub Actions](https://github.com/meijiahao003-prog/Quant-Display/actions) |
 
 <details>
@@ -154,6 +179,7 @@ src/ashare_factor_lab/  部分因子库展示及配套研究工具
 configs/               公开配置示例
 docs/system/           跨模块数据契约与回测接入约定
 docs/futures/           研究模块说明、来源及验证
+docs/strategies/        独立策略展示、来源差异及实现边界
 results/               已归档的股票因子研究结果
 examples/              合成演示与可选接入示例
 tests/                 合成数据与时间边界回归测试

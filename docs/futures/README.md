@@ -47,19 +47,21 @@ flowchart TD
 | 模型 | `factor_model_training` | XGBoost、LightGBM、CatBoost 可选适配器、Transformer、iTransformer，两阶段训练 |
 | 评估 | `factor_model_testing`、`factor_series_qc_v2` | 冻结模型测试、预测落盘、月度相关系数、形态 QC、前缀不变性检查 |
 | 融合 | `factor_ridge_stacking`、`factor_hierarchical_residual` | Walk-forward OOF、Ridge 元模型、分层残差选择与晋级 |
+| CTA 策略 | `cta_sector.py`、`cta_strategy.py`、`cta_portfolio.py` | 板块相对收益、独立训练、排名集成与区间研究回测 |
 | 编排 | `pipeline.py`、`cli.py` | 数据契约、冻结处理器、运行配置、合成演示、不可覆盖的运行目录 |
 
 ## 防泄漏边界
 
 - `Datetime` 是预测信息截止时间；`feature_available_at <= Datetime`，`label_end >= Datetime`。这些字段由数据提供方据实生成；程序无法从数值矩阵推断供应商是否事后修订了历史值。
 - 训练/验证/测试必须按时间隔离，先裁掉跨边界标签，再拟合处理器和模型。六个采样点本身不保证标签不重叠；夜盘、节假日、交割日使用各自交易日历和实际标签结束时刻。
-- Z-score、缺失填补、PCA 仅在 Fit 估计。默认编排在最终重训时也冻结同一套处理器，避免配置变化混入模型比较；OOF 每折的上游处理器也必须只使用该折训练信息。
+- 通用流水线的时间序列 Z-score、缺失填补、PCA 仅在 Fit 估计。CTA 策略的截面 z-score 只使用同时点、同板块信息，传播组内最晚可用时点，不沿时间估计。默认编排在最终重训时也冻结同一套处理器，避免配置变化混入模型比较；OOF 每折的上游处理器也必须只使用该折训练信息。
 - Valid 只用于选择训练轮数；最终训练从新模型开始。多模型 Test 指标是描述性比较，使用 Test 排名后继续改参数会让它变成研究集，必须另留未查看的最终确认集。
 - 连续价的换约跳变不能直接视为可实现收益。即使采用因果比例调整，也不能替代逐合约持仓、移仓成本、手续费与滑点模拟。
 - 本仓库没有完成真实行情全量审计，也不声称这些检查足以证明整个研究无数据泄漏或未来可盈利。
 
 ## 文档与证据
 
+- [商品期货截面多空 CTA：独立策略与研究回测](../strategies/sector_cta.md)
 - [工作总结与来源对应](research_summary.md)
 - [连续合约与数据契约](continuous.md)
 - [因子处理、采样与 QC](factors.md)

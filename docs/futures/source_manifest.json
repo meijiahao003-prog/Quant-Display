@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "raw_sources_included": false,
-  "source_count": 17,
+  "source_count": 18,
   "sources": [
     {
       "id": "S01",
@@ -155,6 +155,15 @@
       "kind": "notebook",
       "notebook_cells": 20,
       "historical_output_cells_removed": 0
+    },
+    {
+      "id": "S18",
+      "sha256": "7004b2c7ec68044925eec7ed4e6bf48d6e1afed3e288083b6fc32d7cb475cd4b",
+      "bytes": 1733589,
+      "code_lines": 1785,
+      "kind": "notebook",
+      "notebook_cells": 39,
+      "historical_output_cells_removed": 26
     }
   ]
 }
