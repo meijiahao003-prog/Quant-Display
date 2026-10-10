@@ -1,0 +1,12 @@
+include README.md pyproject.toml
+recursive-include docs *.md *.json *.txt
+recursive-include configs *.json
+recursive-include tests *.py
+recursive-include examples *.py
+recursive-include tools *.py
+recursive-include requirements *.txt
+recursive-include results *.md *.csv *.png
+prune runs
+prune data
+prune private
+global-exclude __pycache__ *.py[cod] .env *.parquet *.joblib *.pt *.pth

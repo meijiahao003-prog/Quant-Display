@@ -1,0 +1,36 @@
+# Versions used for the local synthetic verification on macOS arm64 / Python 3.12.14.
+# This is an environment snapshot, not a cross-platform resolver lock or binary-integrity lock.
+build==1.6.1
+cloudpickle==3.1.2
+filelock==4.1.0
+fsspec==2026.9.0
+iniconfig==2.3.1
+jinja2==3.1.6
+joblib==1.6.0
+lightgbm==4.7.0
+markupsafe==3.0.4
+mpmath==1.3.0
+narwhals==2.27.1
+networkx==3.7
+numpy==2.3.5
+packaging==26.3
+pandas==2.2.3
+pluggy==1.6.0
+pyarrow==26.0.0
+pygments==2.21.0
+pyproject-hooks==1.3.3
+pytest==9.1.1
+python-dateutil==2.9.0.post0
+pytz==2026.4
+ruff==0.17.0
+scikit-learn==1.9.1
+scipy==1.18.1
+setuptools==84.0.0
+six==1.17.0
+sympy==1.14.0
+threadpoolctl==3.7.0
+torch==2.14.1
+typing-extensions==4.16.0
+tzdata==2026.4
+wheel==0.48.0
+xgboost==3.4.1

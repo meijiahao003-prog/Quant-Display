@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "raw_sources_included": false,
+  "source_count": 17,
+  "sources": [
+    {
+      "id": "S01",
+      "sha256": "f1dcb2ff7fc393188ad940849c5fb4cfcaa10559f50bf47701c9327a497c796e",
+      "bytes": 992247,
+      "code_lines": 4161,
+      "kind": "notebook",
+      "notebook_cells": 71,
+      "historical_output_cells_removed": 12
+    },
+    {
+      "id": "S02",
+      "sha256": "597518102be845fe82e4270d6a6aa9d2c4e4a8b45333f3df746eb09e4c392195",
+      "bytes": 217437,
+      "code_lines": 1210,
+      "kind": "notebook",
+      "notebook_cells": 5,
+      "historical_output_cells_removed": 4
+    },
+    {
+      "id": "S03",
+      "sha256": "894f578a714e54cf3b09dadddd3b215034354f2b0a59f2e2ff8db957c0019fc2",
+      "bytes": 1646844,
+      "code_lines": 839,
+      "kind": "notebook",
+      "notebook_cells": 34,
+      "historical_output_cells_removed": 22
+    },
+    {
+      "id": "S04",
+      "sha256": "b0ade50ef95749ceabc7fbaf70a48f2b078f69150cbd9fa2d20eacd07978abe4",
+      "bytes": 29792,
+      "code_lines": 664,
+      "kind": "python",
+      "notebook_cells": null,
+      "historical_output_cells_removed": 0
+    },
+    {
+      "id": "S05",
+      "sha256": "4773191017491289ca3ab99adb172ed42f54e61ad1e7015ee430c27f69b10691",
+      "bytes": 30151,
+      "code_lines": 662,
+      "kind": "python",
+      "notebook_cells": null,
+      "historical_output_cells_removed": 0
+    },
+    {
+      "id": "S06",
+      "sha256": "bb422fd3ab6ca9aa58a5020a6c8dd878b5350b4b7ef2b6d54b827bfec58e3522",
+      "bytes": 8757,
+      "code_lines": 248,
+      "kind": "python",
+      "notebook_cells": null,
+      "historical_output_cells_removed": 0
+    },
+    {
+      "id": "S07",
+      "sha256": "6ee8f0511d4c5f9bcbc87425fbf4e00c8570bc18acf8dbafd7cebb9dddff5306",
+      "bytes": 65015,
+      "code_lines": 1592,
+      "kind": "python",
+      "notebook_cells": null,
+      "historical_output_cells_removed": 0
+    },
+    {
+      "id": "S08",
+      "sha256": "cc2c7fdb97ab26e1a64262c7cca55d47917cb3ca00b5abc93b2cb1cf8b48c9a9",
+      "bytes": 15141,
+      "code_lines": 436,
+      "kind": "python",
+      "notebook_cells": null,
+      "historical_output_cells_removed": 0
+    },
+    {
+      "id": "S09",
+      "sha256": "c5c7ae531ad91504a3fe42000c6d065c9f7d0bbb6b24d1cfdeea6ab6130882e2",
+      "bytes": 36629,
+      "code_lines": 953,
+      "kind": "python",
+      "notebook_cells": null,
+      "historical_output_cells_removed": 0
+    },
+    {
+      "id": "S10",
+      "sha256": "4546f3b6d391659bfc57fc94791d98630720ae481daec5e747600ba89a03a6e2",
+      "bytes": 100116,
+      "code_lines": 2474,
+      "kind": "python",
+      "notebook_cells": null,
+      "historical_output_cells_removed": 0
+    },
+    {
+      "id": "S11",
+      "sha256": "fc839970a1910685ba5169c76e73e04d826ce52dfc677fc0cf59591a95e3a8ef",
+      "bytes": 64449,
+      "code_lines": 1519,
+      "kind": "python",
+      "notebook_cells": null,
+      "historical_output_cells_removed": 0
+    },
+    {
+      "id": "S12",
+      "sha256": "c3fed65ea5a4160748a2efd0c27f88e400fda341cfe70d855b85f415869c83f8",
+      "bytes": 7722,
+      "code_lines": 204,
+      "kind": "python",
+      "notebook_cells": null,
+      "historical_output_cells_removed": 0
+    },
+    {
+      "id": "S13",
+      "sha256": "5459456b4b17deb35de0aaa7c5e39b984b090402e4ff4c91e4833ef6a20bf633",
+      "bytes": 18756,
+      "code_lines": 497,
+      "kind": "python",
+      "notebook_cells": null,
+      "historical_output_cells_removed": 0
+    },
+    {
+      "id": "S14",
+      "sha256": "34492b3a80e87f29ab92848432290897e376d4b8a9385c310e6f0f159602b21d",
+      "bytes": 58295,
+      "code_lines": 780,
+      "kind": "notebook",
+      "notebook_cells": 23,
+      "historical_output_cells_removed": 0
+    },
+    {
+      "id": "S15",
+      "sha256": "613ed6e207d8b20ce7db8344d560bbd05c821af9f55a7529968640226be5c93b",
+      "bytes": 212834,
+      "code_lines": 1074,
+      "kind": "notebook",
+      "notebook_cells": 24,
+      "historical_output_cells_removed": 12
+    },
+    {
+      "id": "S16",
+      "sha256": "cb34f1a67ae84a39b8c33ed08721d25e6d9d5c4e8f4a827d9c13e73b95e006ff",
+      "bytes": 91397,
+      "code_lines": 760,
+      "kind": "notebook",
+      "notebook_cells": 11,
+      "historical_output_cells_removed": 7
+    },
+    {
+      "id": "S17",
+      "sha256": "db8d0197a92c392ec9b98f32f57b1148db8d718e5012fedfaf7ac9090f7a6f33",
+      "bytes": 88602,
+      "code_lines": 1650,
+      "kind": "notebook",
+      "notebook_cells": 20,
+      "historical_output_cells_removed": 0
+    }
+  ]
+}
