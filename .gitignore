@@ -21,3 +21,11 @@ outputs/
 .env
 .env.*
 !.env.example
+runs/
+private/
+*.pt
+*.pth
+*.joblib
+dist/
+build/
+.ruff_cache/

@@ -1,0 +1,22 @@
+{
+  "seed": 7,
+  "timezone": "Asia/Shanghai",
+  "asset_class": "futures",
+  "dataset": {
+    "train_valid": "../data/train_valid.parquet",
+    "test": "../data/test.parquet",
+    "features": ["F_001", "F_002", "F_003"],
+    "target": "future_return"
+  },
+  "intervals": {
+    "fit": ["2024-01-01", "2024-04-01"],
+    "valid": ["2024-04-01", "2024-05-01"],
+    "test": ["2024-05-01", "2024-06-01"]
+  },
+  "models": ["xgboost", "lightgbm", "transformer", "itransformer"],
+  "iterations": {"xgboost": 20, "lightgbm": 20, "transformer": 3, "itransformer": 3},
+  "groups": {"core": ["F_001", "F_002"], "auxiliary": ["F_003"]},
+  "pca_components": {"core": 2},
+  "sampling_times": ["09:30", "10:00", "10:30", "13:30", "14:00", "14:30"],
+  "embargo": "0s"
+}

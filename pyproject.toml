@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ashare-factor-lab"
-version = "0.1.0"
-description = "A research-oriented, data-vendor-neutral toolkit for A-share equity factor prototyping."
+version = "0.2.0"
+description = "Vendor-neutral A-share factor and futures machine-learning research systems."
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
@@ -15,10 +15,31 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     "ruff>=0.5",
+    "pytest>=8,<10",
 ]
 reports = [
     "matplotlib>=3.8",
 ]
+futures = [
+    "pandas>=2.2,<3",
+    "scikit-learn>=1.4,<2",
+    "threadpoolctl>=3.2,<4",
+    "pyarrow>=15",
+    "joblib>=1.4,<2",
+]
+futures-models = [
+    "xgboost>=2,<4",
+    "lightgbm>=4,<5",
+    "torch>=2.2,<3",
+]
+catboost = ["catboost>=1.2,<2"]
+
+[project.scripts]
+futures-research = "futures_research.cli:main"
+quant-research = "futures_research.cli:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
@@ -26,3 +47,6 @@ where = ["src"]
 [tool.ruff]
 line-length = 100
 target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]
