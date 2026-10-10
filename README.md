@@ -1,8 +1,10 @@
 # Quant-Display · 量化研究系统
 
-这个仓库整理一条持续演进的量化研究链路：**因子挖掘与研究 → 行情构造与因子引用 → 数据处理与抽样 → 模型训练与融合 → 预测评估 → 回测接入**。
+这个仓库整理一条持续演进的量化研究链路：**行情接入与合约构造 → 因子引用与面板适配 → 数据处理与抽样 → 模型训练与融合 → 预测评估 → 回测接入**。
 
-原有九个股票因子及研究成果保留为上游研究层；本次加入的期货主次连、因子工程、模型比较与融合模块接在统一数据契约之下。股票和期货共享处理与训练协议，同时保留各自的资产身份、交易日历、数据可用时间及计算规则。
+系统以统一数据契约连接主次连构造、因子处理、模型比较与融合。研究流程按需接入因子计算器或已计算的因子面板；股票和期货共享处理与训练协议，同时保留各自的资产身份、交易日历、数据可用时间及计算规则。
+
+仓库另设[已实现的部分因子库展示](#已实现的部分因子库展示)：九个股票因子是公开展示的示例，代表已完成因子库的一部分，不是全流程的固定步骤或必需输入，也不代表完整因子库的范围。
 
 **目前已实现研究与预测链路；交易回测正在另行开发，后续按接口接入。** 仓库不把模型 IC、预测误差或连续价格涨跌称为可实现策略收益。这里公开源码、文档和合成测试，不发布私人行情、账号凭据、训练权重或原 Notebook 输出。
 
@@ -10,10 +12,10 @@
 
 ```mermaid
 flowchart TD
-    A["股票数据快照 / 当时可见的资产池"] --> B["九个因子实现 / 因子研究与诊断"]
-    B --> C["Factor 快照桥接 → 时间×资产面板"]
+    A["时点数据快照 + 用户配置的因子计算器"] --> B["可选：Factor 快照桥接"]
+    B --> C["已计算的因子面板 / 特征可用时间"]
     D["期货原始行情 / 合约版本目录 / 交易日历"] --> E["主次连选择 / T+1 映射 / 原价与换月审计"]
-    E -. "用户因子计算器" .-> C
+    E -. "外部因子计算 / 按需接入" .-> C
     C --> F["统一特征、标签、可用时间与标签结束时间"]
     F --> G["按时间切分 / purge / 精确抽样"]
     G --> H["Fit 标准化 / 分组 / PCA"]
@@ -25,17 +27,29 @@ flowchart TD
     L -. "约定接口，待接入" .-> M["用户正在开发的交易回测"]
 ```
 
-虚线表示需要显式接入的环节。基础 CLI 编排标准化、分组/PCA、单模型及多模型比较；OOF、Ridge 和分层残差提供独立研究 API。它不会自动将每个股票因子公式移植到期货，也不会生成未提供的专有因子。
+虚线表示需要显式接入的环节。已计算的自有因子面板可直接作为输入；快照桥接是按需选择的接入方式。基础 CLI 编排标准化、分组/PCA、单模型及多模型比较；OOF、Ridge 和分层残差提供独立研究 API。因子计算器由调用方选择并核验资产适用性、数据时点及所需字段。
 
 | 层 | 代码与文档 | 状态 |
 | --- | --- | --- |
-| 因子挖掘与研究 | [原股票因子库与历史成果](docs/ashare_factor_research.md)、[因子卡片](docs/factor_cards.md) | 保留九个因子及历史研究档案 |
-| 上游因子引用 | [快照桥接](docs/system/factor_bridge.md)、`quant_research.factor_bridge` | 将单时点 `(1, n_assets)` 因子输出转为统一面板 |
+| 因子引用与面板适配 | [数据接入](docs/futures/reproducibility.md)、[可选快照桥接](docs/system/factor_bridge.md) | 接收符合契约的自有因子面板；支持按需桥接单时点因子输出 |
 | 期货数据构造 | [连续合约](docs/futures/continuous.md)、`continuous.py`、`adapters.py` | 完整身份、版本目录、日历、主次连与缺口审计 |
 | 数据与样本工程 | [处理、分组、采样与 QC](docs/futures/factors.md) | Fit 标准化、PCA、时点验证与标签 purge |
 | 模型训练与融合 | [训练与融合](docs/futures/training.md) | 树模型、Transformer/iTransformer、OOF、Ridge 与分层残差 |
 | 编排与复现 | [接入与复现](docs/futures/reproducibility.md)、[示例配置](configs/research.example.json) | 配置驱动运行、独立 Test、预测和来源清单 |
 | 交易回测 | [后续接入契约](docs/system/backtest_contract.md) | 接口已约定，执行、持仓及损益引擎待接入 |
+
+## 已实现的部分因子库展示
+
+以下九个股票因子用于展示已完成的部分因子实现及研究记录。它们独立于上述流程结构展示，主流程无需使用或运行这九个因子。
+
+| 类别 | 展示示例 |
+| --- | --- |
+| 市场微观结构 | F01 隔夜尾盘资金冲击、F02 开收盘成交量集中度、F03 散户资金同步、F04 机构尾盘加速、F05 VWAP 与资金流背离 |
+| 风险 | F06 混合周期特质偏度 |
+| 交易活跃度 | F07 成交额稳定性、F08 换手率稳定性 |
+| 基本面 | F09 综合质量 |
+
+查看[因子实现与展示说明](docs/ashare_factor_research.md)、[因子卡片](docs/factor_cards.md)及[历史研究结果](results/README.md)（[全样本汇总](results/summary.csv)、[年度汇总](results/annual_metrics.csv)）。这些历史结果保留为研究档案，本次整理没有重新运行底层真实数据或重新确认收益有效性。
 
 ## 快速运行
 
@@ -65,7 +79,7 @@ quant-research demo \
 quant-research run --config configs/research.example.json --output runs/real
 ```
 
-`dataset` 路径相对配置文件解析；示例不包含真实数据。已有输出目录会被拒绝覆盖，失败重试也使用新目录。原股票因子的轻量演示仍可运行：
+`dataset` 路径相对配置文件解析；示例不包含真实数据。已有输出目录会被拒绝覆盖，失败重试也使用新目录。因子展示另有独立的轻量演示，可按需运行：
 
 ```bash
 python examples/run_synthetic_demo.py
@@ -81,21 +95,19 @@ python examples/run_synthetic_demo.py
 - Test 是冻结后的评估集。根据 Test 排名继续选特征、改参数或筛策略后，必须另留未查看的最终确认区间。
 - 预测评估与交易回测分别记录。换约跳变、复权涨跌和模型相关系数都不能替代真实合约持仓、成本与成交约束。
 
-## 原股票成果与本次整理记录
+## 本次整理与验证记录
 
-- [原股票因子项目说明](docs/ashare_factor_research.md)
-- [历史结果目录](results/README.md)、[全样本汇总](results/summary.csv)、[年度汇总](results/annual_metrics.csv)
 - [工作总结及 17 份材料对应关系](docs/futures/research_summary.md)
 - [来源哈希清单](docs/futures/source_manifest.json)
 - [脱敏与发布检查](docs/futures/sanitization.md)
 - [本次软件验证记录](docs/futures/verification.md)
 
-原股票结果是已归档的研究材料，本次接入没有重新运行其底层真实数据，也没有重新确认收益有效性。软件验证、合成演示和历史实证档案分开标记。
+软件验证、合成演示和历史实证档案分开标记。
 
 ## 仓库布局
 
 ```text
-src/ashare_factor_lab/   原股票因子、数据接口、算子与研究诊断
+src/ashare_factor_lab/   部分因子库展示、配套数据接口、算子与研究诊断
 src/quant_research/      跨层因子快照桥接
 src/futures_research/    连续合约、公共数据处理、模型、融合与 CLI
 configs/                可公开的研究配置示例

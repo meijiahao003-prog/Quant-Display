@@ -1,5 +1,8 @@
 # Factor cards
 
+These nine cards describe a selected subset of the author's implemented factor library.
+They accompany the factor showcase; the research pipeline does not require these factors.
+
 These cards document what each implementation measures, the sign convention, and the most
 important falsification tests. Formulas describe the raw signal before optional winsorization,
 neutralization, and cross-sectional ranking.

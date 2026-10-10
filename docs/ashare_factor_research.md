@@ -1,11 +1,14 @@
-# Quant Factor Display
+# 已实现因子库展示（部分示例）
+
+本页展示已实现因子库中的九个股票因子示例及对应研究记录。它们是部分成果展示，不构成量化全流程的固定环节，也不代表作者完整的因子库。
 
 A compact, research-oriented toolkit for prototyping and documenting cross-sectional equity
 factors on Chinese A-share data. The project separates data access, signal construction,
 cross-sectional post-processing, and evaluation so that the same research logic can be tested
 with different data vendors.
 
-The repository contains **nine independently implemented factors** plus sanitized historical
+This showcase contains **nine independently implemented factors**, selected from the author's
+implemented factor library, plus sanitized historical
 evaluation summaries covering market microstructure, trading activity, risk, and fundamental
 quality.
 
@@ -14,7 +17,7 @@ quality.
 > is used for reproducible software tests; the separately labelled empirical section reports
 > archived research diagnostics without distributing the underlying market data.
 
-## Factor catalogue
+## Showcased factor examples
 
 | ID | Theme | Factor | Core intuition | Horizon |
 |---|---|---|---|---:|
