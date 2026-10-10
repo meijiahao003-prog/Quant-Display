@@ -13,7 +13,7 @@
 ## 全流程架构
 
 ```mermaid
-flowchart LR
+flowchart TB
     D["数据构造<br/>行情适配 · 主次连"]
     F["因子接入<br/>自有面板 · 可选桥接"]
     subgraph CLI["CLI · 统一研究流水线"]
@@ -28,7 +28,7 @@ flowchart LR
     D -. "调用方因子计算" .-> F
     F --> P
     T --> O
-    F -. "按各折时间契约接入" .-> R
+    F -. "分折接入" .-> R
     R -. "按契约导出" .-> O
     O -. "预测信号接口" .-> B
     style B stroke-dasharray: 5 5
