@@ -1,0 +1,3616 @@
+{
+  "schema_version": "market-lens.council.v1",
+  "bundle_id": "actual-recorded-20261021-510300",
+  "analysis_asof": "2026-10-21T06:04:48.930Z",
+  "timezone": "Asia/Shanghai",
+  "mode": "real",
+  "selected": {
+    "symbol": "510300",
+    "kind": "etf",
+    "name": "沪深300ETF华泰柏瑞"
+  },
+  "question": "请结合 沪深300ETF华泰柏瑞（510300）的价格与资金分时，分别检查宏观环境、盘面与波段条件、基本面证据。列出事实、竞争解释、触发与失效条件、资料缺口；保留分歧。",
+  "snapshot": {
+    "mode": "real",
+    "status": "live",
+    "source": "腾讯财经公开行情 · 免费源，延迟未承诺",
+    "as_of": "2026-10-21T14:04:21+08:00",
+    "fetched_at": "2026-10-21T06:04:22.633Z",
+    "selected": {
+      "symbol": "510300",
+      "kind": "etf",
+      "name": "沪深300ETF华泰柏瑞",
+      "price": 4.193,
+      "change_pct": -0.64,
+      "amount": 2593210000,
+      "volume": 6159503,
+      "main_net": -568231200,
+      "main_pct": -21.91,
+      "as_of": "2026-10-21T14:04:21+08:00",
+      "status": "live",
+      "unit": {
+        "price": "CNY",
+        "amount": "CNY",
+        "volume": "source_raw_unverified",
+        "main_net": "CNY"
+      },
+      "flow_as_of": "2026-10-21T14:04:21+08:00",
+      "flow_status": "live",
+      "flow_source": "东方财富 ETF 资金 · AKShare 同源字段 · 免费延迟源",
+      "flow_stale": false
+    },
+    "instruments": [
+      {
+        "symbol": "000001",
+        "kind": "index",
+        "name": "上证指数",
+        "price": 3717.26,
+        "change_pct": -0.48,
+        "amount": 522611980000,
+        "volume": 303480628,
+        "main_net": 452807215,
+        "main_pct": null,
+        "as_of": "2026-10-21T14:04:21+08:00",
+        "status": "live",
+        "unit": {
+          "price": "index_points",
+          "amount": "CNY",
+          "volume": "source_raw_unverified",
+          "main_net": "CNY"
+        },
+        "flow_as_of": "2026-10-21T14:05:00+08:00",
+        "flow_status": "live",
+        "flow_source": "东方财富 · 当日资金分时",
+        "flow_stale": false
+      },
+      {
+        "symbol": "399001",
+        "kind": "index",
+        "name": "深证成指",
+        "price": 11743.61,
+        "change_pct": -0.49,
+        "amount": 650206150000,
+        "volume": 385720815,
+        "main_net": -1358416303,
+        "main_pct": null,
+        "as_of": "2026-10-21T14:04:18+08:00",
+        "status": "live",
+        "unit": {
+          "price": "index_points",
+          "amount": "CNY",
+          "volume": "source_raw_unverified",
+          "main_net": "CNY"
+        },
+        "flow_as_of": "2026-10-21T14:05:00+08:00",
+        "flow_status": "live",
+        "flow_source": "东方财富 · 当日资金分时",
+        "flow_stale": false
+      },
+      {
+        "symbol": "399006",
+        "kind": "index",
+        "name": "创业板指",
+        "price": 2705.7,
+        "change_pct": -1.22,
+        "amount": 331174450000,
+        "volume": 124271787,
+        "main_net": -2045056380,
+        "main_pct": null,
+        "as_of": "2026-10-21T14:04:18+08:00",
+        "status": "live",
+        "unit": {
+          "price": "index_points",
+          "amount": "CNY",
+          "volume": "source_raw_unverified",
+          "main_net": "CNY"
+        },
+        "flow_as_of": "2026-10-21T14:05:00+08:00",
+        "flow_status": "live",
+        "flow_source": "东方财富 · 当日资金分时",
+        "flow_stale": false
+      },
+      {
+        "symbol": "000300",
+        "kind": "index",
+        "name": "沪深300",
+        "price": 4118.05,
+        "change_pct": -0.82,
+        "amount": 310976200000,
+        "volume": 111370484,
+        "main_net": -5785433017,
+        "main_pct": null,
+        "as_of": "2026-10-21T14:04:21+08:00",
+        "status": "live",
+        "unit": {
+          "price": "index_points",
+          "amount": "CNY",
+          "volume": "source_raw_unverified",
+          "main_net": "CNY"
+        },
+        "flow_as_of": "2026-10-21T14:05:00+08:00",
+        "flow_status": "live",
+        "flow_source": "东方财富 · 当日资金分时",
+        "flow_stale": false
+      },
+      {
+        "symbol": "000905",
+        "kind": "index",
+        "name": "中证500",
+        "price": 6863.9,
+        "change_pct": 0.33,
+        "amount": 199673910000,
+        "volume": 90190948,
+        "main_net": -377468478,
+        "main_pct": null,
+        "as_of": "2026-10-21T14:04:21+08:00",
+        "status": "live",
+        "unit": {
+          "price": "index_points",
+          "amount": "CNY",
+          "volume": "source_raw_unverified",
+          "main_net": "CNY"
+        },
+        "flow_as_of": "2026-10-21T14:05:00+08:00",
+        "flow_status": "live",
+        "flow_source": "东方财富 · 当日资金分时",
+        "flow_stale": false
+      },
+      {
+        "symbol": "000688",
+        "kind": "index",
+        "name": "科创50",
+        "price": 1348.53,
+        "change_pct": 0.46,
+        "amount": 51040420000,
+        "volume": 5294285,
+        "main_net": 558331776,
+        "main_pct": null,
+        "as_of": "2026-10-21T14:04:21+08:00",
+        "status": "live",
+        "unit": {
+          "price": "index_points",
+          "amount": "CNY",
+          "volume": "source_raw_unverified",
+          "main_net": "CNY"
+        },
+        "flow_as_of": "2026-10-21T14:05:00+08:00",
+        "flow_status": "live",
+        "flow_source": "东方财富 · 当日资金分时",
+        "flow_stale": false
+      },
+      {
+        "symbol": "510300",
+        "kind": "etf",
+        "name": "沪深300ETF华泰柏瑞",
+        "price": 4.193,
+        "change_pct": -0.64,
+        "amount": 2593210000,
+        "volume": 6159503,
+        "main_net": -568231200,
+        "main_pct": -21.91,
+        "as_of": "2026-10-21T14:04:21+08:00",
+        "status": "live",
+        "unit": {
+          "price": "CNY",
+          "amount": "CNY",
+          "volume": "source_raw_unverified",
+          "main_net": "CNY"
+        },
+        "flow_as_of": "2026-10-21T14:04:21+08:00",
+        "flow_status": "live",
+        "flow_source": "东方财富 ETF 资金 · AKShare 同源字段 · 免费延迟源",
+        "flow_stale": false
+      },
+      {
+        "symbol": "510500",
+        "kind": "etf",
+        "name": "中证500ETF南方",
+        "price": 6.899,
+        "change_pct": 0.41,
+        "amount": 2312910000,
+        "volume": 3340507,
+        "main_net": -17124800,
+        "main_pct": -0.74,
+        "as_of": "2026-10-21T14:04:21+08:00",
+        "status": "live",
+        "unit": {
+          "price": "CNY",
+          "amount": "CNY",
+          "volume": "source_raw_unverified",
+          "main_net": "CNY"
+        },
+        "flow_as_of": "2026-10-21T14:04:21+08:00",
+        "flow_status": "live",
+        "flow_source": "东方财富 ETF 资金 · AKShare 同源字段 · 免费延迟源",
+        "flow_stale": false
+      },
+      {
+        "symbol": "159915",
+        "kind": "etf",
+        "name": "创业板ETF易方达",
+        "price": 2.723,
+        "change_pct": -1.2,
+        "amount": 7257500000,
+        "volume": 26415598,
+        "main_net": -1560078976,
+        "main_pct": -21.5,
+        "as_of": "2026-10-21T14:04:18+08:00",
+        "status": "live",
+        "unit": {
+          "price": "CNY",
+          "amount": "CNY",
+          "volume": "source_raw_unverified",
+          "main_net": "CNY"
+        },
+        "flow_as_of": "2026-10-21T14:04:21+08:00",
+        "flow_status": "live",
+        "flow_source": "东方财富 ETF 资金 · AKShare 同源字段 · 免费延迟源",
+        "flow_stale": false
+      },
+      {
+        "symbol": "588000",
+        "kind": "etf",
+        "name": "科创50ETF华夏",
+        "price": 1.425,
+        "change_pct": 0.56,
+        "amount": 5583300000,
+        "volume": 38989820,
+        "main_net": -101459440,
+        "main_pct": -1.82,
+        "as_of": "2026-10-21T14:04:20+08:00",
+        "status": "live",
+        "unit": {
+          "price": "CNY",
+          "amount": "CNY",
+          "volume": "source_raw_unverified",
+          "main_net": "CNY"
+        },
+        "flow_as_of": "2026-10-21T14:04:20+08:00",
+        "flow_status": "live",
+        "flow_source": "东方财富 ETF 资金 · AKShare 同源字段 · 免费延迟源",
+        "flow_stale": false
+      },
+      {
+        "symbol": "512480",
+        "kind": "etf",
+        "name": "半导体ETF国联安",
+        "price": 0.834,
+        "change_pct": 0.6,
+        "amount": 748790000,
+        "volume": 8925244,
+        "main_net": -33064542,
+        "main_pct": -4.41,
+        "as_of": "2026-10-21T14:04:19+08:00",
+        "status": "live",
+        "unit": {
+          "price": "CNY",
+          "amount": "CNY",
+          "volume": "source_raw_unverified",
+          "main_net": "CNY"
+        },
+        "flow_as_of": "2026-10-21T14:04:22+08:00",
+        "flow_status": "live",
+        "flow_source": "东方财富 ETF 资金 · AKShare 同源字段 · 免费延迟源",
+        "flow_stale": false
+      },
+      {
+        "symbol": "512660",
+        "kind": "etf",
+        "name": "军工ETF国泰",
+        "price": 1.069,
+        "change_pct": -0.09,
+        "amount": 270580000,
+        "volume": 2518574,
+        "main_net": -21416919,
+        "main_pct": -7.92,
+        "as_of": "2026-10-21T14:04:18+08:00",
+        "status": "live",
+        "unit": {
+          "price": "CNY",
+          "amount": "CNY",
+          "volume": "source_raw_unverified",
+          "main_net": "CNY"
+        },
+        "flow_as_of": "2026-10-21T14:04:21+08:00",
+        "flow_status": "live",
+        "flow_source": "东方财富 ETF 资金 · AKShare 同源字段 · 免费延迟源",
+        "flow_stale": false
+      },
+      {
+        "symbol": "518880",
+        "kind": "etf",
+        "name": "黄金ETF华安",
+        "price": 8.427,
+        "change_pct": -0.35,
+        "amount": 1944800000,
+        "volume": 2307550,
+        "main_net": -171143008,
+        "main_pct": -8.8,
+        "as_of": "2026-10-21T14:04:18+08:00",
+        "status": "live",
+        "unit": {
+          "price": "CNY",
+          "amount": "CNY",
+          "volume": "source_raw_unverified",
+          "main_net": "CNY"
+        },
+        "flow_as_of": "2026-10-21T14:04:21+08:00",
+        "flow_status": "live",
+        "flow_source": "东方财富 ETF 资金 · AKShare 同源字段 · 免费延迟源",
+        "flow_stale": false
+      },
+      {
+        "symbol": "513100",
+        "kind": "etf",
+        "name": "纳指ETF国泰",
+        "price": 2.318,
+        "change_pct": -0.69,
+        "amount": 479310000,
+        "volume": 2055557,
+        "main_net": -51149757,
+        "main_pct": -10.67,
+        "as_of": "2026-10-21T14:04:20+08:00",
+        "status": "live",
+        "unit": {
+          "price": "CNY",
+          "amount": "CNY",
+          "volume": "source_raw_unverified",
+          "main_net": "CNY"
+        },
+        "flow_as_of": "2026-10-21T14:04:20+08:00",
+        "flow_status": "live",
+        "flow_source": "东方财富 ETF 资金 · AKShare 同源字段 · 免费延迟源",
+        "flow_stale": false
+      },
+      {
+        "symbol": "510050",
+        "kind": "etf",
+        "name": "上证50ETF华夏",
+        "price": 2.862,
+        "change_pct": -0.52,
+        "amount": 916540000,
+        "volume": 3194948,
+        "main_net": -132107282,
+        "main_pct": -14.41,
+        "as_of": "2026-10-21T14:04:19+08:00",
+        "status": "live",
+        "unit": {
+          "price": "CNY",
+          "amount": "CNY",
+          "volume": "source_raw_unverified",
+          "main_net": "CNY"
+        },
+        "flow_as_of": "2026-10-21T14:04:22+08:00",
+        "flow_status": "live",
+        "flow_source": "东方财富 ETF 资金 · AKShare 同源字段 · 免费延迟源",
+        "flow_stale": false
+      },
+      {
+        "symbol": "512010",
+        "kind": "etf",
+        "name": "医药ETF易方达",
+        "price": 0.377,
+        "change_pct": 0,
+        "amount": 237720000,
+        "volume": 6303871,
+        "main_net": 6553964,
+        "main_pct": 2.76,
+        "as_of": "2026-10-21T14:04:18+08:00",
+        "status": "live",
+        "unit": {
+          "price": "CNY",
+          "amount": "CNY",
+          "volume": "source_raw_unverified",
+          "main_net": "CNY"
+        },
+        "flow_as_of": "2026-10-21T14:04:21+08:00",
+        "flow_status": "live",
+        "flow_source": "东方财富 ETF 资金 · AKShare 同源字段 · 免费延迟源",
+        "flow_stale": false
+      }
+    ]
+  },
+  "price_history": {
+    "symbol": "510300",
+    "kind": "etf",
+    "source": "腾讯财经公开行情 · 免费源，延迟未承诺",
+    "status": "live",
+    "as_of": "2026-10-21T14:05:00+08:00",
+    "fetched_at": "2026-10-21T06:04:21.785Z",
+    "unit": {
+      "price": "CNY",
+      "volume": "source_raw_unverified",
+      "amount": "CNY",
+      "cumulative_volume": "source_raw_unverified",
+      "cumulative_amount": "source_raw_unverified"
+    },
+    "stale": false,
+    "note": "分时价格采样点，不是分钟 OHLC；累计量额保留原始字段及未核实单位，分钟成交量不推算。",
+    "bars": [
+      {
+        "time": "2026-10-21 09:30",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.234,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 09:31",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.229,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 09:32",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.225,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 09:33",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.221,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 09:34",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.221,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 09:35",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.23,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 09:36",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.233,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 09:37",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.226,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 09:38",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.222,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 09:39",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.224,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 09:40",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.224,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 09:41",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.22,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 09:42",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.217,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 09:43",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.219,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 09:44",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.221,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 09:45",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.225,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 09:46",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.222,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 09:47",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.224,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 09:48",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.225,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 09:49",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.22,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 09:50",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.22,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 09:51",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.227,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 09:52",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.227,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 09:53",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.226,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 09:54",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.228,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 09:55",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.227,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 09:56",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.227,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 09:57",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.228,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 09:58",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.228,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 09:59",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.226,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:00",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.223,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:01",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.223,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:02",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.223,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:03",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.219,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:04",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.22,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:05",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.22,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:06",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.219,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:07",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.219,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:08",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.218,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:09",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.22,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:10",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.221,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:11",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.221,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:12",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.218,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:13",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.217,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:14",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.221,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:15",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.217,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:16",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.216,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:17",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.216,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:18",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.215,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:19",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.213,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:20",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.215,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:21",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.211,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:22",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.212,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:23",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.211,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:24",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.209,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:25",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.209,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:26",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.209,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:27",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.214,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:28",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.211,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:29",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.208,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:30",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.204,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:31",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.205,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:32",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.205,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:33",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.205,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:34",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.207,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:35",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.206,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:36",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.202,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:37",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.201,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:38",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.202,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:39",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.202,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:40",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.205,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:41",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.202,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:42",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.2,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:43",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.201,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:44",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.198,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:45",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.2,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:46",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.201,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:47",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.199,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:48",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.203,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:49",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.2,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:50",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.2,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:51",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.197,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:52",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.199,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:53",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.197,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:54",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.198,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:55",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.197,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:56",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.195,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:57",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.196,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:58",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.196,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 10:59",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.198,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 11:00",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.195,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 11:01",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.198,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 11:02",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.196,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 11:03",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.195,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 11:04",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.197,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 11:05",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.196,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 11:06",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.192,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 11:07",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.192,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 11:08",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.196,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 11:09",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.194,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 11:10",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.191,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 11:11",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.191,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 11:12",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.192,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 11:13",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.19,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 11:14",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.192,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 11:15",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.195,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 11:16",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.197,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 11:17",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.198,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 11:18",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.197,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 11:19",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.199,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 11:20",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.199,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 11:21",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.2,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 11:22",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.2,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 11:23",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.201,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 11:24",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.195,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 11:25",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.194,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 11:26",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.194,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 11:27",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.193,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 11:28",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.192,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 11:29",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.195,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 11:30",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.197,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:00",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.197,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:01",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.194,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:02",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.192,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:03",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.194,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:04",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.191,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:05",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.19,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:06",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.19,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:07",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.195,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:08",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.192,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:09",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.193,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:10",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.197,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:11",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.196,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:12",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.194,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:13",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.193,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:14",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.191,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:15",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.192,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:16",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.19,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:17",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.19,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:18",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.192,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:19",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.193,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:20",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.196,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:21",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.195,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:22",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.2,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:23",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.202,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:24",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.201,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:25",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.197,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:26",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.203,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:27",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.201,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:28",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.198,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:29",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.196,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:30",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.202,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:31",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.201,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:32",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.199,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:33",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.196,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:34",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.193,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:35",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.192,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:36",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.194,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:37",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.194,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:38",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.191,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:39",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.19,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:40",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.187,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:41",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.187,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:42",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.186,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:43",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.188,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:44",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.19,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:45",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.193,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:46",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.194,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:47",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.191,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:48",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.19,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:49",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.191,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:50",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.191,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:51",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.192,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:52",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.188,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:53",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.19,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:54",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.19,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:55",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.189,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:56",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.189,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:57",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.188,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:58",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.188,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 13:59",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.188,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 14:00",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.19,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 14:01",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.189,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 14:02",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.192,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 14:03",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.192,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 14:04",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.192,
+        "volume": null,
+        "amount": null
+      },
+      {
+        "time": "2026-10-21 14:05",
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": 4.192,
+        "volume": null,
+        "amount": null
+      }
+    ],
+    "period": "intraday"
+  },
+  "fund_flow_history": {
+    "symbol": "510300",
+    "kind": "etf",
+    "source": "东方财富 · 当日资金分时",
+    "status": "live",
+    "as_of": "2026-10-21T14:05:00+08:00",
+    "fetched_at": "2026-10-21T06:04:24.273Z",
+    "trade_date": "2026-10-21",
+    "unit": "CNY",
+    "stale": false,
+    "note": "直接补拉数据源已有的当日分钟资金序列。净额为当日累计值，主力为大单与超大单之和；指数采用数据源对应指数口径，ETF 为自身交易口径。缺失时段留空，订单分类不代表机构身份，公开源延迟未承诺。",
+    "bars": [
+      {
+        "time": "2026-10-21T09:31:00+08:00",
+        "main_net": 4918230,
+        "super_net": -28854928,
+        "large_net": 33773158,
+        "medium_net": 848667,
+        "small_net": -5809187
+      },
+      {
+        "time": "2026-10-21T09:32:00+08:00",
+        "main_net": 4739100,
+        "super_net": -31324662,
+        "large_net": 36063762,
+        "medium_net": 1820188,
+        "small_net": -6567319
+      },
+      {
+        "time": "2026-10-21T09:33:00+08:00",
+        "main_net": -66194,
+        "super_net": -42457226,
+        "large_net": 42391032,
+        "medium_net": 5509350,
+        "small_net": -5447379
+      },
+      {
+        "time": "2026-10-21T09:34:00+08:00",
+        "main_net": -2003750,
+        "super_net": -51883674,
+        "large_net": 49879924,
+        "medium_net": 6920622,
+        "small_net": -4912653
+      },
+      {
+        "time": "2026-10-21T09:35:00+08:00",
+        "main_net": -3499323,
+        "super_net": -64942044,
+        "large_net": 61442721,
+        "medium_net": 5960060,
+        "small_net": -2456509
+      },
+      {
+        "time": "2026-10-21T09:36:00+08:00",
+        "main_net": -6241105,
+        "super_net": -84487666,
+        "large_net": 78246561,
+        "medium_net": 4476250,
+        "small_net": 1756387
+      },
+      {
+        "time": "2026-10-21T09:37:00+08:00",
+        "main_net": -12336358,
+        "super_net": -98168679,
+        "large_net": 85832321,
+        "medium_net": 6335546,
+        "small_net": 6229437
+      },
+      {
+        "time": "2026-10-21T09:38:00+08:00",
+        "main_net": -14321576,
+        "super_net": -106491033,
+        "large_net": 92169457,
+        "medium_net": 7733653,
+        "small_net": 6572302
+      },
+      {
+        "time": "2026-10-21T09:39:00+08:00",
+        "main_net": -15369980,
+        "super_net": -110765768,
+        "large_net": 95395788,
+        "medium_net": 8515396,
+        "small_net": 6778553
+      },
+      {
+        "time": "2026-10-21T09:40:00+08:00",
+        "main_net": -15249326,
+        "super_net": -113854870,
+        "large_net": 98605544,
+        "medium_net": 9023906,
+        "small_net": 6224999
+      },
+      {
+        "time": "2026-10-21T09:41:00+08:00",
+        "main_net": -25217853,
+        "super_net": -129560756,
+        "large_net": 104342903,
+        "medium_net": 15166002,
+        "small_net": 9822706
+      },
+      {
+        "time": "2026-10-21T09:42:00+08:00",
+        "main_net": -28681982,
+        "super_net": -139594328,
+        "large_net": 110912346,
+        "medium_net": 17425175,
+        "small_net": 11258073
+      },
+      {
+        "time": "2026-10-21T09:43:00+08:00",
+        "main_net": -30905733,
+        "super_net": -157114330,
+        "large_net": 126208597,
+        "medium_net": 18805454,
+        "small_net": 12096482
+      },
+      {
+        "time": "2026-10-21T09:44:00+08:00",
+        "main_net": -31140983,
+        "super_net": -170492959,
+        "large_net": 139351976,
+        "medium_net": 18849785,
+        "small_net": 12291199
+      },
+      {
+        "time": "2026-10-21T09:45:00+08:00",
+        "main_net": -28348431,
+        "super_net": -180320177,
+        "large_net": 151971746,
+        "medium_net": 16861207,
+        "small_net": 11485957
+      },
+      {
+        "time": "2026-10-21T09:46:00+08:00",
+        "main_net": -29535808,
+        "super_net": -187214841,
+        "large_net": 157679033,
+        "medium_net": 17621043,
+        "small_net": 11917721
+      },
+      {
+        "time": "2026-10-21T09:47:00+08:00",
+        "main_net": -27006720,
+        "super_net": -192000956,
+        "large_net": 164994236,
+        "medium_net": 15964431,
+        "small_net": 11058767
+      },
+      {
+        "time": "2026-10-21T09:48:00+08:00",
+        "main_net": -26909250,
+        "super_net": -189744798,
+        "large_net": 162835548,
+        "medium_net": 15546971,
+        "small_net": 11328479
+      },
+      {
+        "time": "2026-10-21T09:49:00+08:00",
+        "main_net": -31238063,
+        "super_net": -200807960,
+        "large_net": 169569897,
+        "medium_net": 18487491,
+        "small_net": 12750572
+      },
+      {
+        "time": "2026-10-21T09:50:00+08:00",
+        "main_net": -32098780,
+        "super_net": -201947245,
+        "large_net": 169848465,
+        "medium_net": 19108405,
+        "small_net": 12990375
+      },
+      {
+        "time": "2026-10-21T09:51:00+08:00",
+        "main_net": -26645034,
+        "super_net": -196526607,
+        "large_net": 169881573,
+        "medium_net": 15104137,
+        "small_net": 11543010
+      },
+      {
+        "time": "2026-10-21T09:52:00+08:00",
+        "main_net": -21072010,
+        "super_net": -193675492,
+        "large_net": 172603482,
+        "medium_net": 12397004,
+        "small_net": 8975896
+      },
+      {
+        "time": "2026-10-21T09:53:00+08:00",
+        "main_net": -20851037,
+        "super_net": -193211904,
+        "large_net": 172360867,
+        "medium_net": 11900084,
+        "small_net": 9000820
+      },
+      {
+        "time": "2026-10-21T09:54:00+08:00",
+        "main_net": -17086159,
+        "super_net": -197638341,
+        "large_net": 180552182,
+        "medium_net": 9437869,
+        "small_net": 7656745
+      },
+      {
+        "time": "2026-10-21T09:55:00+08:00",
+        "main_net": -16886277,
+        "super_net": -200394734,
+        "large_net": 183508457,
+        "medium_net": 9086659,
+        "small_net": 7879506
+      },
+      {
+        "time": "2026-10-21T09:56:00+08:00",
+        "main_net": -17545388,
+        "super_net": -204638479,
+        "large_net": 187093091,
+        "medium_net": 9623703,
+        "small_net": 7921682
+      },
+      {
+        "time": "2026-10-21T09:57:00+08:00",
+        "main_net": -15715719,
+        "super_net": -203999371,
+        "large_net": 188283652,
+        "medium_net": 8429974,
+        "small_net": 7328022
+      },
+      {
+        "time": "2026-10-21T09:58:00+08:00",
+        "main_net": -13874323,
+        "super_net": -202505552,
+        "large_net": 188631229,
+        "medium_net": 6597826,
+        "small_net": 6884466
+      },
+      {
+        "time": "2026-10-21T09:59:00+08:00",
+        "main_net": -14190808,
+        "super_net": -199217696,
+        "large_net": 185026888,
+        "medium_net": 6743977,
+        "small_net": 7442600
+      },
+      {
+        "time": "2026-10-21T10:00:00+08:00",
+        "main_net": -14734743,
+        "super_net": -189540202,
+        "large_net": 174805459,
+        "medium_net": 7038272,
+        "small_net": 7902548
+      },
+      {
+        "time": "2026-10-21T10:01:00+08:00",
+        "main_net": -16437953,
+        "super_net": -191031045,
+        "large_net": 174593092,
+        "medium_net": 8363111,
+        "small_net": 8074835
+      },
+      {
+        "time": "2026-10-21T10:02:00+08:00",
+        "main_net": -16291339,
+        "super_net": -188444663,
+        "large_net": 172153324,
+        "medium_net": 8322933,
+        "small_net": 7968398
+      },
+      {
+        "time": "2026-10-21T10:03:00+08:00",
+        "main_net": -24538587,
+        "super_net": -197882691,
+        "large_net": 173344104,
+        "medium_net": 12969341,
+        "small_net": 11570081
+      },
+      {
+        "time": "2026-10-21T10:04:00+08:00",
+        "main_net": -26093388,
+        "super_net": -201628170,
+        "large_net": 175534782,
+        "medium_net": 14005147,
+        "small_net": 12059957
+      },
+      {
+        "time": "2026-10-21T10:05:00+08:00",
+        "main_net": -28677228,
+        "super_net": -207413886,
+        "large_net": 178736658,
+        "medium_net": 16167100,
+        "small_net": 12510118
+      },
+      {
+        "time": "2026-10-21T10:06:00+08:00",
+        "main_net": -31405848,
+        "super_net": -213408969,
+        "large_net": 182003121,
+        "medium_net": 17491498,
+        "small_net": 13828274
+      },
+      {
+        "time": "2026-10-21T10:07:00+08:00",
+        "main_net": -36060665,
+        "super_net": -221305132,
+        "large_net": 185244467,
+        "medium_net": 19953215,
+        "small_net": 15953448
+      },
+      {
+        "time": "2026-10-21T10:08:00+08:00",
+        "main_net": -37779317,
+        "super_net": -225399706,
+        "large_net": 187620389,
+        "medium_net": 21094800,
+        "small_net": 16684509
+      },
+      {
+        "time": "2026-10-21T10:09:00+08:00",
+        "main_net": -39545534,
+        "super_net": -230086399,
+        "large_net": 190540865,
+        "medium_net": 22232776,
+        "small_net": 17257467
+      },
+      {
+        "time": "2026-10-21T10:10:00+08:00",
+        "main_net": -40689704,
+        "super_net": -233163203,
+        "large_net": 192473499,
+        "medium_net": 22880184,
+        "small_net": 17886333
+      },
+      {
+        "time": "2026-10-21T10:11:00+08:00",
+        "main_net": -41007210,
+        "super_net": -234729606,
+        "large_net": 193722396,
+        "medium_net": 22885321,
+        "small_net": 18100775
+      },
+      {
+        "time": "2026-10-21T10:12:00+08:00",
+        "main_net": -47144995,
+        "super_net": -248579822,
+        "large_net": 201434827,
+        "medium_net": 26952454,
+        "small_net": 20192534
+      },
+      {
+        "time": "2026-10-21T10:13:00+08:00",
+        "main_net": -48560553,
+        "super_net": -255052671,
+        "large_net": 206492118,
+        "medium_net": 27966498,
+        "small_net": 20610914
+      },
+      {
+        "time": "2026-10-21T10:14:00+08:00",
+        "main_net": -48414963,
+        "super_net": -257614095,
+        "large_net": 209199132,
+        "medium_net": 27894271,
+        "small_net": 20518995
+      },
+      {
+        "time": "2026-10-21T10:15:00+08:00",
+        "main_net": -50129327,
+        "super_net": -259679462,
+        "large_net": 209550135,
+        "medium_net": 28734403,
+        "small_net": 21394493
+      },
+      {
+        "time": "2026-10-21T10:16:00+08:00",
+        "main_net": -58436785,
+        "super_net": -267926920,
+        "large_net": 209490135,
+        "medium_net": 33270134,
+        "small_net": 25167486
+      },
+      {
+        "time": "2026-10-21T10:17:00+08:00",
+        "main_net": -61122755,
+        "super_net": -264555384,
+        "large_net": 203432629,
+        "medium_net": 34973048,
+        "small_net": 26149700
+      },
+      {
+        "time": "2026-10-21T10:18:00+08:00",
+        "main_net": -68139497,
+        "super_net": -268069995,
+        "large_net": 199930498,
+        "medium_net": 39379731,
+        "small_net": 28759337
+      },
+      {
+        "time": "2026-10-21T10:19:00+08:00",
+        "main_net": -72026184,
+        "super_net": -275307123,
+        "large_net": 203280939,
+        "medium_net": 41226249,
+        "small_net": 30644469
+      },
+      {
+        "time": "2026-10-21T10:20:00+08:00",
+        "main_net": -72390714,
+        "super_net": -278559981,
+        "large_net": 206169267,
+        "medium_net": 41990933,
+        "small_net": 30398508
+      },
+      {
+        "time": "2026-10-21T10:21:00+08:00",
+        "main_net": -81593213,
+        "super_net": -284471507,
+        "large_net": 202878294,
+        "medium_net": 47095402,
+        "small_net": 34495697
+      },
+      {
+        "time": "2026-10-21T10:22:00+08:00",
+        "main_net": -83493232,
+        "super_net": -287630297,
+        "large_net": 204137065,
+        "medium_net": 47772722,
+        "small_net": 35720501
+      },
+      {
+        "time": "2026-10-21T10:23:00+08:00",
+        "main_net": -86445994,
+        "super_net": -292386100,
+        "large_net": 205940106,
+        "medium_net": 48981420,
+        "small_net": 37338235
+      },
+      {
+        "time": "2026-10-21T10:24:00+08:00",
+        "main_net": -95920798,
+        "super_net": -304904875,
+        "large_net": 208984077,
+        "medium_net": 54190678,
+        "small_net": 41730111
+      },
+      {
+        "time": "2026-10-21T10:25:00+08:00",
+        "main_net": -97697667,
+        "super_net": -308152102,
+        "large_net": 210454435,
+        "medium_net": 54883011,
+        "small_net": 42815910
+      },
+      {
+        "time": "2026-10-21T10:26:00+08:00",
+        "main_net": -97923343,
+        "super_net": -307760244,
+        "large_net": 209836901,
+        "medium_net": 54997945,
+        "small_net": 42925390
+      },
+      {
+        "time": "2026-10-21T10:27:00+08:00",
+        "main_net": -98495968,
+        "super_net": -306927699,
+        "large_net": 208431731,
+        "medium_net": 55318521,
+        "small_net": 43177018
+      },
+      {
+        "time": "2026-10-21T10:28:00+08:00",
+        "main_net": -102459764,
+        "super_net": -311587386,
+        "large_net": 209127622,
+        "medium_net": 57748963,
+        "small_net": 44710793
+      },
+      {
+        "time": "2026-10-21T10:29:00+08:00",
+        "main_net": -108208078,
+        "super_net": -315678229,
+        "large_net": 207470151,
+        "medium_net": 60462539,
+        "small_net": 47770773
+      },
+      {
+        "time": "2026-10-21T10:30:00+08:00",
+        "main_net": -116620348,
+        "super_net": -323656498,
+        "large_net": 207036150,
+        "medium_net": 64365241,
+        "small_net": 52235756
+      },
+      {
+        "time": "2026-10-21T10:31:00+08:00",
+        "main_net": -121398749,
+        "super_net": -327249329,
+        "large_net": 205850580,
+        "medium_net": 67613531,
+        "small_net": 53781006
+      },
+      {
+        "time": "2026-10-21T10:32:00+08:00",
+        "main_net": -124069531,
+        "super_net": -329344380,
+        "large_net": 205274849,
+        "medium_net": 68479314,
+        "small_net": 55586426
+      },
+      {
+        "time": "2026-10-21T10:33:00+08:00",
+        "main_net": -128219881,
+        "super_net": -328788904,
+        "large_net": 200569023,
+        "medium_net": 71345644,
+        "small_net": 56872129
+      },
+      {
+        "time": "2026-10-21T10:34:00+08:00",
+        "main_net": -130119773,
+        "super_net": -332163635,
+        "large_net": 202043862,
+        "medium_net": 72883430,
+        "small_net": 57236338
+      },
+      {
+        "time": "2026-10-21T10:35:00+08:00",
+        "main_net": -137088996,
+        "super_net": -335175968,
+        "large_net": 198086972,
+        "medium_net": 77515735,
+        "small_net": 59559377
+      },
+      {
+        "time": "2026-10-21T10:36:00+08:00",
+        "main_net": -155124808,
+        "super_net": -343801575,
+        "large_net": 188676767,
+        "medium_net": 87823085,
+        "small_net": 67399183
+      },
+      {
+        "time": "2026-10-21T10:37:00+08:00",
+        "main_net": -169155054,
+        "super_net": -355061335,
+        "large_net": 185906281,
+        "medium_net": 95926174,
+        "small_net": 73228877
+      },
+      {
+        "time": "2026-10-21T10:38:00+08:00",
+        "main_net": -174217598,
+        "super_net": -358351227,
+        "large_net": 184133629,
+        "medium_net": 99132231,
+        "small_net": 75084524
+      },
+      {
+        "time": "2026-10-21T10:39:00+08:00",
+        "main_net": -185262097,
+        "super_net": -366649657,
+        "large_net": 181387560,
+        "medium_net": 106327379,
+        "small_net": 78945638
+      },
+      {
+        "time": "2026-10-21T10:40:00+08:00",
+        "main_net": -188270189,
+        "super_net": -363854611,
+        "large_net": 175584422,
+        "medium_net": 107782960,
+        "small_net": 80478816
+      },
+      {
+        "time": "2026-10-21T10:41:00+08:00",
+        "main_net": -194278089,
+        "super_net": -370674561,
+        "large_net": 176396472,
+        "medium_net": 110599554,
+        "small_net": 83615487
+      },
+      {
+        "time": "2026-10-21T10:42:00+08:00",
+        "main_net": -213337430,
+        "super_net": -387992646,
+        "large_net": 174655216,
+        "medium_net": 120748349,
+        "small_net": 92647458
+      },
+      {
+        "time": "2026-10-21T10:43:00+08:00",
+        "main_net": -219909997,
+        "super_net": -391060336,
+        "large_net": 171150339,
+        "medium_net": 123908415,
+        "small_net": 96000320
+      },
+      {
+        "time": "2026-10-21T10:44:00+08:00",
+        "main_net": -232395844,
+        "super_net": -404460624,
+        "large_net": 172064780,
+        "medium_net": 130372022,
+        "small_net": 102014164
+      },
+      {
+        "time": "2026-10-21T10:45:00+08:00",
+        "main_net": -236312085,
+        "super_net": -409862440,
+        "large_net": 173550355,
+        "medium_net": 132938474,
+        "small_net": 103372770
+      },
+      {
+        "time": "2026-10-21T10:46:00+08:00",
+        "main_net": -241260736,
+        "super_net": -415172531,
+        "large_net": 173911795,
+        "medium_net": 135981269,
+        "small_net": 105274426
+      },
+      {
+        "time": "2026-10-21T10:47:00+08:00",
+        "main_net": -250025990,
+        "super_net": -425711215,
+        "large_net": 175685225,
+        "medium_net": 140000238,
+        "small_net": 110025332
+      },
+      {
+        "time": "2026-10-21T10:48:00+08:00",
+        "main_net": -254854318,
+        "super_net": -432375807,
+        "large_net": 177521489,
+        "medium_net": 142412795,
+        "small_net": 112441523
+      },
+      {
+        "time": "2026-10-21T10:49:00+08:00",
+        "main_net": -263737087,
+        "super_net": -442588313,
+        "large_net": 178851226,
+        "medium_net": 147902665,
+        "small_net": 115813423
+      },
+      {
+        "time": "2026-10-21T10:50:00+08:00",
+        "main_net": -270374361,
+        "super_net": -449247157,
+        "large_net": 178872796,
+        "medium_net": 152146800,
+        "small_net": 118225463
+      },
+      {
+        "time": "2026-10-21T10:51:00+08:00",
+        "main_net": -282281246,
+        "super_net": -461775977,
+        "large_net": 179494731,
+        "medium_net": 159283611,
+        "small_net": 122990923
+      },
+      {
+        "time": "2026-10-21T10:52:00+08:00",
+        "main_net": -283214760,
+        "super_net": -461366131,
+        "large_net": 178151371,
+        "medium_net": 160095303,
+        "small_net": 123119460
+      },
+      {
+        "time": "2026-10-21T10:53:00+08:00",
+        "main_net": -288645423,
+        "super_net": -467222471,
+        "large_net": 178577048,
+        "medium_net": 162816142,
+        "small_net": 125820889
+      },
+      {
+        "time": "2026-10-21T10:54:00+08:00",
+        "main_net": -291095883,
+        "super_net": -471596737,
+        "large_net": 180500854,
+        "medium_net": 164347797,
+        "small_net": 126747668
+      },
+      {
+        "time": "2026-10-21T10:55:00+08:00",
+        "main_net": -295828302,
+        "super_net": -478123473,
+        "large_net": 182295171,
+        "medium_net": 167227971,
+        "small_net": 128648166
+      },
+      {
+        "time": "2026-10-21T10:56:00+08:00",
+        "main_net": -310514178,
+        "super_net": -497407360,
+        "large_net": 186893182,
+        "medium_net": 175229922,
+        "small_net": 135282999
+      },
+      {
+        "time": "2026-10-21T10:57:00+08:00",
+        "main_net": -314071497,
+        "super_net": -502830995,
+        "large_net": 188759498,
+        "medium_net": 177077590,
+        "small_net": 136993909
+      },
+      {
+        "time": "2026-10-21T10:58:00+08:00",
+        "main_net": -317018814,
+        "super_net": -507856565,
+        "large_net": 190837751,
+        "medium_net": 178881051,
+        "small_net": 138137767
+      },
+      {
+        "time": "2026-10-21T10:59:00+08:00",
+        "main_net": -319587181,
+        "super_net": -510127786,
+        "large_net": 190540605,
+        "medium_net": 180487238,
+        "small_net": 139093650
+      },
+      {
+        "time": "2026-10-21T11:00:00+08:00",
+        "main_net": -324707964,
+        "super_net": -518323956,
+        "large_net": 193615992,
+        "medium_net": 183719049,
+        "small_net": 140988918
+      },
+      {
+        "time": "2026-10-21T11:01:00+08:00",
+        "main_net": -325007962,
+        "super_net": -519207163,
+        "large_net": 194199201,
+        "medium_net": 183672019,
+        "small_net": 141335947
+      },
+      {
+        "time": "2026-10-21T11:02:00+08:00",
+        "main_net": -328095431,
+        "super_net": -524572989,
+        "large_net": 196477558,
+        "medium_net": 185074522,
+        "small_net": 143020912
+      },
+      {
+        "time": "2026-10-21T11:03:00+08:00",
+        "main_net": -334396742,
+        "super_net": -533880906,
+        "large_net": 199484164,
+        "medium_net": 188337388,
+        "small_net": 146055161
+      },
+      {
+        "time": "2026-10-21T11:04:00+08:00",
+        "main_net": -334996795,
+        "super_net": -536196757,
+        "large_net": 201199962,
+        "medium_net": 188518661,
+        "small_net": 146478137
+      },
+      {
+        "time": "2026-10-21T11:05:00+08:00",
+        "main_net": -336881587,
+        "super_net": -541101929,
+        "large_net": 204220342,
+        "medium_net": 189239522,
+        "small_net": 147637031
+      },
+      {
+        "time": "2026-10-21T11:06:00+08:00",
+        "main_net": -350959629,
+        "super_net": -563255455,
+        "large_net": 212295826,
+        "medium_net": 195900219,
+        "small_net": 155049770
+      },
+      {
+        "time": "2026-10-21T11:07:00+08:00",
+        "main_net": -351554104,
+        "super_net": -564067861,
+        "large_net": 212513757,
+        "medium_net": 195872549,
+        "small_net": 155681557
+      },
+      {
+        "time": "2026-10-21T11:08:00+08:00",
+        "main_net": -352741245,
+        "super_net": -564909173,
+        "large_net": 212167928,
+        "medium_net": 196555302,
+        "small_net": 156185945
+      },
+      {
+        "time": "2026-10-21T11:09:00+08:00",
+        "main_net": -354430369,
+        "super_net": -566061914,
+        "large_net": 211631545,
+        "medium_net": 197118339,
+        "small_net": 157317065
+      },
+      {
+        "time": "2026-10-21T11:10:00+08:00",
+        "main_net": -357671433,
+        "super_net": -570378800,
+        "large_net": 212707367,
+        "medium_net": 198333318,
+        "small_net": 159328475
+      },
+      {
+        "time": "2026-10-21T11:11:00+08:00",
+        "main_net": -365054283,
+        "super_net": -580329222,
+        "large_net": 215274939,
+        "medium_net": 202366316,
+        "small_net": 162698024
+      },
+      {
+        "time": "2026-10-21T11:12:00+08:00",
+        "main_net": -364798466,
+        "super_net": -579345685,
+        "large_net": 214547219,
+        "medium_net": 201635477,
+        "small_net": 163160894
+      },
+      {
+        "time": "2026-10-21T11:13:00+08:00",
+        "main_net": -387128379,
+        "super_net": -605317027,
+        "large_net": 218188648,
+        "medium_net": 211289131,
+        "small_net": 172760438
+      },
+      {
+        "time": "2026-10-21T11:14:00+08:00",
+        "main_net": -384274569,
+        "super_net": -602365533,
+        "large_net": 218090964,
+        "medium_net": 210926597,
+        "small_net": 173347974
+      },
+      {
+        "time": "2026-10-21T11:15:00+08:00",
+        "main_net": -385125935,
+        "super_net": -605424384,
+        "large_net": 220298449,
+        "medium_net": 211341766,
+        "small_net": 173784171
+      },
+      {
+        "time": "2026-10-21T11:16:00+08:00",
+        "main_net": -386210921,
+        "super_net": -608328510,
+        "large_net": 222117589,
+        "medium_net": 211913970,
+        "small_net": 174280166
+      },
+      {
+        "time": "2026-10-21T11:17:00+08:00",
+        "main_net": -388433107,
+        "super_net": -609587910,
+        "large_net": 221154803,
+        "medium_net": 213242083,
+        "small_net": 175180951
+      },
+      {
+        "time": "2026-10-21T11:18:00+08:00",
+        "main_net": -390023036,
+        "super_net": -609587910,
+        "large_net": 219564874,
+        "medium_net": 214122668,
+        "small_net": 175894493
+      },
+      {
+        "time": "2026-10-21T11:19:00+08:00",
+        "main_net": -389533052,
+        "super_net": -610685425,
+        "large_net": 221152373,
+        "medium_net": 213778363,
+        "small_net": 175746293
+      },
+      {
+        "time": "2026-10-21T11:20:00+08:00",
+        "main_net": -388965688,
+        "super_net": -603602970,
+        "large_net": 214637282,
+        "medium_net": 212842131,
+        "small_net": 176123559
+      },
+      {
+        "time": "2026-10-21T11:21:00+08:00",
+        "main_net": -389555682,
+        "super_net": -604129659,
+        "large_net": 214573977,
+        "medium_net": 212847983,
+        "small_net": 176581700
+      },
+      {
+        "time": "2026-10-21T11:22:00+08:00",
+        "main_net": -390312055,
+        "super_net": -605991094,
+        "large_net": 215679039,
+        "medium_net": 213401532,
+        "small_net": 176910524
+      },
+      {
+        "time": "2026-10-21T11:23:00+08:00",
+        "main_net": -390729435,
+        "super_net": -605991094,
+        "large_net": 215261659,
+        "medium_net": 213361925,
+        "small_net": 177367510
+      },
+      {
+        "time": "2026-10-21T11:24:00+08:00",
+        "main_net": -394502773,
+        "super_net": -609185961,
+        "large_net": 214683188,
+        "medium_net": 215229054,
+        "small_net": 179275397
+      },
+      {
+        "time": "2026-10-21T11:25:00+08:00",
+        "main_net": -395125820,
+        "super_net": -610731818,
+        "large_net": 215605998,
+        "medium_net": 215358718,
+        "small_net": 179763326
+      },
+      {
+        "time": "2026-10-21T11:26:00+08:00",
+        "main_net": -396789861,
+        "super_net": -612429863,
+        "large_net": 215640002,
+        "medium_net": 215798609,
+        "small_net": 180990832
+      },
+      {
+        "time": "2026-10-21T11:27:00+08:00",
+        "main_net": -396884634,
+        "super_net": -612429863,
+        "large_net": 215545229,
+        "medium_net": 215366757,
+        "small_net": 181515780
+      },
+      {
+        "time": "2026-10-21T11:28:00+08:00",
+        "main_net": -400079291,
+        "super_net": -614743494,
+        "large_net": 214664203,
+        "medium_net": 216647055,
+        "small_net": 183432237
+      },
+      {
+        "time": "2026-10-21T11:29:00+08:00",
+        "main_net": -399986988,
+        "super_net": -614612560,
+        "large_net": 214625572,
+        "medium_net": 216425254,
+        "small_net": 183557540
+      },
+      {
+        "time": "2026-10-21T11:30:00+08:00",
+        "main_net": -400230076,
+        "super_net": -616631884,
+        "large_net": 216401808,
+        "medium_net": 216570058,
+        "small_net": 183660019
+      },
+      {
+        "time": "2026-10-21T13:01:00+08:00",
+        "main_net": -408909776,
+        "super_net": -624896401,
+        "large_net": 215986625,
+        "medium_net": 221096615,
+        "small_net": 187813162
+      },
+      {
+        "time": "2026-10-21T13:02:00+08:00",
+        "main_net": -410264867,
+        "super_net": -629535512,
+        "large_net": 219270645,
+        "medium_net": 222108619,
+        "small_net": 188155410
+      },
+      {
+        "time": "2026-10-21T13:03:00+08:00",
+        "main_net": -413470747,
+        "super_net": -638065343,
+        "large_net": 224594596,
+        "medium_net": 224069187,
+        "small_net": 189405755
+      },
+      {
+        "time": "2026-10-21T13:04:00+08:00",
+        "main_net": -416709177,
+        "super_net": -643701981,
+        "large_net": 226992804,
+        "medium_net": 225879605,
+        "small_net": 190787663
+      },
+      {
+        "time": "2026-10-21T13:05:00+08:00",
+        "main_net": -425812405,
+        "super_net": -657165483,
+        "large_net": 231353078,
+        "medium_net": 230458845,
+        "small_net": 195353559
+      },
+      {
+        "time": "2026-10-21T13:06:00+08:00",
+        "main_net": -430108490,
+        "super_net": -663929817,
+        "large_net": 233821327,
+        "medium_net": 233856846,
+        "small_net": 197455012
+      },
+      {
+        "time": "2026-10-21T13:07:00+08:00",
+        "main_net": -431442875,
+        "super_net": -666451142,
+        "large_net": 235008267,
+        "medium_net": 234358218,
+        "small_net": 197083398
+      },
+      {
+        "time": "2026-10-21T13:08:00+08:00",
+        "main_net": -435354626,
+        "super_net": -671401298,
+        "large_net": 236046672,
+        "medium_net": 236857141,
+        "small_net": 198497485
+      },
+      {
+        "time": "2026-10-21T13:09:00+08:00",
+        "main_net": -435974035,
+        "super_net": -672656089,
+        "large_net": 236682054,
+        "medium_net": 237380995,
+        "small_net": 198593042
+      },
+      {
+        "time": "2026-10-21T13:10:00+08:00",
+        "main_net": -435354706,
+        "super_net": -672493743,
+        "large_net": 237139037,
+        "medium_net": 236917735,
+        "small_net": 198435715
+      },
+      {
+        "time": "2026-10-21T13:11:00+08:00",
+        "main_net": -437027698,
+        "super_net": -672481171,
+        "large_net": 235453473,
+        "medium_net": 238043836,
+        "small_net": 198985122
+      },
+      {
+        "time": "2026-10-21T13:12:00+08:00",
+        "main_net": -438532934,
+        "super_net": -674256171,
+        "large_net": 235723237,
+        "medium_net": 238943260,
+        "small_net": 199694501
+      },
+      {
+        "time": "2026-10-21T13:13:00+08:00",
+        "main_net": -439582075,
+        "super_net": -676263873,
+        "large_net": 236681798,
+        "medium_net": 239604525,
+        "small_net": 199976714
+      },
+      {
+        "time": "2026-10-21T13:14:00+08:00",
+        "main_net": -444645951,
+        "super_net": -681174436,
+        "large_net": 236528485,
+        "medium_net": 242864820,
+        "small_net": 201781134
+      },
+      {
+        "time": "2026-10-21T13:15:00+08:00",
+        "main_net": -445561266,
+        "super_net": -684311175,
+        "large_net": 238749909,
+        "medium_net": 243506879,
+        "small_net": 202054389
+      },
+      {
+        "time": "2026-10-21T13:16:00+08:00",
+        "main_net": -454348190,
+        "super_net": -698873691,
+        "large_net": 244525501,
+        "medium_net": 248371815,
+        "small_net": 206133884
+      },
+      {
+        "time": "2026-10-21T13:17:00+08:00",
+        "main_net": -461627306,
+        "super_net": -703670055,
+        "large_net": 242042749,
+        "medium_net": 250836683,
+        "small_net": 210790625
+      },
+      {
+        "time": "2026-10-21T13:18:00+08:00",
+        "main_net": -461954020,
+        "super_net": -702944743,
+        "large_net": 240990723,
+        "medium_net": 251099107,
+        "small_net": 210857010
+      },
+      {
+        "time": "2026-10-21T13:19:00+08:00",
+        "main_net": -462543237,
+        "super_net": -704676086,
+        "large_net": 242132849,
+        "medium_net": 251545049,
+        "small_net": 210998188
+      },
+      {
+        "time": "2026-10-21T13:20:00+08:00",
+        "main_net": -462996745,
+        "super_net": -705856986,
+        "large_net": 242860241,
+        "medium_net": 252010728,
+        "small_net": 210977625
+      },
+      {
+        "time": "2026-10-21T13:21:00+08:00",
+        "main_net": -463972460,
+        "super_net": -707945216,
+        "large_net": 243972756,
+        "medium_net": 252531749,
+        "small_net": 211458326
+      },
+      {
+        "time": "2026-10-21T13:22:00+08:00",
+        "main_net": -461070404,
+        "super_net": -706055937,
+        "large_net": 244985533,
+        "medium_net": 250782078,
+        "small_net": 210204326
+      },
+      {
+        "time": "2026-10-21T13:23:00+08:00",
+        "main_net": -459838439,
+        "super_net": -705342413,
+        "large_net": 245503974,
+        "medium_net": 250273581,
+        "small_net": 209548050
+      },
+      {
+        "time": "2026-10-21T13:24:00+08:00",
+        "main_net": -459708140,
+        "super_net": -705372402,
+        "large_net": 245664262,
+        "medium_net": 250281523,
+        "small_net": 209421156
+      },
+      {
+        "time": "2026-10-21T13:25:00+08:00",
+        "main_net": -460497511,
+        "super_net": -707274447,
+        "large_net": 246776936,
+        "medium_net": 250684600,
+        "small_net": 209812911
+      },
+      {
+        "time": "2026-10-21T13:26:00+08:00",
+        "main_net": -458869422,
+        "super_net": -707295882,
+        "large_net": 248426460,
+        "medium_net": 249944767,
+        "small_net": 208926757
+      },
+      {
+        "time": "2026-10-21T13:27:00+08:00",
+        "main_net": -458362002,
+        "super_net": -706883522,
+        "large_net": 248521520,
+        "medium_net": 249323852,
+        "small_net": 209273351
+      },
+      {
+        "time": "2026-10-21T13:28:00+08:00",
+        "main_net": -460272292,
+        "super_net": -709328377,
+        "large_net": 249056085,
+        "medium_net": 250372063,
+        "small_net": 209894352
+      },
+      {
+        "time": "2026-10-21T13:29:00+08:00",
+        "main_net": -461873508,
+        "super_net": -708499013,
+        "large_net": 246625505,
+        "medium_net": 251173906,
+        "small_net": 210699602
+      },
+      {
+        "time": "2026-10-21T13:30:00+08:00",
+        "main_net": -459347773,
+        "super_net": -707734571,
+        "large_net": 248386798,
+        "medium_net": 249655310,
+        "small_net": 209696666
+      },
+      {
+        "time": "2026-10-21T13:31:00+08:00",
+        "main_net": -459526080,
+        "super_net": -708918726,
+        "large_net": 249392646,
+        "medium_net": 249721536,
+        "small_net": 209804543
+      },
+      {
+        "time": "2026-10-21T13:32:00+08:00",
+        "main_net": -460596732,
+        "super_net": -710078493,
+        "large_net": 249481761,
+        "medium_net": 250474765,
+        "small_net": 210121967
+      },
+      {
+        "time": "2026-10-21T13:33:00+08:00",
+        "main_net": -462999580,
+        "super_net": -710571103,
+        "large_net": 247571523,
+        "medium_net": 251904597,
+        "small_net": 211385697
+      },
+      {
+        "time": "2026-10-21T13:34:00+08:00",
+        "main_net": -465930665,
+        "super_net": -713131466,
+        "large_net": 247200801,
+        "medium_net": 252792229,
+        "small_net": 213138438
+      },
+      {
+        "time": "2026-10-21T13:35:00+08:00",
+        "main_net": -468119337,
+        "super_net": -717221849,
+        "large_net": 249102512,
+        "medium_net": 253490650,
+        "small_net": 214628689
+      },
+      {
+        "time": "2026-10-21T13:36:00+08:00",
+        "main_net": -468537896,
+        "super_net": -717912678,
+        "large_net": 249374782,
+        "medium_net": 253724674,
+        "small_net": 214889964
+      },
+      {
+        "time": "2026-10-21T13:37:00+08:00",
+        "main_net": -469862195,
+        "super_net": -718538842,
+        "large_net": 248676647,
+        "medium_net": 254318035,
+        "small_net": 215543324
+      },
+      {
+        "time": "2026-10-21T13:38:00+08:00",
+        "main_net": -473615189,
+        "super_net": -723334454,
+        "large_net": 249719265,
+        "medium_net": 255671785,
+        "small_net": 217922447
+      },
+      {
+        "time": "2026-10-21T13:39:00+08:00",
+        "main_net": -482266259,
+        "super_net": -734714514,
+        "large_net": 252448255,
+        "medium_net": 260155654,
+        "small_net": 222068709
+      },
+      {
+        "time": "2026-10-21T13:40:00+08:00",
+        "main_net": -511088278,
+        "super_net": -761902884,
+        "large_net": 250814606,
+        "medium_net": 275694447,
+        "small_net": 235477993
+      },
+      {
+        "time": "2026-10-21T13:41:00+08:00",
+        "main_net": -533731471,
+        "super_net": -782508209,
+        "large_net": 248776738,
+        "medium_net": 287669849,
+        "small_net": 246044038
+      },
+      {
+        "time": "2026-10-21T13:42:00+08:00",
+        "main_net": -542688662,
+        "super_net": -790714193,
+        "large_net": 248025531,
+        "medium_net": 292326794,
+        "small_net": 250357684
+      },
+      {
+        "time": "2026-10-21T13:43:00+08:00",
+        "main_net": -543932499,
+        "super_net": -791217403,
+        "large_net": 247284904,
+        "medium_net": 292881421,
+        "small_net": 251055269
+      },
+      {
+        "time": "2026-10-21T13:44:00+08:00",
+        "main_net": -546261566,
+        "super_net": -792827354,
+        "large_net": 246565788,
+        "medium_net": 293935736,
+        "small_net": 252325834
+      },
+      {
+        "time": "2026-10-21T13:45:00+08:00",
+        "main_net": -546749637,
+        "super_net": -793382547,
+        "large_net": 246632910,
+        "medium_net": 294218320,
+        "small_net": 252529224
+      },
+      {
+        "time": "2026-10-21T13:46:00+08:00",
+        "main_net": -547309938,
+        "super_net": -790923359,
+        "large_net": 243613421,
+        "medium_net": 294394608,
+        "small_net": 252915333
+      },
+      {
+        "time": "2026-10-21T13:47:00+08:00",
+        "main_net": -548476295,
+        "super_net": -791156434,
+        "large_net": 242680139,
+        "medium_net": 294646050,
+        "small_net": 253851199
+      },
+      {
+        "time": "2026-10-21T13:48:00+08:00",
+        "main_net": -550101691,
+        "super_net": -791156434,
+        "large_net": 241054743,
+        "medium_net": 295588443,
+        "small_net": 254511995
+      },
+      {
+        "time": "2026-10-21T13:49:00+08:00",
+        "main_net": -550472595,
+        "super_net": -791156434,
+        "large_net": 240683839,
+        "medium_net": 295880961,
+        "small_net": 254570684
+      },
+      {
+        "time": "2026-10-21T13:50:00+08:00",
+        "main_net": -551794185,
+        "super_net": -793090699,
+        "large_net": 241296514,
+        "medium_net": 296329739,
+        "small_net": 255464453
+      },
+      {
+        "time": "2026-10-21T13:51:00+08:00",
+        "main_net": -551617776,
+        "super_net": -793772574,
+        "large_net": 242154798,
+        "medium_net": 296407738,
+        "small_net": 255212140
+      },
+      {
+        "time": "2026-10-21T13:52:00+08:00",
+        "main_net": -557168254,
+        "super_net": -795028974,
+        "large_net": 237860720,
+        "medium_net": 298874004,
+        "small_net": 258292580
+      },
+      {
+        "time": "2026-10-21T13:53:00+08:00",
+        "main_net": -557291455,
+        "super_net": -795028974,
+        "large_net": 237737519,
+        "medium_net": 298734154,
+        "small_net": 258556048
+      },
+      {
+        "time": "2026-10-21T13:54:00+08:00",
+        "main_net": -558293032,
+        "super_net": -794995873,
+        "large_net": 236702841,
+        "medium_net": 298994382,
+        "small_net": 259286083
+      },
+      {
+        "time": "2026-10-21T13:55:00+08:00",
+        "main_net": -559755482,
+        "super_net": -794995873,
+        "large_net": 235240391,
+        "medium_net": 299908021,
+        "small_net": 259842438
+      },
+      {
+        "time": "2026-10-21T13:56:00+08:00",
+        "main_net": -559585394,
+        "super_net": -794363753,
+        "large_net": 234778359,
+        "medium_net": 299709838,
+        "small_net": 259874303
+      },
+      {
+        "time": "2026-10-21T13:57:00+08:00",
+        "main_net": -559991021,
+        "super_net": -794911276,
+        "large_net": 234920255,
+        "medium_net": 299500109,
+        "small_net": 260490915
+      },
+      {
+        "time": "2026-10-21T13:58:00+08:00",
+        "main_net": -562386099,
+        "super_net": -792463825,
+        "large_net": 230077726,
+        "medium_net": 300389602,
+        "small_net": 261996500
+      },
+      {
+        "time": "2026-10-21T13:59:00+08:00",
+        "main_net": -562898397,
+        "super_net": -794116409,
+        "large_net": 231218012,
+        "medium_net": 300576477,
+        "small_net": 262301821
+      },
+      {
+        "time": "2026-10-21T14:00:00+08:00",
+        "main_net": -563050773,
+        "super_net": -794116409,
+        "large_net": 231065636,
+        "medium_net": 300411344,
+        "small_net": 262641527
+      },
+      {
+        "time": "2026-10-21T14:01:00+08:00",
+        "main_net": -566123251,
+        "super_net": -797741403,
+        "large_net": 231618152,
+        "medium_net": 302222278,
+        "small_net": 263908934
+      },
+      {
+        "time": "2026-10-21T14:02:00+08:00",
+        "main_net": -565625446,
+        "super_net": -796545570,
+        "large_net": 230920124,
+        "medium_net": 301380943,
+        "small_net": 264244507
+      },
+      {
+        "time": "2026-10-21T14:03:00+08:00",
+        "main_net": -568014455,
+        "super_net": -799922472,
+        "large_net": 231908017,
+        "medium_net": 302575274,
+        "small_net": 265019984
+      },
+      {
+        "time": "2026-10-21T14:04:00+08:00",
+        "main_net": -568316689,
+        "super_net": -799738911,
+        "large_net": 231422222,
+        "medium_net": 302535388,
+        "small_net": 265785915
+      },
+      {
+        "time": "2026-10-21T14:05:00+08:00",
+        "main_net": -568296583,
+        "super_net": -799304200,
+        "large_net": 231007617,
+        "medium_net": 302559727,
+        "small_net": 265736441
+      }
+    ]
+  },
+  "data_boundaries": [
+    "资金为供应商按成交单大小统计的当日累计净额，不代表机构身份或 ETF 申赎。",
+    "价格和资金保留各自源时间，抓取时间不作为市场时间。",
+    "没有提供当前宏观、财报、成分权重或持仓约束时，相应结论须标注证据不足。",
+    "两个宏观相关 Skill 共用部分方法与来源，不构成两份独立确认。"
+  ]
+}

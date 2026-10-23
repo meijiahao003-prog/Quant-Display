@@ -1,0 +1,17 @@
+{
+  "name": "expert-council-local",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "个人本地投资研究专家讨论平台，使用 Codex ChatGPT 登录",
+  "engines": { "node": ">=22.16.0" },
+  "scripts": {
+    "start": "node src/server.mjs",
+    "dev": "node src/server.mjs --preview",
+    "test": "node --test tests/*.test.mjs",
+    "verify:protocol": "node scripts/verify-protocol.mjs",
+    "verify:local": "node scripts/verify-local.mjs",
+    "verify:capabilities": "node scripts/verify-capabilities.mjs"
+  },
+  "dependencies": { "@openai/codex": "0.163.0" }
+}

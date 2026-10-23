@@ -1,0 +1,209 @@
+{
+  "checkedAt": "2026-10-19T08:54:08.919Z",
+  "expectedCodexVersion": "0.163.0",
+  "scope": "Unauthenticated protocol capability gate only; not an account, entitlement, or model-generation verification.",
+  "requestSource": "Actual CodexBridge.generate() calls, captured by a test-only account/RPC stub; production account detection is unchanged.",
+  "isolation": {
+    "freshTemporaryCodexHomePerMode": true,
+    "inheritedCredentialsRemovedByProductionBridge": true,
+    "loginRequested": false,
+    "userAccountRead": false,
+    "realTurnRequestsOnlyUseNonexistentThreadId": true
+  },
+  "cases": [
+    {
+      "experimentalApi": false,
+      "installedVersion": "codex-cli 0.163.0",
+      "productionInitializeOptIn": true,
+      "accountConnected": false,
+      "checks": [
+        {
+          "method": "thread/start",
+          "source": "Captured from production generate()",
+          "changedFields": [],
+          "parameterFields": [
+            "approvalPolicy",
+            "approvalsReviewer",
+            "cwd",
+            "developerInstructions",
+            "sandbox"
+          ],
+          "approvalPolicy": {
+            "granular": {
+              "sandbox_approval": false,
+              "rules": false,
+              "mcp_elicitations": false,
+              "request_permissions": false,
+              "skill_approval": false
+            }
+          },
+          "approvalsReviewer": "user",
+          "sandbox": "read-only",
+          "outcome": "rejected",
+          "error": "askForApproval.granular requires experimentalApi capability",
+          "passed": true
+        },
+        {
+          "method": "thread/resume",
+          "source": "Captured from production generate()",
+          "changedFields": [
+            "threadId"
+          ],
+          "parameterFields": [
+            "approvalPolicy",
+            "approvalsReviewer",
+            "cwd",
+            "developerInstructions",
+            "excludeTurns",
+            "sandbox",
+            "threadId"
+          ],
+          "approvalPolicy": {
+            "granular": {
+              "sandbox_approval": false,
+              "rules": false,
+              "mcp_elicitations": false,
+              "request_permissions": false,
+              "skill_approval": false
+            }
+          },
+          "approvalsReviewer": "user",
+          "sandbox": "read-only",
+          "outcome": "rejected",
+          "error": "askForApproval.granular requires experimentalApi capability",
+          "passed": true
+        },
+        {
+          "method": "turn/start",
+          "source": "Captured from production generate()",
+          "changedFields": [
+            "threadId"
+          ],
+          "parameterFields": [
+            "approvalPolicy",
+            "approvalsReviewer",
+            "input",
+            "sandboxPolicy",
+            "threadId"
+          ],
+          "approvalPolicy": {
+            "granular": {
+              "sandbox_approval": false,
+              "rules": false,
+              "mcp_elicitations": false,
+              "request_permissions": false,
+              "skill_approval": false
+            }
+          },
+          "approvalsReviewer": "user",
+          "sandboxPolicy": {
+            "type": "readOnly",
+            "networkAccess": false
+          },
+          "outcome": "rejected",
+          "error": "askForApproval.granular requires experimentalApi capability",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "experimentalApi": true,
+      "installedVersion": "codex-cli 0.163.0",
+      "productionInitializeOptIn": true,
+      "accountConnected": false,
+      "checks": [
+        {
+          "method": "thread/start",
+          "source": "Captured from production generate()",
+          "changedFields": [],
+          "parameterFields": [
+            "approvalPolicy",
+            "approvalsReviewer",
+            "cwd",
+            "developerInstructions",
+            "sandbox"
+          ],
+          "approvalPolicy": {
+            "granular": {
+              "sandbox_approval": false,
+              "rules": false,
+              "mcp_elicitations": false,
+              "request_permissions": false,
+              "skill_approval": false
+            }
+          },
+          "approvalsReviewer": "user",
+          "sandbox": "read-only",
+          "outcome": "accepted",
+          "passed": true
+        },
+        {
+          "method": "thread/resume",
+          "source": "Captured from production generate()",
+          "changedFields": [
+            "threadId"
+          ],
+          "parameterFields": [
+            "approvalPolicy",
+            "approvalsReviewer",
+            "cwd",
+            "developerInstructions",
+            "excludeTurns",
+            "sandbox",
+            "threadId"
+          ],
+          "approvalPolicy": {
+            "granular": {
+              "sandbox_approval": false,
+              "rules": false,
+              "mcp_elicitations": false,
+              "request_permissions": false,
+              "skill_approval": false
+            }
+          },
+          "approvalsReviewer": "user",
+          "sandbox": "read-only",
+          "outcome": "rejected",
+          "error": "no rollout found for thread id 00000000-0000-0000-0000-000000000000",
+          "passed": true
+        },
+        {
+          "method": "turn/start",
+          "source": "Captured from production generate()",
+          "changedFields": [
+            "threadId"
+          ],
+          "parameterFields": [
+            "approvalPolicy",
+            "approvalsReviewer",
+            "input",
+            "sandboxPolicy",
+            "threadId"
+          ],
+          "approvalPolicy": {
+            "granular": {
+              "sandbox_approval": false,
+              "rules": false,
+              "mcp_elicitations": false,
+              "request_permissions": false,
+              "skill_approval": false
+            }
+          },
+          "approvalsReviewer": "user",
+          "sandboxPolicy": {
+            "type": "readOnly",
+            "networkAccess": false
+          },
+          "outcome": "rejected",
+          "error": "thread not found: 00000000-0000-0000-0000-000000000000",
+          "passed": true
+        }
+      ]
+    }
+  ],
+  "bridgeSourceSha256": "1a5857f7ed403de9b870a1872a794ac7eabb99eefecc70a0b9420e54cee7bb27",
+  "passed": true,
+  "failures": [],
+  "modelInferenceVerified": false,
+  "noModelTurnStarted": true
+}

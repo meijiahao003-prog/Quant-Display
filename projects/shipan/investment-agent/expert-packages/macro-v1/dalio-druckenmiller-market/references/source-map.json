@@ -1,0 +1,155 @@
+{
+  "skill_version": "1.0.0",
+  "created_date": "2026-10-21",
+  "market": "A股",
+  "horizon": "数日到数周",
+  "derivation": "Public-source principle paraphrases plus explicitly marked implementation judgments; not model training or full-text distillation",
+  "basis": "dalio-druckenmiller-kb-v2 data/sources.jsonl",
+  "basis_sha256": "9eac2d2f820b411522b3eb2f798f68bcd26545cdbbb65a655b5d6ded8d0eda23",
+  "source_verification_date": "2026-10-19",
+  "pages_reopened_2026_10_21": [
+    "D-S008",
+    "K-S001",
+    "K-S006"
+  ],
+  "sources": [
+    {
+      "source_id": "D-S008",
+      "title": "The All Weather Story",
+      "author": "Paul Podolsky; Ryan Johnson; Owen Jennings (Bridgewater Associates)",
+      "publisher": "Bridgewater Associates",
+      "url": "https://www.bridgewater.com/research-and-insights/the-all-weather-story",
+      "official_fulltext_url": null,
+      "publication_date": "2012-01",
+      "date_precision": "month",
+      "event_date": null,
+      "verification_level": "content_verified",
+      "locator": "January 2012; Balancing Growth and Inflation; 25 Years in the Making",
+      "evidence_note": "已打开完整 HTML 正文。原库 D080 的 2016 年与此文日期不符；2016-08 是另一个官方视频。该框架不应简化成宏观绝对高低或固定择时四象限。 官方脚注明撰稿人为Paul Podolsky、Ryan Johnson、Owen Jennings。"
+    },
+    {
+      "source_id": "D-S009",
+      "title": "Paradigm Shifts",
+      "author": "Ray Dalio",
+      "publisher": "Ray Dalio / LinkedIn",
+      "url": "https://www.linkedin.com/pulse/paradigm-shifts-ray-dalio/",
+      "official_fulltext_url": null,
+      "publication_date": "2019-07-17",
+      "date_precision": "day",
+      "event_date": null,
+      "verification_level": "content_verified",
+      "locator": "Published Jul 17, 2019; Part I; Part 2: The Coming Paradigm Shift",
+      "evidence_note": "已打开作者 LinkedIn 正文，核验标题、署名、日期和两部分结构。"
+    },
+    {
+      "source_id": "D-S011",
+      "title": "What Monetary Policy 3 (MP3) Will Look Like",
+      "author": "Ray Dalio",
+      "publisher": "Ray Dalio / LinkedIn; copyright Bridgewater Associates",
+      "url": "https://www.linkedin.com/pulse/what-monetary-policy-3-mp3-look-like-ray-dalio",
+      "official_fulltext_url": null,
+      "publication_date": "2016-02-18",
+      "date_precision": "day",
+      "event_date": null,
+      "verification_level": "content_verified",
+      "locator": "Published Feb 18, 2016; Why Pushing on a String; final qualification paragraph",
+      "evidence_note": "已打开作者 LinkedIn 正文；末尾保留了作者对近期不确定性的限定。官方 PDF 为补充入口，未在此条宣称全文归档。"
+    },
+    {
+      "source_id": "D-S012",
+      "title": "It’s Time to Look More Carefully at Monetary Policy 3 (MP3) and Modern Monetary Theory (MMT)",
+      "author": "Ray Dalio",
+      "publisher": "Ray Dalio / LinkedIn",
+      "url": "https://www.linkedin.com/pulse/its-time-look-more-carefully-monetary-policy-3-mp3-modern-ray-dalio/",
+      "official_fulltext_url": null,
+      "publication_date": "2019-05-01",
+      "date_precision": "day",
+      "event_date": null,
+      "verification_level": "content_verified",
+      "locator": "Published May 1, 2019; Part 1: Understanding MP3 and MMT; There are aspects of MMT that I disagree with",
+      "evidence_note": "已打开个人 LinkedIn 正文；官方 PDF 链接跳转 download-tracker，HTML 正文为核验依据。"
+    },
+    {
+      "source_id": "D-S013",
+      "title": "Our Biggest Economic, Social, and Political Issue: The Two Economies — The Top 40% and the Bottom 60%",
+      "author": "Ray Dalio; Steven Kryger; Brandon Rowley; Neil Hannan",
+      "publisher": "Bridgewater Associates",
+      "url": "https://www.bridgewater.com/our-biggest-economic-social-and-political-issue",
+      "official_fulltext_url": null,
+      "publication_date": "2017-10-23",
+      "date_precision": "day",
+      "event_date": null,
+      "verification_level": "content_verified",
+      "locator": "Author byline; The Two Economies; In Summary; footnotes",
+      "evidence_note": "已打开桥水官网正文，明确四位作者和日期；脚注说明上下两组只是表达简化，分析实际更细。"
+    },
+    {
+      "source_id": "K-S001",
+      "title": "Talks at GS with Stanley Druckenmiller",
+      "author": "Stanley Druckenmiller; Tony Pasquariello (interviewer)",
+      "publisher": "Goldman Sachs",
+      "url": "https://www.goldmansachs.com/insights/talks-at-gs/stanley-druckenmiller.html",
+      "official_fulltext_url": "https://www.goldmansachs.com/pdfs/insights/goldman-sachs-talks/stanley-druckenmiller-f/transcript.pdf",
+      "publication_date": "2021-02-03",
+      "date_precision": "day",
+      "event_date": "2021-01-21",
+      "verification_level": "content_verified",
+      "locator": "PDF共8页，按PDF物理页码：第2–4页资产观点；第5页日历年口径与跨资产流程；第5–6页集中仓位及风险监控。官网另列发布与录制日期。",
+      "evidence_note": "直接打开高盛官方页面和官方PDF，核验上述段落；PDF末尾有限制复制/分发的声明，因此仅保存链接和自写摘要，不收录完整转录。"
+    },
+    {
+      "source_id": "K-S003",
+      "title": "The Endgame — 21st Annual Sohn Investment Conference",
+      "author": "Stanley Druckenmiller",
+      "publisher": "Sohn Conference Foundation (official-domain PDF archived by Internet Archive)",
+      "url": "https://web.archive.org/web/20160527064545if_/http://www.sohnconference.org:80/wp-content/uploads/2016/05/The_Endgame_Sohn.pdf",
+      "official_fulltext_url": "https://web.archive.org/web/20160527064545if_/http://www.sohnconference.org:80/wp-content/uploads/2016/05/The_Endgame_Sohn.pdf",
+      "publication_date": null,
+      "date_precision": "unknown",
+      "event_date": "2016-05-04",
+      "verification_level": "content_verified",
+      "locator": "PDF共8页，物理页码与印刷页码一致：第1页活动日；第4页公司融资用途；第5–6页中国信贷；第7–8页股票和黄金。",
+      "evidence_note": "先打开2016-05-27官方域名存档，再打开内嵌PDF；PDF页脚2016-05-05为文件生成痕迹，不据此推定首次公开日期。"
+    },
+    {
+      "source_id": "K-S006",
+      "title": "Stan Druckenmiller: Invest, Then Investigate — Hard Lessons",
+      "author": "Stanley Druckenmiller",
+      "publisher": "Morgan Stanley",
+      "url": "https://www.morganstanley.com/insights/videos/hard-lessons/duquesne-stan-druckenmiller-iliana-bouzali",
+      "official_fulltext_url": null,
+      "publication_date": "2026-02-27",
+      "date_precision": "day",
+      "event_date": null,
+      "verification_level": "content_verified",
+      "locator": "主页面View Audio Transcript及Pick One with Stan Druckenmiller；系列页E4发布日期。",
+      "evidence_note": "直接打开官方正文及系列索引；未独立逐字听校音频。录制日未在本次可见正文确认，故event_date为空。"
+    },
+    {
+      "source_id": "K-S010",
+      "title": "Stanley Druckenmiller — Economic Club of New York webinar, May 12, 2020",
+      "author": "Stanley Druckenmiller; Scott Bessent (interviewer)",
+      "publisher": "The Economic Club of New York",
+      "url": "https://econclubny.globalnorthstar.net/web/pages/legacyarchive/-/blogs/stanley-druckenmiller",
+      "official_fulltext_url": "https://econclubny.globalnorthstar.net/documents/20124/74672/2020DruckenmillerTranscript.pdf/f533ce0a-d3f6-4c91-4e26-b3dea49c7797",
+      "publication_date": null,
+      "date_precision": "unknown",
+      "event_date": "2020-05-12",
+      "verification_level": "content_verified",
+      "locator": "PDF共26页、封面不计印刷页码：印刷第4–9页（PDF第5–10页）讨论流动性与股票风险收益；印刷第18–19页（PDF第19–20页）讨论科技数字化。",
+      "evidence_note": "旧官网PDF直开失败，沿官方迁站活动页Download Transcript找到并打开新址；页面限制视频会员分发，PDF为公开下载。封面出现疑似模板标题错误，应以正文采访与活动身份为准。"
+    }
+  ],
+  "local_rule_references": [
+    {
+      "url": "https://www.sse.com.cn/aboutus/mediacenter/hotandd/c/c_20240412_10753188.shtml",
+      "verified_on": "2026-10-21",
+      "scope": "Historical disclosure reform notice; current arrangements require subsequent-notice check"
+    },
+    {
+      "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/fund/trading/c/c_20260424_10817739.shtml",
+      "verified_on": "2026-10-21",
+      "scope": "Notice specifies effective date and deferred provisions; page summary status may be stale; not a full legal applicability review"
+    }
+  ]
+}

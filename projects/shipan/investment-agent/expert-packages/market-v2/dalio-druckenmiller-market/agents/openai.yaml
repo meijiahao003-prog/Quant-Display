@@ -1,0 +1,4 @@
+interface:
+  display_name: "A股波段看盘 · 宏观与交易方法"
+  short_description: "结合达里奥、德鲁肯米勒与经核验交易员方法，专注A股数日到数周波段，保留适用边界和来源"
+  default_prompt: "使用 $dalio-druckenmiller-market 帮我看A股，按数日到数周波段判断环境、主线、适用方法、触发与失效条件，并保留来源。"

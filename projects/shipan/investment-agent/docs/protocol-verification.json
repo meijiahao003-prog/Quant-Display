@@ -1,0 +1,130 @@
+{
+  "checkedAt": "2026-10-18T04:10:14.972Z",
+  "expectedVersion": "0.163.0",
+  "mode": "isolated-unauthenticated-real-binary",
+  "authenticatedInference": "NOT_EXECUTED: requires the user to sign in and authorize a real model request",
+  "loginStarted": false,
+  "checks": [
+    {
+      "method": "initialize",
+      "passed": true,
+      "status": {
+        "installed": true,
+        "ready": true,
+        "version": "codex-cli 0.163.0",
+        "error": null
+      }
+    },
+    {
+      "method": "account/read",
+      "passed": true,
+      "connected": false,
+      "type": null
+    },
+    {
+      "method": "model/list",
+      "passed": true,
+      "count": 8,
+      "models": [
+        {
+          "id": "gpt-6.1-sol",
+          "displayName": "GPT-6.1-Sol"
+        },
+        {
+          "id": "gpt-6-astra",
+          "displayName": "GPT-6-Astra"
+        },
+        {
+          "id": "gpt-6-sol",
+          "displayName": "GPT-6-Sol"
+        },
+        {
+          "id": "gpt-6-luna",
+          "displayName": "GPT-6-Luna"
+        },
+        {
+          "id": "gpt-5.6-sol",
+          "displayName": "GPT-5.6-Sol"
+        },
+        {
+          "id": "gpt-5.6-terra",
+          "displayName": "GPT-5.6-Terra"
+        },
+        {
+          "id": "gpt-5.6-luna",
+          "displayName": "GPT-5.6-Luna"
+        },
+        {
+          "id": "gpt-5.5",
+          "displayName": "GPT-5.5"
+        }
+      ],
+      "note": "Bundled catalog is not entitlement proof."
+    },
+    {
+      "method": "config/read",
+      "passed": true,
+      "effective": {
+        "sandbox_mode": "read-only",
+        "web_search": "disabled",
+        "forced_login_method": "chatgpt",
+        "cli_auth_credentials_store": "file",
+        "features": {
+          "code_mode": false,
+          "code_mode_host": false,
+          "multi_agent_v2": false,
+          "sleep_tool": false,
+          "network_proxy": null,
+          "apps": false,
+          "browser_use": false,
+          "browser_use_external": false,
+          "browser_use_full_cdp_access": false,
+          "computer_use": false,
+          "goals": false,
+          "hooks": false,
+          "image_generation": false,
+          "memories": false,
+          "multi_agent": false,
+          "plugins": false,
+          "remote_plugin": false,
+          "request_permissions_tool": false,
+          "shell_snapshot": false,
+          "shell_tool": false,
+          "skill_mcp_dependency_install": false,
+          "skill_search": false,
+          "tool_suggest": false,
+          "view_image": false,
+          "workspace_dependencies": false,
+          "api_key_cyber_access_programs": true,
+          "api_key_model_discovery": true,
+          "auth_elicitation": true,
+          "background_paginated_rollout_migration": false,
+          "codex_apps_mcp_2026_07_28": false,
+          "mcp_2026_07_28": false,
+          "mentions_v2": true,
+          "remote_control": false,
+          "windows_sandbox_service": false
+        }
+      }
+    },
+    {
+      "method": "thread/start",
+      "passed": true,
+      "threadAllocated": true,
+      "persistenceVerified": false,
+      "inferenceStarted": false
+    },
+    {
+      "method": "thread/start-or-resume",
+      "passed": false,
+      "error": "no rollout found for thread id [temporary]",
+      "inferenceStarted": false,
+      "note": "An empty thread has no saved rollout yet. Resume after an authenticated completed turn remains unverified."
+    }
+  ],
+  "security": {
+    "credentials": "New CODEX_HOME; file credential store; inherited API keys/auth tokens removed",
+    "execution": "shell/browser/computer/apps/plugins/code-mode/subagent features disabled; read-only sandbox; approvals rejected",
+    "limitation": "This is not OS/container isolation. Version 0.163.0 does not expose restricted read roots in its SandboxPolicy schema. No claim that every possible internal tool is absent."
+  }
+}

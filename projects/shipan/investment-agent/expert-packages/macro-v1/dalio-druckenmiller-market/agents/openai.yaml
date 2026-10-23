@@ -1,0 +1,4 @@
+interface:
+  display_name: "达里奥 × 德鲁肯米勒 · A股看盘"
+  short_description: "专注A股波段，从宏观预期、市场宽度与主线持续性判断盘面和失效条件"
+  default_prompt: "使用 $dalio-druckenmiller-market 帮我看A股，按数日到数周波段分析大盘环境、风格、板块主线、反证与下一步观察条件。"

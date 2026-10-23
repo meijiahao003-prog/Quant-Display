@@ -1,0 +1,38 @@
+{
+  "checkedAt": "2026-10-18T04:14:40.060Z",
+  "mode": "real-http-and-codex-unauthenticated",
+  "inferenceExecuted": false,
+  "checks": [
+    {
+      "name": "index.html",
+      "passed": true
+    },
+    {
+      "name": "/app.js",
+      "passed": true
+    },
+    {
+      "name": "/style.css",
+      "passed": true
+    },
+    {
+      "name": "real-codex-status",
+      "passed": true,
+      "version": "codex-cli 0.163.0",
+      "connected": false
+    },
+    {
+      "name": "model-catalog",
+      "passed": true,
+      "count": 8,
+      "entitlementVerified": false
+    },
+    {
+      "name": "unauthenticated-generation-blocked",
+      "passed": true,
+      "status": 409,
+      "message": "请先完成 ChatGPT 登录。"
+    }
+  ],
+  "passed": true
+}

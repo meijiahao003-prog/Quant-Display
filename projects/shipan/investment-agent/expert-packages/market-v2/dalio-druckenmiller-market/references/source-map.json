@@ -1,0 +1,1457 @@
+{
+  "schema_version": "2.0",
+  "skill_version": "2.0.0",
+  "created_date": "2026-10-21",
+  "market": "A股",
+  "horizon": "数日到数周",
+  "derivation": "Limited source-supported paraphrases plus separately labeled A-share application judgments. No model training, no profitability or historical leakage validation.",
+  "bases": [
+    {
+      "path": "/Users/apple/Documents/Codex/2026-10-19/zhen/outputs/dalio-druckenmiller-kb-v2/data/sources.jsonl",
+      "sha256": "9eac2d2f820b411522b3eb2f798f68bcd26545cdbbb65a655b5d6ded8d0eda23"
+    },
+    {
+      "path": "/Users/apple/Documents/Codex/2026-10-19/zhen/outputs/trader-source-library-v1/data/sources.jsonl",
+      "sha256": "68c401f6fff8d7145df11cb2098c0e9e3947771808e650a34b1ee3705d026305"
+    }
+  ],
+  "packaging": "Self-contained source cards and links; protected full books, transcripts and PDF snapshots are not bundled. Base databases are not modified.",
+  "verification_scope": "Source identity and specified text/segments, not every statement in a document or every book. Source publicity is distinct from historical version availability.",
+  "sources": [
+    {
+      "source_id": "D-S008",
+      "title": "The All Weather Story",
+      "author": "Paul Podolsky; Ryan Johnson; Owen Jennings (Bridgewater Associates)",
+      "publisher": "Bridgewater Associates",
+      "url": "https://www.bridgewater.com/research-and-insights/the-all-weather-story",
+      "official_fulltext_url": null,
+      "publication_date": "2012-01",
+      "date_precision": "month",
+      "event_date": null,
+      "verification_level": "content_verified",
+      "locator": "January 2012; Balancing Growth and Inflation; 25 Years in the Making",
+      "evidence_note": "已打开完整 HTML 正文。原库 D080 的 2016 年与此文日期不符；2016-08 是另一个官方视频。该框架不应简化成宏观绝对高低或固定择时四象限。 官方脚注明撰稿人为Paul Podolsky、Ryan Johnson、Owen Jennings。",
+      "historical_availability_verified": false,
+      "performance_audited": false
+    },
+    {
+      "source_id": "D-S009",
+      "title": "Paradigm Shifts",
+      "author": "Ray Dalio",
+      "publisher": "Ray Dalio / LinkedIn",
+      "url": "https://www.linkedin.com/pulse/paradigm-shifts-ray-dalio/",
+      "official_fulltext_url": null,
+      "publication_date": "2019-07-17",
+      "date_precision": "day",
+      "event_date": null,
+      "verification_level": "content_verified",
+      "locator": "Published Jul 17, 2019; Part I; Part 2: The Coming Paradigm Shift",
+      "evidence_note": "已打开作者 LinkedIn 正文，核验标题、署名、日期和两部分结构。",
+      "historical_availability_verified": false,
+      "performance_audited": false
+    },
+    {
+      "source_id": "D-S011",
+      "title": "What Monetary Policy 3 (MP3) Will Look Like",
+      "author": "Ray Dalio",
+      "publisher": "Ray Dalio / LinkedIn; copyright Bridgewater Associates",
+      "url": "https://www.linkedin.com/pulse/what-monetary-policy-3-mp3-look-like-ray-dalio",
+      "official_fulltext_url": null,
+      "publication_date": "2016-02-18",
+      "date_precision": "day",
+      "event_date": null,
+      "verification_level": "content_verified",
+      "locator": "Published Feb 18, 2016; Why Pushing on a String; final qualification paragraph",
+      "evidence_note": "已打开作者 LinkedIn 正文；末尾保留了作者对近期不确定性的限定。官方 PDF 为补充入口，未在此条宣称全文归档。",
+      "historical_availability_verified": false,
+      "performance_audited": false
+    },
+    {
+      "source_id": "D-S012",
+      "title": "It’s Time to Look More Carefully at Monetary Policy 3 (MP3) and Modern Monetary Theory (MMT)",
+      "author": "Ray Dalio",
+      "publisher": "Ray Dalio / LinkedIn",
+      "url": "https://www.linkedin.com/pulse/its-time-look-more-carefully-monetary-policy-3-mp3-modern-ray-dalio/",
+      "official_fulltext_url": null,
+      "publication_date": "2019-05-01",
+      "date_precision": "day",
+      "event_date": null,
+      "verification_level": "content_verified",
+      "locator": "Published May 1, 2019; Part 1: Understanding MP3 and MMT; There are aspects of MMT that I disagree with",
+      "evidence_note": "已打开个人 LinkedIn 正文；官方 PDF 链接跳转 download-tracker，HTML 正文为核验依据。",
+      "historical_availability_verified": false,
+      "performance_audited": false
+    },
+    {
+      "source_id": "D-S013",
+      "title": "Our Biggest Economic, Social, and Political Issue: The Two Economies — The Top 40% and the Bottom 60%",
+      "author": "Ray Dalio; Steven Kryger; Brandon Rowley; Neil Hannan",
+      "publisher": "Bridgewater Associates",
+      "url": "https://www.bridgewater.com/our-biggest-economic-social-and-political-issue",
+      "official_fulltext_url": null,
+      "publication_date": "2017-10-23",
+      "date_precision": "day",
+      "event_date": null,
+      "verification_level": "content_verified",
+      "locator": "Author byline; The Two Economies; In Summary; footnotes",
+      "evidence_note": "已打开桥水官网正文，明确四位作者和日期；脚注说明上下两组只是表达简化，分析实际更细。",
+      "historical_availability_verified": false,
+      "performance_audited": false
+    },
+    {
+      "source_id": "K-S001",
+      "title": "Talks at GS with Stanley Druckenmiller",
+      "author": "Stanley Druckenmiller; Tony Pasquariello (interviewer)",
+      "publisher": "Goldman Sachs",
+      "url": "https://www.goldmansachs.com/insights/talks-at-gs/stanley-druckenmiller.html",
+      "official_fulltext_url": "https://www.goldmansachs.com/pdfs/insights/goldman-sachs-talks/stanley-druckenmiller-f/transcript.pdf",
+      "publication_date": "2021-02-03",
+      "date_precision": "day",
+      "event_date": "2021-01-21",
+      "verification_level": "content_verified",
+      "locator": "PDF共8页，按PDF物理页码：第2–4页资产观点；第5页日历年口径与跨资产流程；第5–6页集中仓位及风险监控。官网另列发布与录制日期。",
+      "evidence_note": "直接打开高盛官方页面和官方PDF，核验上述段落；PDF末尾有限制复制/分发的声明，因此仅保存链接和自写摘要，不收录完整转录。",
+      "historical_availability_verified": false,
+      "performance_audited": false
+    },
+    {
+      "source_id": "K-S003",
+      "title": "The Endgame — 21st Annual Sohn Investment Conference",
+      "author": "Stanley Druckenmiller",
+      "publisher": "Sohn Conference Foundation (official-domain PDF archived by Internet Archive)",
+      "url": "https://web.archive.org/web/20160527064545if_/http://www.sohnconference.org:80/wp-content/uploads/2016/05/The_Endgame_Sohn.pdf",
+      "official_fulltext_url": "https://web.archive.org/web/20160527064545if_/http://www.sohnconference.org:80/wp-content/uploads/2016/05/The_Endgame_Sohn.pdf",
+      "publication_date": null,
+      "date_precision": "unknown",
+      "event_date": "2016-05-04",
+      "verification_level": "content_verified",
+      "locator": "PDF共8页，物理页码与印刷页码一致：第1页活动日；第4页公司融资用途；第5–6页中国信贷；第7–8页股票和黄金。",
+      "evidence_note": "先打开2016-05-27官方域名存档，再打开内嵌PDF；PDF页脚2016-05-05为文件生成痕迹，不据此推定首次公开日期。",
+      "historical_availability_verified": false,
+      "performance_audited": false
+    },
+    {
+      "source_id": "K-S006",
+      "title": "Stan Druckenmiller: Invest, Then Investigate — Hard Lessons",
+      "author": "Stanley Druckenmiller",
+      "publisher": "Morgan Stanley",
+      "url": "https://www.morganstanley.com/insights/videos/hard-lessons/duquesne-stan-druckenmiller-iliana-bouzali",
+      "official_fulltext_url": null,
+      "publication_date": "2026-02-27",
+      "date_precision": "day",
+      "event_date": null,
+      "verification_level": "content_verified",
+      "locator": "主页面View Audio Transcript及Pick One with Stan Druckenmiller；系列页E4发布日期。",
+      "evidence_note": "直接打开官方正文及系列索引；未独立逐字听校音频。录制日未在本次可见正文确认，故event_date为空。",
+      "historical_availability_verified": false,
+      "performance_audited": false
+    },
+    {
+      "source_id": "K-S010",
+      "title": "Stanley Druckenmiller — Economic Club of New York webinar, May 12, 2020",
+      "author": "Stanley Druckenmiller; Scott Bessent (interviewer)",
+      "publisher": "The Economic Club of New York",
+      "url": "https://econclubny.globalnorthstar.net/web/pages/legacyarchive/-/blogs/stanley-druckenmiller",
+      "official_fulltext_url": "https://econclubny.globalnorthstar.net/documents/20124/74672/2020DruckenmillerTranscript.pdf/f533ce0a-d3f6-4c91-4e26-b3dea49c7797",
+      "publication_date": null,
+      "date_precision": "unknown",
+      "event_date": "2020-05-12",
+      "verification_level": "content_verified",
+      "locator": "PDF共26页、封面不计印刷页码：印刷第4–9页（PDF第5–10页）讨论流动性与股票风险收益；印刷第18–19页（PDF第19–20页）讨论科技数字化。",
+      "evidence_note": "旧官网PDF直开失败，沿官方迁站活动页Download Transcript找到并打开新址；页面限制视频会员分发，PDF为公开下载。封面出现疑似模板标题错误，应以正文采访与活动身份为准。",
+      "historical_availability_verified": false,
+      "performance_audited": false
+    },
+    {
+      "source_id": "CN-S002",
+      "title": "期货中国专访傅海棠：天道就是市场，有自己的运行规律",
+      "author": "期货中国采访；傅海棠回答",
+      "publisher": "七禾网（原期货中国）",
+      "url": "https://www.7hcn.com/article/104899-1.html",
+      "publication_date": null,
+      "event_date": null,
+      "date_role": "source_stated_publication_date",
+      "locator": "第1页采访介绍；第2页问题3—11，供求、交易摩擦和调查信息",
+      "verification_level": "content_verified",
+      "content_sha256": null,
+      "actual_reviewers": [],
+      "rights_note": "仅保存元数据、链接和自行转述。网页公开不代表允许整篇再发布；未下载整书。",
+      "provenance_note": "采访主体及第2页正文已打开。页面未显示可靠原始发布日期，留空；自述概率、亏损比例及“主力”解释未作事实认证。",
+      "historical_availability_verified": false,
+      "skill_usage": "limited_source_principle",
+      "performance_audited": false,
+      "used_fulltext_url": "https://www.7hcn.com/article/104899-2.html"
+    },
+    {
+      "source_id": "CN-S003",
+      "title": "傅海棠：和“天”站在一起，才能赚大钱（发布会发言整理）",
+      "author": "傅海棠演讲；翁建平、沈良整理",
+      "publisher": "七禾网；活动由海通期货主办",
+      "url": "https://www.7hcn.com/article/142128-1.html",
+      "publication_date": null,
+      "event_date": "2013-09-08",
+      "date_role": "source_stated_publication_date",
+      "locator": "导语活动日期；正文我的交易理念和投资经历；末尾整理署名",
+      "verification_level": "content_verified",
+      "content_sha256": null,
+      "actual_reviewers": [],
+      "rights_note": "仅保存元数据、链接和自行转述。网页公开不代表允许整篇再发布；未下载整书。",
+      "provenance_note": "导语明确活动为2013-09-08，网页称“部分录音”；这是一场回顾性演讲，不是2010年决策时的同步日志。",
+      "historical_availability_verified": false,
+      "skill_usage": "limited_source_principle",
+      "performance_audited": false
+    },
+    {
+      "source_id": "CN-S006",
+      "title": "林广茂：基本面研究让我拿住了单子（2014棉花论坛问答）",
+      "author": "林广茂回答；七禾网整理",
+      "publisher": "七禾网，文内标注2014郑商所棉花论坛",
+      "url": "https://www.7hcn.com/article/169302-1.html",
+      "publication_date": null,
+      "event_date": null,
+      "date_role": "source_stated_publication_date",
+      "locator": "2014年郑商所棉花论坛说明；关于2010年持仓、供需历史、最终交割的问答",
+      "verification_level": "content_verified",
+      "content_sha256": null,
+      "actual_reviewers": [],
+      "rights_note": "仅保存元数据、链接和自行转述。网页公开不代表允许整篇再发布；未下载整书。",
+      "provenance_note": "问答文本可读，论坛原始视频和交易所原始记录本轮未取得。导语夸张收益数字不作为已核验绩效；事件只明确到2014年。",
+      "historical_availability_verified": false,
+      "skill_usage": "limited_source_principle",
+      "performance_audited": false
+    },
+    {
+      "source_id": "CN-S010",
+      "title": "“期货作手”青泽：在交易世界里放弃完美",
+      "author": "江南采访；青泽回答",
+      "publisher": "第一财经《财商》",
+      "url": "https://www.yicai.com/news/1978636.html",
+      "publication_date": "2012-08-11",
+      "event_date": null,
+      "date_role": "source_stated_publication_date",
+      "locator": "2012-08-11署名；1993—1999经历、从小资金积累、交易体系与风险管理问答",
+      "verification_level": "content_verified",
+      "content_sha256": null,
+      "actual_reviewers": [],
+      "rights_note": "仅保存元数据、链接和自行转述。网页公开不代表允许整篇再发布；未下载整书。",
+      "provenance_note": "原媒体页面、作者和发布时间已核验。本人回忆仍不是独立验证的账户纪录；采访中的行业盈利比例未核实。",
+      "historical_availability_verified": false,
+      "skill_usage": "limited_source_principle",
+      "performance_audited": false
+    },
+    {
+      "source_id": "CN-S011",
+      "title": "青泽：思想有多远，投资走多远",
+      "author": "黄义荣采访；青泽回答",
+      "publisher": "期货日报；七禾网转载",
+      "url": "https://www.7hcn.com/article/110060-1.html",
+      "publication_date": null,
+      "event_date": null,
+      "date_role": "source_stated_publication_date",
+      "locator": "文内记者署名；关于四个阶段、交易体系、风控与退出的问答",
+      "verification_level": "content_verified",
+      "content_sha256": null,
+      "actual_reviewers": [],
+      "rights_note": "仅保存元数据、链接和自行转述。网页公开不代表允许整篇再发布；未下载整书。",
+      "provenance_note": "全文问答及原媒体归属已读，七禾为转载；未核实期货日报原始刊期，发布时间留空。只确认转载文本存在。",
+      "historical_availability_verified": false,
+      "skill_usage": "limited_source_principle",
+      "performance_audited": false
+    },
+    {
+      "source_id": "CN-S015",
+      "title": "葛卫东：离市场远一点，把复杂的问题简单化（CBN问答转载）",
+      "author": "CBN记者采访；葛卫东回答；原记者姓名未核实",
+      "publisher": "七禾网转载第一财经CBN采访",
+      "url": "https://www.7hcn.com/article/51062-1.html",
+      "publication_date": null,
+      "event_date": null,
+      "date_role": "source_stated_publication_date",
+      "locator": "CBN问答：恐慌与银行股/平安估值；1996—1997长虹经历；基本与技术反馈",
+      "verification_level": "content_verified",
+      "content_sha256": null,
+      "actual_reviewers": [],
+      "rights_note": "仅保存元数据、链接和自行转述。网页公开不代表允许整篇再发布；未下载整书。",
+      "provenance_note": "已打开完整转载；搜狐搜索结果有2009-07-04版本但打开超时，未将其刊期填为七禾发布日期。引述的回报数字、巴菲特业绩等未审计，不能照录为事实。",
+      "historical_availability_verified": false,
+      "skill_usage": "limited_source_principle",
+      "performance_audited": false
+    },
+    {
+      "source_id": "US-S004",
+      "title": "Interviewing Mark Minervini & David Ryan",
+      "author": "Steve Burns（采访）；Mark Minervini、David Ryan（回答）",
+      "publisher": "New Trader U",
+      "url": "https://www.newtraderu.com/2014/07/16/my-interview-with-two-market-wizards-mark-minervini-david-ryan/",
+      "publication_date": "2014-07-16",
+      "event_date": null,
+      "date_role": "source_stated_publication_date",
+      "locator": "Questions for David Ryan；Questions for Mark Minervini",
+      "verification_level": "content_verified",
+      "verified_at": "2026-10-21",
+      "content_sha256": null,
+      "actual_reviewers": [],
+      "rights_note": "受版权保护；只保存书目信息、原始链接和简短研究摘要。公开可读不等于允许复制整书、视频转录或再分发。",
+      "provenance_note": "原采访者发布，问答正文可读；日期来自原站路径。属于当时的自述，不是订单记录或长期绩效审计。",
+      "historical_availability_verified": false,
+      "skill_usage": "limited_source_principle",
+      "performance_audited": false,
+      "publication_date_basis": "原站URL日期；未完成历史版本可得性审计"
+    },
+    {
+      "source_id": "US-S010",
+      "title": "CANSLIM's Market Wizard: A Conversation with David Ryan",
+      "author": "David Penn（采访）；David Ryan（受访）",
+      "publisher": "TradingMarkets",
+      "url": "https://tradingmarkets.com/recent/canslims_market_wizard_a_conversation_with_david_ryan-677201",
+      "publication_date": "2009-03-13",
+      "event_date": null,
+      "date_role": "source_stated_publication_date",
+      "locator": "正文开头的2000–2002回顾；The Making of a CANSLIM Man等小节",
+      "verification_level": "content_verified",
+      "verified_at": "2026-10-21",
+      "content_sha256": null,
+      "actual_reviewers": [],
+      "rights_note": "受版权保护；只保存书目信息、原始链接和简短研究摘要。公开可读不等于允许复制整书、视频转录或再分发。",
+      "provenance_note": "采访者原站，有本人直接引语；收益数字是自报，非本轮审计核验。不是逐笔交易日志。",
+      "historical_availability_verified": false,
+      "skill_usage": "limited_source_principle",
+      "performance_audited": false
+    },
+    {
+      "source_id": "GL-S002",
+      "title": "Linda Bradford Raschke: The Rituals of Trading",
+      "author": "Mark Etzkorn（采访）；Linda Bradford Raschke（受访）",
+      "publisher": "Active Trader；作者官网托管",
+      "url": "https://lindaraschke.net/wp-content/uploads/2026/01/rituals.pdf",
+      "publication_date": "2000-08",
+      "event_date": null,
+      "date_role": "source_stated_publication_date",
+      "locator": "PDF第6页（刊物第64页）；7页PDF依次为刊物56、57、58、60、62、64、65页",
+      "verification_level": "content_verified",
+      "verified_at": "2026-10-21",
+      "content_sha256": "f0804fb801b54dea514c4603504ee577b28549fdef834b0a150c7b90aadb5bc4",
+      "actual_reviewers": [],
+      "rights_note": "作者站公开提供的刊物PDF；链接与短摘要可入研究库，公开可读不等于获得整篇再发行或训练许可。",
+      "provenance_note": "从作者官网Articles的The Rituals of Trading链接进入；路径2026/01是托管时间，内容刊期为2000年8月。是采访自述，不是当时完整逐笔账本。",
+      "historical_availability_verified": false,
+      "skill_usage": "limited_source_principle",
+      "performance_audited": false,
+      "previous_catalog_locator": "PDF 7页；刊物页56–62；PDF第2页作者署名，第6页记录与夜间准备讨论",
+      "correction_verified_on": "2026-10-21"
+    },
+    {
+      "source_id": "GL-S003",
+      "title": "Trading Style and Daily Market Regimen（官网目录名；Active Trader 2004年2月交易日访谈）",
+      "author": "Mark Etzkorn（采访和现场观察）；Linda Bradford Raschke（受访）",
+      "publisher": "Active Trader；作者官网托管",
+      "url": "https://lindaraschke.net/wp-content/uploads/2026/01/raschke0204.pdf",
+      "publication_date": "2004-02",
+      "event_date": "2003-11",
+      "date_role": "source_stated_publication_date",
+      "locator": "PDF共10页，刊物页66–75；第2页交代2003年11月初实地采访；第3页盘前准备与相对强度；第10页高周期背景",
+      "verification_level": "content_verified",
+      "verified_at": "2026-10-21",
+      "content_sha256": "25ed7dee45739179a3e8374e0df8dfaa8e27c381b0866e9f0ee07acee5543ca9",
+      "actual_reviewers": [],
+      "rights_note": "作者站公开PDF，保留链接与自写摘要；未取得转载整篇许可。",
+      "provenance_note": "作者官网Articles直接链接。事件仅能确定到2003年11月初，未伪造具体日；文章是事后出版的观察记录，非公开事前信号流。标题采用官网目录名，PDF提取的版式标题不完整。",
+      "historical_availability_verified": false,
+      "skill_usage": "limited_source_principle",
+      "performance_audited": false
+    },
+    {
+      "source_id": "GL-S005",
+      "title": "Factor Update, November 8, 2025",
+      "author": "Peter L. Brandt / Factor LLC",
+      "publisher": "Factor Trading（作者官网）",
+      "url": "https://www.peterlbrandt.com/wp-content/uploads/2025/11/Factor-Update-November-8-2025.pdf",
+      "publication_date": "2025-11-08",
+      "event_date": "2025-11-07",
+      "date_role": "source_stated_publication_date",
+      "locator": "13页PDF；第1页持仓、风险计量与11/7周五平仓；第2页服务定义和披露延迟",
+      "verification_level": "content_verified",
+      "verified_at": "2026-10-21",
+      "content_sha256": "8e48eae406a5f321ee4470d9ad66a898eb68d433efcac4d250c74182f8f9d208",
+      "actual_reviewers": [],
+      "rights_note": "官网无需登录可读；只收摘要和定位，版权属于作者/Factor，未获得再发行授权。",
+      "provenance_note": "官网2025-11-08条目直接链向PDF。属于带日期的自报持仓和事后周报，未核券商流水；具体收益自报未转录。",
+      "historical_availability_verified": false,
+      "skill_usage": "limited_source_principle",
+      "performance_audited": false
+    },
+    {
+      "source_id": "GL-S006",
+      "title": "The Factor Report Update, June 13, 2026（June 11 issued）",
+      "author": "Peter L. Brandt / Factor LLC",
+      "publisher": "Factor Trading（作者官网）",
+      "url": "https://www.peterlbrandt.com/wp-content/uploads/2026/06/httpswww.peterlbrandt.comwp-contentuploads202606Factor-Update-June-13-2026-1.pdf",
+      "publication_date": "2026-06-12",
+      "event_date": "2026-06-11",
+      "date_role": "source_stated_publication_date",
+      "locator": "8页PDF，第1页注明6月11日晚发出、采用当日收盘价；官网页6/12发布，报告题名6/13",
+      "verification_level": "content_verified",
+      "verified_at": "2026-10-21",
+      "content_sha256": "5c8d4a6604867ce33102afb7b20289b7303ee94e90139b489b54828c57f02bab",
+      "actual_reviewers": [],
+      "rights_note": "作者明确标为Complimentary Issue；可合法阅读公开报告，不推定获得批量分发或模型训练权。",
+      "provenance_note": "来源页 https://www.peterlbrandt.com/factor-update-june-13-2026-issued-june-11-2026-complimentary-issue/ 。publication_date指公开网页日期，报告签发6/11、题名6/13必须分列；未证明所有读者6/11已能获取。",
+      "historical_availability_verified": false,
+      "skill_usage": "limited_source_principle",
+      "performance_audited": false
+    },
+    {
+      "source_id": "GL-S010",
+      "title": "Entries & Exits — Chapter 1: Sherri Haskell（出版社试读）",
+      "author": "Alexander Elder；Sherri Haskell（案例受访交易员）",
+      "publisher": "John Wiley & Sons",
+      "url": "https://catalogimages.wiley.com/images/db/pdf/9780471678052.excerpt.pdf",
+      "publication_date": null,
+      "event_date": null,
+      "date_role": "book_edition_or_work_date",
+      "locator": "18页官方试读；Chapter1，书内页13起；PDF第4页ASKJ 2003-08-12入场案例；开头说明2003/2004两次采访",
+      "verification_level": "content_verified",
+      "verified_at": "2026-10-21",
+      "content_sha256": null,
+      "actual_reviewers": [
+        "Sherri Haskell"
+      ],
+      "rights_note": "出版社明确试读文件；仅合法片段公开，不等于全书授权。本库只保存定位和摘要。",
+      "provenance_note": "出版社catalogimages域官方excerpt文件。案例属于Sherri Haskell，Elder为采访与点评者；是后来出版整理，不能当作2003年公开事前记录，也不是独立审计业绩。",
+      "historical_availability_verified": false,
+      "skill_usage": "limited_source_principle",
+      "performance_audited": false,
+      "contributor_roles": [
+        {
+          "name": "Alexander Elder",
+          "role": "book author, interviewer and commentator"
+        },
+        {
+          "name": "Sherri Haskell",
+          "role": "case trader; ASKJ trade and personal notes"
+        }
+      ]
+    },
+    {
+      "source_id": "R-S004",
+      "title": "The Crisis & What To Do About It",
+      "author": "George Soros",
+      "publisher": "作者官网转载 The New York Review of Books",
+      "url": "https://www.georgesoros.com/2008/11/06/the_crisis_what_to_do_about_it/",
+      "publication_date": "2008-11-06",
+      "event_date": null,
+      "date_precision": "day",
+      "date_role": "source_stated_publication_date",
+      "locator": "第1–3节，特别是第3节反身性解释与预测局限",
+      "verification_level": "content_verified",
+      "content_sha256": null,
+      "actual_reviewers": [],
+      "rights_note": "保留原始链接与自写短摘要；不包含受版权保护的整书或完整文章。",
+      "provenance_note": "直接打开作者官网正文，页首署明原刊与日期；属宏观解释，不是本人逐笔交易复盘。当前网页存在不证明所有文字版本当年完全相同。",
+      "historical_availability_verified": false,
+      "skill_usage": "limited_source_principle",
+      "performance_audited": false
+    },
+    {
+      "source_id": "US-S007",
+      "title": "MarketSmith Stock Guide 2023 Q4 — Good Trade/Bad Trade: Arnie Gutierrez",
+      "author": "Arnie Gutierrez（受访教练）；MarketSmith 编辑团队",
+      "publisher": "Investor's Business Daily / MarketSmith",
+      "url": "https://marketsurge-files.investors.com/2023/12/StockGuide-Q4-2023.pdf",
+      "publication_date": null,
+      "publication_period": "2023-Q4",
+      "event_date": null,
+      "date_role": "source_stated_publication_date",
+      "data_asof": "2023-12-12",
+      "locator": "PDF印刷页18–23；封面2023Q4；图表/筛选截面2023-12-12",
+      "verification_level": "content_verified",
+      "verified_at": "2026-10-21",
+      "content_sha256": "8906e698729da25514462abbfc47a8b0a90651c7860b2de50dc7a4562acd8a73",
+      "attribution_type": "school_affiliated_not_person_authored",
+      "actual_reviewers": [
+        "Arnie Gutierrez"
+      ],
+      "rights_note": "受版权保护；只保存书目信息、原始链接和简短研究摘要。公开可读不等于允许复制整书、视频转录或再分发。",
+      "provenance_note": "官方域名32页PDF，已读具体复盘正文；这是Arnie自述及机构编辑材料，不是O'Neil本人；当时ANF尚未完全平仓。",
+      "historical_availability_verified": false,
+      "skill_usage": "review_case_only",
+      "performance_audited": false
+    },
+    {
+      "source_id": "US-S009",
+      "title": "MarketSurge Stock Guide 2024 Mid-Year — Good Trade/Bad Trade: Jesse Munoz",
+      "author": "Jesse Munoz（受访教练）；MarketSurge 编辑团队",
+      "publisher": "Investor's Business Daily / MarketSurge",
+      "url": "https://marketsurge-files.investors.com/2024/07/StockGuide-Mid-year-2024.pdf",
+      "publication_date": null,
+      "publication_period": "2024-Mid-Year",
+      "event_date": null,
+      "date_role": "source_stated_publication_date",
+      "data_asof": "2024-07-02",
+      "locator": "PDF印刷页20–25；筛选截面2024-07-02；页9–10另介绍Ryan的Ants指标",
+      "verification_level": "content_verified",
+      "verified_at": "2026-10-21",
+      "content_sha256": "cadbd291f2679079e68851ad90e842abc91f508f2f15fd657b40f728f051a6ec",
+      "attribution_type": "school_affiliated_not_person_authored",
+      "actual_reviewers": [
+        "Jesse Munoz"
+      ],
+      "rights_note": "受版权保护；只保存书目信息、原始链接和简短研究摘要。公开可读不等于允许复制整书、视频转录或再分发。",
+      "provenance_note": "官方32页PDF，正文可读；不是O'Neil本人；图中文字仍有Lorem ipsum占位痕迹，抽取图注需要视觉复核。",
+      "historical_availability_verified": false,
+      "skill_usage": "review_case_only",
+      "performance_audited": false
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "D1",
+      "method_id": "MACRO-D",
+      "source_ids": [
+        "D-S008",
+        "D-S009"
+      ],
+      "reference_file": "principles.md",
+      "locator": "对应原则编号；来源记录保留原文定位",
+      "claim_kind": "source_paraphrase_with_separately_labeled_application"
+    },
+    {
+      "claim_id": "D2",
+      "method_id": "MACRO-D",
+      "source_ids": [
+        "D-S008"
+      ],
+      "reference_file": "principles.md",
+      "locator": "对应原则编号；来源记录保留原文定位",
+      "claim_kind": "source_paraphrase_with_separately_labeled_application"
+    },
+    {
+      "claim_id": "D3",
+      "method_id": "MACRO-D",
+      "source_ids": [
+        "D-S011",
+        "D-S012"
+      ],
+      "reference_file": "principles.md",
+      "locator": "对应原则编号；来源记录保留原文定位",
+      "claim_kind": "source_paraphrase_with_separately_labeled_application"
+    },
+    {
+      "claim_id": "D4",
+      "method_id": "MACRO-D",
+      "source_ids": [
+        "D-S009"
+      ],
+      "reference_file": "principles.md",
+      "locator": "对应原则编号；来源记录保留原文定位",
+      "claim_kind": "source_paraphrase_with_separately_labeled_application"
+    },
+    {
+      "claim_id": "D5",
+      "method_id": "MACRO-D",
+      "source_ids": [
+        "D-S013"
+      ],
+      "reference_file": "principles.md",
+      "locator": "对应原则编号；来源记录保留原文定位",
+      "claim_kind": "source_paraphrase_with_separately_labeled_application"
+    },
+    {
+      "claim_id": "K1",
+      "method_id": "MACRO-K",
+      "source_ids": [
+        "K-S001"
+      ],
+      "reference_file": "principles.md",
+      "locator": "对应原则编号；来源记录保留原文定位",
+      "claim_kind": "source_paraphrase_with_separately_labeled_application"
+    },
+    {
+      "claim_id": "K2",
+      "method_id": "MACRO-K",
+      "source_ids": [
+        "K-S003",
+        "K-S010"
+      ],
+      "reference_file": "principles.md",
+      "locator": "对应原则编号；来源记录保留原文定位",
+      "claim_kind": "source_paraphrase_with_separately_labeled_application"
+    },
+    {
+      "claim_id": "K3",
+      "method_id": "MACRO-K",
+      "source_ids": [
+        "K-S006"
+      ],
+      "reference_file": "principles.md",
+      "locator": "对应原则编号；来源记录保留原文定位",
+      "claim_kind": "source_paraphrase_with_separately_labeled_application"
+    },
+    {
+      "claim_id": "K4",
+      "method_id": "MACRO-K",
+      "source_ids": [
+        "K-S001",
+        "K-S006"
+      ],
+      "reference_file": "principles.md",
+      "locator": "对应原则编号；来源记录保留原文定位",
+      "claim_kind": "source_paraphrase_with_separately_labeled_application"
+    },
+    {
+      "claim_id": "S1",
+      "method_id": "MACRO-S",
+      "source_ids": [
+        "R-S004"
+      ],
+      "reference_file": "principles.md",
+      "locator": "对应原则编号；来源记录保留原文定位",
+      "claim_kind": "source_paraphrase_with_separately_labeled_application"
+    },
+    {
+      "claim_id": "CN-F1",
+      "person": "傅海棠",
+      "source_ids": [
+        "CN-S002"
+      ],
+      "source_principle": "供需、成本及生产者反应是研究重点，多点调查用于补充汇总信息。",
+      "url": "https://www.7hcn.com/article/104899-2.html",
+      "locator": "第2页，问题4、7、10；web抽取正文第26行含整组问答",
+      "publication_date": null,
+      "attribution": "期货中国采访；傅海棠回答",
+      "excluded": [
+        "必赚概率",
+        "未经核验的收益与主力叙事"
+      ],
+      "method_id": "CN-F",
+      "reference_file": "trader-methods.md"
+    },
+    {
+      "claim_id": "CN-F2",
+      "person": "傅海棠",
+      "source_ids": [
+        "CN-S003"
+      ],
+      "source_principle": "长期低价可触发观察，但仍需等待供需变化。",
+      "url": "https://www.7hcn.com/article/142128-1.html",
+      "locator": "正文大蒜回顾段，web抽取第61行；导语第26行说明为部分录音",
+      "event_date": "2013-09-08",
+      "publication_date": null,
+      "attribution": "傅海棠演讲；翁建平、沈良整理",
+      "excluded": [
+        "事后回顾当同期日志",
+        "天道或绝对确定性当因果定律"
+      ],
+      "method_id": "CN-F",
+      "reference_file": "trader-methods.md"
+    },
+    {
+      "claim_id": "CN-L1",
+      "person": "林广茂",
+      "source_ids": [
+        "CN-S006"
+      ],
+      "source_principle": "长期供需总量和短期可投入市场的储备不同，基本面研究需要历史积累。",
+      "url": "https://www.7hcn.com/article/169302-1.html",
+      "locator": "第一问回答与末问回答；web抽取第29、32—33行",
+      "event_year": 2014,
+      "publication_date": null,
+      "attribution": "林广茂回答；七禾网整理的2014郑商所棉花论坛问答",
+      "excluded": [
+        "期货交割收敛直接移植股票",
+        "主持人复制成功说法"
+      ],
+      "method_id": "CN-L",
+      "reference_file": "trader-methods.md"
+    },
+    {
+      "claim_id": "CN-L2",
+      "person": "林广茂",
+      "source_ids": [
+        "CN-S006"
+      ],
+      "source_principle": "随商品整体回落的价格可能被错当作个体基本面判断得到证实。",
+      "url": "https://www.7hcn.com/article/169302-1.html",
+      "locator": "末问回答，棉花与白糖、橡胶一起下跌一段；web抽取第33行",
+      "event_year": 2014,
+      "publication_date": null,
+      "attribution": "林广茂回答；七禾网整理",
+      "excluded": [
+        "自述持仓收益作审计绩效"
+      ],
+      "method_id": "CN-L",
+      "reference_file": "trader-methods.md"
+    },
+    {
+      "claim_id": "CN-Q1",
+      "person": "青泽",
+      "source_ids": [
+        "CN-S010"
+      ],
+      "source_principle": "总结自身交易历史，建立适合自己的体系，并防止盈利后的自信膨胀。",
+      "url": "https://www.yicai.com/news/1978636.html",
+      "locator": "从小钱往大钱做/失败的根源在于自己；web抽取第47、63—65行",
+      "publication_date": "2012-08-11",
+      "attribution": "江南采访；青泽回答；第一财经财商",
+      "excluded": [
+        "行业盈利占比未经验证的数字",
+        "无法证伪的品性归因"
+      ],
+      "method_id": "CN-Q",
+      "reference_file": "trader-methods.md"
+    },
+    {
+      "claim_id": "CN-Q2",
+      "person": "青泽",
+      "source_ids": [
+        "CN-S011"
+      ],
+      "source_principle": "预测是交易体系的一部分；降低本可发生的大损失也值得复盘。",
+      "url": "https://www.7hcn.com/article/110060-1.html",
+      "locator": "首个问答和最后问答；web抽取第31、51行；第53行记者署名",
+      "publication_date": null,
+      "attribution": "黄义荣采访；青泽回答；期货日报采访由七禾转载",
+      "excluded": [
+        "个人四阶段经历当市场四阶段模型",
+        "必然性行情当统计保证"
+      ],
+      "method_id": "CN-Q",
+      "reference_file": "trader-methods.md"
+    },
+    {
+      "claim_id": "CN-G1",
+      "person": "葛卫东",
+      "source_ids": [
+        "CN-S015"
+      ],
+      "source_principle": "长虹回顾用于反思频繁进出的机会成本。",
+      "url": "https://www.7hcn.com/article/51062-1.html",
+      "locator": "投资理念：做股票如找金矿后半，1996—1997长虹回顾；web抽取第26行含全文",
+      "publication_date": null,
+      "attribution": "葛卫东回答；七禾转载CBN采访；原记者未核实",
+      "excluded": [
+        "回忆中的收益当绩效事实",
+        "长周期持有改称数周波段法"
+      ],
+      "method_id": "CN-G",
+      "reference_file": "trader-methods.md"
+    },
+    {
+      "claim_id": "CN-G2",
+      "person": "葛卫东",
+      "source_ids": [
+        "CN-S015"
+      ],
+      "source_principle": "基本面方向、技术面方向与风险收益关系共同检视交易。",
+      "url": "https://www.7hcn.com/article/51062-1.html",
+      "locator": "最后一段我现在做交易有三个原则；web抽取第26行含全文",
+      "publication_date": null,
+      "attribution": "葛卫东回答；七禾转载CBN采访；原刊期未核实",
+      "excluded": [
+        "个人数字当通用风险收益阈值",
+        "高增长允许任何估值的绝对化判断"
+      ],
+      "method_id": "CN-G",
+      "reference_file": "trader-methods.md"
+    },
+    {
+      "claim_id": "GM-RYAN-1",
+      "locator": "Questions for David Ryan，第1–2问；网页正文约第30–35行",
+      "attribution": "Ryan本人回答",
+      "paraphrase": "前一晚整理行动清单；通常先看技术结构，再核对基本面，要求两方面支持。",
+      "source_ids": [
+        "US-S004"
+      ],
+      "method_id": "GM-RYAN",
+      "reference_file": "trader-methods.md"
+    },
+    {
+      "claim_id": "GM-RYAN-2",
+      "locator": "2000–2002回顾；The Making of a CANSLIM Man；All About the Acronym，正文约第38–39、48、73–74行",
+      "attribution": "Ryan采访自述与采访者叙述",
+      "paraphrase": "形态会随市场环境转坏；他提醒避免过度延伸的买入，强调突破后的跟随表现。",
+      "source_ids": [
+        "US-S010"
+      ],
+      "method_id": "GM-RYAN",
+      "reference_file": "trader-methods.md"
+    },
+    {
+      "claim_id": "GM-MINERVINI-1",
+      "locator": "Questions for Mark Minervini，最大持仓问题；网页正文约第64–65行",
+      "attribution": "Minervini本人回答",
+      "paraphrase": "希望熟悉持股的基本面与技术情况；集中偏好是个人描述。",
+      "source_ids": [
+        "US-S004"
+      ],
+      "method_id": "GM-MINERVINI",
+      "reference_file": "trader-methods.md"
+    },
+    {
+      "claim_id": "GM-MINERVINI-2",
+      "locator": "Questions for Mark Minervini，What rules do you follow when you are going through drawdowns问题；网页正文约第100–101行",
+      "attribution": "Minervini本人回答",
+      "paraphrase": "不顺或回撤时，会缩小单笔仓位与总体敞口。",
+      "source_ids": [
+        "US-S004"
+      ],
+      "method_id": "GM-MINERVINI",
+      "reference_file": "trader-methods.md"
+    },
+    {
+      "claim_id": "GM-RASCHKE-1",
+      "locator": "PDF第6页，刊物第64页，执行/资金管理/夜间准备问答",
+      "attribution": "Raschke本人回答",
+      "paraphrase": "分开讨论方法、执行、资金管理与心理，并通过夜间情景准备和记录形成例行流程。",
+      "source_ids": [
+        "GL-S002"
+      ],
+      "method_id": "GM-RASCHKE",
+      "reference_file": "trader-methods.md"
+    },
+    {
+      "claim_id": "GM-RASCHKE-2",
+      "locator": "PDF第3页（刊物68）相对强弱问答；PDF第10页（刊物75）after close/night analysis问答",
+      "attribution": "Raschke本人回答",
+      "paraphrase": "观察多日强弱和浅回撤；分析需要波动背景与高周期背景，股票日线要放进周线结构。",
+      "source_ids": [
+        "GL-S003"
+      ],
+      "method_id": "GM-RASCHKE",
+      "reference_file": "trader-methods.md"
+    },
+    {
+      "claim_id": "GM-BRANDT-1",
+      "locator": "PDF第1页持仓/候选/风险单位，第2页服务定义与风险管理",
+      "attribution": "Brandt / Factor LLC报告自述",
+      "paraphrase": "持仓与候选分开列示；百分比表示相对风险单位；服务不是实时信号。",
+      "source_ids": [
+        "GL-S005"
+      ],
+      "method_id": "GM-BRANDT",
+      "reference_file": "trader-methods.md"
+    },
+    {
+      "claim_id": "GM-BRANDT-2",
+      "locator": "PDF第1页Ongoing Factor Moves与Dow futures段",
+      "attribution": "Brandt / Factor LLC报告自述",
+      "paraphrase": "报告称账户全市场空仓，但Dow形态仍跟踪；原仓已止损，符合技术再入条件仍可因风险选择放弃。",
+      "source_ids": [
+        "GL-S006"
+      ],
+      "method_id": "GM-BRANDT",
+      "reference_file": "trader-methods.md"
+    },
+    {
+      "claim_id": "GM-HASKELL-1",
+      "locator": "PDF第2–3页（书内13–14）两次采访、夜间清单、带日期笔记",
+      "attribution": "Haskell记录与自述，Elder采访描述",
+      "paraphrase": "案例展示晚间候选和逐持仓笔记、带日期记录；受访者仍在改进加仓与止损。",
+      "source_ids": [
+        "GL-S010"
+      ],
+      "method_id": "GM-HASKELL-ELDER",
+      "reference_file": "trader-methods.md"
+    },
+    {
+      "claim_id": "GM-HASKELL-2",
+      "locator": "PDF第4–6页（书内15–17），ASKJ入场、退出与ENTRY COMMENT",
+      "attribution": "交易为Haskell本人，点评为Elder",
+      "paraphrase": "出版结构将入场、后续退出和点评分开；ASKJ不是Elder本人交易。",
+      "source_ids": [
+        "GL-S010"
+      ],
+      "method_id": "GM-HASKELL-ELDER",
+      "reference_file": "trader-methods.md"
+    },
+    {
+      "claim_id": "US-S007-REVIEW",
+      "method_id": "CASE-IBD",
+      "source_ids": [
+        "US-S007"
+      ],
+      "actual_reviewer": "Arnie Gutierrez",
+      "reference_file": "trader-methods.md",
+      "claim_kind": "selected_retrospective_examples_only",
+      "not_attributed_to": "William O'Neil"
+    },
+    {
+      "claim_id": "US-S009-REVIEW",
+      "method_id": "CASE-IBD",
+      "source_ids": [
+        "US-S009"
+      ],
+      "actual_reviewer": "Jesse Munoz",
+      "reference_file": "trader-methods.md",
+      "claim_kind": "selected_retrospective_examples_only",
+      "not_attributed_to": "William O'Neil"
+    }
+  ],
+  "global_method_details": [
+    {
+      "method_id": "GM-RYAN",
+      "person": "David Ryan",
+      "support_level": "有限但可形成流程与候选条件卡",
+      "source_claims": [
+        {
+          "claim_id": "GM-RYAN-1",
+          "source_id": "US-S004",
+          "locator": "Questions for David Ryan，第1–2问；网页正文约第30–35行",
+          "attribution": "Ryan本人回答",
+          "paraphrase": "前一晚整理行动清单；通常先看技术结构，再核对基本面，要求两方面支持。"
+        },
+        {
+          "claim_id": "GM-RYAN-2",
+          "source_id": "US-S010",
+          "locator": "2000–2002回顾；The Making of a CANSLIM Man；All About the Acronym，正文约第38–39、48、73–74行",
+          "attribution": "Ryan采访自述与采访者叙述",
+          "paraphrase": "形态会随市场环境转坏；他提醒避免过度延伸的买入，强调突破后的跟随表现。"
+        }
+      ],
+      "a_share_application": "观察清单与触发条件分离；检查多日相对强弱、当时可得的盈利信息及突破后续表现。",
+      "suitable_environment": "有趋势、板块参与度和经营信息支持的成长/趋势波段。",
+      "failure_conditions": [
+        "突破反复失败或参与度衰减",
+        "经营事实与原假设冲突",
+        "入场已过度延伸、风险空间不合用户约束"
+      ],
+      "caveats": [
+        "不设置固定回撤或资金比例",
+        "A股新买普通股票不能复制美股当日快速纠错",
+        "后续验证须纳入失败及未触发样本",
+        "突破未立即上涨不自动判失败，应先定义观察窗口"
+      ]
+    },
+    {
+      "method_id": "GM-MINERVINI",
+      "person": "Mark Minervini",
+      "support_level": "研究承载能力与回撤约束；不足以形成完整SEPA/VCP技术方法",
+      "source_claims": [
+        {
+          "claim_id": "GM-MINERVINI-1",
+          "source_id": "US-S004",
+          "locator": "Questions for Mark Minervini，最大持仓问题；网页正文约第64–65行",
+          "attribution": "Minervini本人回答",
+          "paraphrase": "希望熟悉持股的基本面与技术情况；集中偏好是个人描述。"
+        },
+        {
+          "claim_id": "GM-MINERVINI-2",
+          "source_id": "US-S004",
+          "locator": "Questions for Mark Minervini，What rules do you follow when you are going through drawdowns问题；网页正文约第100–101行",
+          "attribution": "Minervini本人回答",
+          "paraphrase": "不顺或回撤时，会缩小单笔仓位与总体敞口。"
+        }
+      ],
+      "a_share_application": "按研究承载能力精简观察名单；若用户提供的记录显示执行或环境适配持续恶化，讨论收缩新增风险，额度依用户约束确定。",
+      "suitable_environment": "候选太多导致跟踪质量下降，或已有记录显示交易与环境不适配时；非方向或买点信号。",
+      "failure_conditions": [
+        "熟悉程度只有叙事而无证据",
+        "少数持仓共享行业、政策、流动性风险而未识别",
+        "跳空、T+1或涨跌停使计划减仓无法按原价完成"
+      ],
+      "caveats": [
+        "不以集中经历生成重仓法",
+        "不移植个人仓位上限",
+        "不从有限问答补写SEPA/VCP或趋势模板阈值",
+        "Ryan对其纪律的评价不是Minervini本人技术规则",
+        "不将所有大亏都能主动避免的绝对说法规范化"
+      ]
+    },
+    {
+      "method_id": "GM-RASCHKE",
+      "person": "Linda Bradford Raschke",
+      "support_level": "背景与准备流程，不是A股日内或数周优势验证",
+      "source_claims": [
+        {
+          "claim_id": "GM-RASCHKE-1",
+          "source_id": "GL-S002",
+          "locator": "PDF第6页，刊物第64页，执行/资金管理/夜间准备问答",
+          "attribution": "Raschke本人回答",
+          "paraphrase": "分开讨论方法、执行、资金管理与心理，并通过夜间情景准备和记录形成例行流程。"
+        },
+        {
+          "claim_id": "GM-RASCHKE-2",
+          "source_id": "GL-S003",
+          "locator": "PDF第3页（刊物68）相对强弱问答；PDF第10页（刊物75）after close/night analysis问答",
+          "attribution": "Raschke本人回答",
+          "paraphrase": "观察多日强弱和浅回撤；分析需要波动背景与高周期背景，股票日线要放进周线结构。"
+        }
+      ],
+      "a_share_application": "分列日线波段假设、周线背景、波动状态和执行约束；复盘区分方向错误与执行错误。",
+      "suitable_environment": "区分突破初期、趋势整理和高波动后横盘；用于准备与背景过滤。",
+      "failure_conditions": [
+        "低周期上冲被误当周线反转",
+        "跳空或波动变化使退出距离失真",
+        "计划被价格否定后仍执着原叙事"
+      ],
+      "caveats": [
+        "不把十分钟持仓、日内胜率与开盘规律延伸为A股数周优势",
+        "不迁移亏损时不离场想赚回来的个人偏好",
+        "执行贡献比例不是已核实因果估计",
+        "2026/01是托管路径而非文章发表时间"
+      ]
+    },
+    {
+      "method_id": "GM-BRANDT",
+      "person": "Peter L. Brandt",
+      "support_level": "周报切片支持状态区分及风险语义，不代表完整系统",
+      "source_claims": [
+        {
+          "claim_id": "GM-BRANDT-1",
+          "source_id": "GL-S005",
+          "locator": "PDF第1页持仓/候选/风险单位，第2页服务定义与风险管理",
+          "attribution": "Brandt / Factor LLC报告自述",
+          "paraphrase": "持仓与候选分开列示；百分比表示相对风险单位；服务不是实时信号。"
+        },
+        {
+          "claim_id": "GM-BRANDT-2",
+          "source_id": "GL-S006",
+          "locator": "PDF第1页Ongoing Factor Moves与Dow futures段",
+          "attribution": "Brandt / Factor LLC报告自述",
+          "paraphrase": "报告称账户全市场空仓，但Dow形态仍跟踪；原仓已止损，符合技术再入条件仍可因风险选择放弃。"
+        }
+      ],
+      "a_share_application": "把研究假设、候选触发和用户实际持仓分开；分别写资金占用、风险金额及名义敞口。",
+      "suitable_environment": "有结构边界和可执行退出计划的趋势/形态波段。",
+      "failure_conditions": [
+        "形态边界破坏",
+        "风险距离不合用户约束",
+        "T+1、涨跌停或流动性限制导致计划退出不可实现"
+      ],
+      "caveats": [
+        "100%风险单位不是满资金仓位",
+        "不默认复制周五平亏损仓或期货杠杆",
+        "没有连续样本就不把自报胜率/利润贡献当成技能性能",
+        "研究假设仍存在不代表原交易必须继续"
+      ]
+    },
+    {
+      "method_id": "GM-HASKELL-ELDER",
+      "person": "Sherri Haskell（实际案例）；Alexander Elder（作者、采访与点评）",
+      "support_level": "有限出版社试读支持记录结构，不代表Elder全套系统",
+      "source_claims": [
+        {
+          "claim_id": "GM-HASKELL-1",
+          "source_id": "GL-S010",
+          "locator": "PDF第2–3页（书内13–14）两次采访、夜间清单、带日期笔记",
+          "attribution": "Haskell记录与自述，Elder采访描述",
+          "paraphrase": "案例展示晚间候选和逐持仓笔记、带日期记录；受访者仍在改进加仓与止损。"
+        },
+        {
+          "claim_id": "GM-HASKELL-2",
+          "source_id": "GL-S010",
+          "locator": "PDF第4–6页（书内15–17），ASKJ入场、退出与ENTRY COMMENT",
+          "attribution": "交易为Haskell本人，点评为Elder",
+          "paraphrase": "出版结构将入场、后续退出和点评分开；ASKJ不是Elder本人交易。"
+        }
+      ],
+      "a_share_application": "分开保留当时信息、原计划、后续变化、结果及反思，并保留版本。",
+      "suitable_environment": "波段盘后与周末复盘；过程可核查性模块，非择时模型。",
+      "failure_conditions": [
+        "结果出现后补写计划",
+        "只保存盈利案例",
+        "用更新图形或后来财报回填当时理由"
+      ],
+      "caveats": [
+        "不采用样本指标阈值或必买断言为普适规则",
+        "不依据几例出版样本估计胜率",
+        "不从试读补写Elder完整三重滤网或2%规则",
+        "2003/2004采访时间不是当时公开可得证明"
+      ]
+    }
+  ],
+  "excluded_from_rule_evidence": [
+    {
+      "source_id": "CN-S001",
+      "title": "《一个农民的亿万传奇》出品方专题、前言及目录",
+      "url": "https://www.7hcn.com/article/130482-1.html",
+      "verification_level": "content_verified",
+      "exclusion_reason": "Not selected as a rule source in this version; verified scope is narrower than a complete method."
+    },
+    {
+      "source_id": "CN-S004",
+      "title": "《交易之道：傅海棠观点集》出品方书籍页",
+      "url": "https://www.7hcn.com/page/show-jyzd.html",
+      "verification_level": "metadata_verified",
+      "exclusion_reason": "Bibliography, program listing or limited access only; no detailed principle inferred."
+    },
+    {
+      "source_id": "CN-S005",
+      "title": "傅海棠等：河北大学东方经济学交流问答",
+      "url": "https://www.7hcn.com/article/323345-1.html",
+      "verification_level": "content_verified",
+      "exclusion_reason": "Not selected as a rule source in this version; verified scope is narrower than a complete method."
+    },
+    {
+      "source_id": "CN-S007",
+      "title": "一个亿到七个亿的历程（2012发言的2018转载）",
+      "url": "https://www.7hcn.com/article/325338-1.html",
+      "verification_level": "discovery_only",
+      "exclusion_reason": "Unverified discovery lead; quarantined."
+    },
+    {
+      "source_id": "CN-S008",
+      "title": "“浓汤野人”林广茂：棉花有没有牛市？",
+      "url": "https://www.7hcn.com/article/250833-1.html",
+      "verification_level": "discovery_only",
+      "exclusion_reason": "Unverified discovery lead; quarantined."
+    },
+    {
+      "source_id": "CN-S009",
+      "title": "做多棉花亏7个亿，林广茂总结失败原因",
+      "url": "https://www.7hcn.com/article/324485-1.html",
+      "verification_level": "discovery_only",
+      "exclusion_reason": "Unverified discovery lead; quarantined."
+    },
+    {
+      "source_id": "CN-S012",
+      "title": "《十年一梦：一个操盘手的自白》2012版书目、目录及试读",
+      "url": "https://www.beijingbookstore.com/~beijingb/DispOne.php?itemid=9787550611245",
+      "verification_level": "content_verified",
+      "exclusion_reason": "Not selected as a rule source in this version; verified scope is narrower than a complete method."
+    },
+    {
+      "source_id": "CN-S013",
+      "title": "《澄明之境》正版平台书目与目录",
+      "url": "https://se.zhangyue.com/book/detail?appId=c961e99c&bookId=12302978&bookType=1",
+      "verification_level": "metadata_verified",
+      "exclusion_reason": "Bibliography, program listing or limited access only; no detailed principle inferred."
+    },
+    {
+      "source_id": "CN-S014",
+      "title": "《十年一梦》修订版图书馆书目校验",
+      "url": "https://lib.zy91.com/opac/book/31253",
+      "verification_level": "metadata_verified",
+      "exclusion_reason": "Bibliography, program listing or limited access only; no detailed principle inferred."
+    },
+    {
+      "source_id": "CN-S016",
+      "title": "葛卫东：混沌理论与投资市场（网络转载）",
+      "url": "https://www.7hcn.com/article/92698-1.html",
+      "verification_level": "discovery_only",
+      "exclusion_reason": "Unverified discovery lead; quarantined."
+    },
+    {
+      "source_id": "US-S001",
+      "title": "Trade Like a Stock Market Wizard: How to Achieve Super Performance in Stocks in Any Market",
+      "url": "https://www.mheducation.com/highered/mhp/product/trade-like-stock-market-wizard-how-achieve-super-performance-stocks-any-market.html",
+      "verification_level": "metadata_verified",
+      "exclusion_reason": "Bibliography, program listing or limited access only; no detailed principle inferred."
+    },
+    {
+      "source_id": "US-S002",
+      "title": "Think & Trade Like a Champion: The Secrets, Rules & Blunt Truths of a Stock Market Wizard",
+      "url": "https://www.minervini.com/books",
+      "verification_level": "metadata_verified",
+      "exclusion_reason": "Bibliography, program listing or limited access only; no detailed principle inferred."
+    },
+    {
+      "source_id": "US-S003",
+      "title": "Momentum Masters: A Roundtable Interview with Super Traders with Minervini, Ryan, Zanger & Ritchie II",
+      "url": "https://www.amazon.com/Momentum-Masters-Roundtable-Interview-Minervini/dp/0996307923",
+      "verification_level": "metadata_verified",
+      "exclusion_reason": "Bibliography, program listing or limited access only; no detailed principle inferred."
+    },
+    {
+      "source_id": "US-S005",
+      "title": "How to Make Money in Stocks: A Winning System in Good Times and Bad, Fourth Edition",
+      "url": "https://www.mheducation.com/highered/mhp/product/how-make-money-stocks-winning-system-good-times-bad-fourth-edition.html?viewOption=student",
+      "verification_level": "metadata_verified",
+      "exclusion_reason": "Bibliography, program listing or limited access only; no detailed principle inferred."
+    },
+    {
+      "source_id": "US-S006",
+      "title": "The Successful Investor",
+      "url": "https://www.mheducation.com/highered/mhp/product/successful-investor.html",
+      "verification_level": "metadata_verified",
+      "exclusion_reason": "Bibliography, program listing or limited access only; no detailed principle inferred."
+    },
+    {
+      "source_id": "US-S008",
+      "title": "MarketSurge Stock Guide Winter 2024 — Good Trade/Bad Trade: Joe Fahmy",
+      "url": "https://marketsurge-files.investors.com/2024/12/StockGuide-End-of-year-2024.pdf",
+      "verification_level": "content_verified",
+      "exclusion_reason": "Date conflict in drug-event background and no historical version verification; not used as rule evidence."
+    },
+    {
+      "source_id": "US-S011",
+      "title": "Investing With IBD Ep.79: These Key Signals Tell You When A Leading Stock's Run Is Over",
+      "url": "https://investing-with-ibd.simplecast.com/episodes/ep-79-david-ryan-these-key-signals-tell-you-when-a-leading-stocks-run-is-over-L_f9KfzZ",
+      "verification_level": "metadata_verified",
+      "exclusion_reason": "Bibliography, program listing or limited access only; no detailed principle inferred."
+    },
+    {
+      "source_id": "US-S012",
+      "title": "MarketSmith Wizards Webinar Q&A（官方问答PDF）",
+      "url": "https://shop.investors.com/Images/promotional/Wizards-QA.pdf",
+      "verification_level": "content_verified",
+      "exclusion_reason": "Not selected as a rule source in this version; verified scope is narrower than a complete method."
+    },
+    {
+      "source_id": "US-S013",
+      "title": "Stan Weinstein's Secrets For Profiting in Bull and Bear Markets",
+      "url": "https://books.google.com/books/about/Stan_Weinstein_s_Secrets_For_Profiting_i.html?id=k7dJZbOOkLEC",
+      "verification_level": "metadata_verified",
+      "exclusion_reason": "Bibliography, program listing or limited access only; no detailed principle inferred."
+    },
+    {
+      "source_id": "US-S014",
+      "title": "2024 Stage Analysis Model Book",
+      "url": "https://traderlion.com/2024-stage-analysis-model-book/",
+      "verification_level": "metadata_verified",
+      "exclusion_reason": "Bibliography, program listing or limited access only; no detailed principle inferred."
+    },
+    {
+      "source_id": "US-S015",
+      "title": "Global Trend Alert — Daily Report | December 17, 2024",
+      "url": "https://traderlion.com/global-trend-alert/global-trend-alert-daily-report-december-17-2024/",
+      "verification_level": "metadata_verified",
+      "exclusion_reason": "Bibliography, program listing or limited access only; no detailed principle inferred."
+    },
+    {
+      "source_id": "US-S016",
+      "title": "TraderLion 2024 Trading Conference Day3 — Stage Analysis in Modern Markets",
+      "url": "https://traderlion.com/2024-trading-conference/",
+      "verification_level": "metadata_verified",
+      "exclusion_reason": "Bibliography, program listing or limited access only; no detailed principle inferred."
+    },
+    {
+      "source_id": "GL-S001",
+      "title": "Trading Sardines: Lessons in the Markets from a Lifelong Trader",
+      "url": "https://lindaraschke.net/trading-sardines/",
+      "verification_level": "metadata_verified",
+      "exclusion_reason": "Bibliography, program listing or limited access only; no detailed principle inferred."
+    },
+    {
+      "source_id": "GL-S004",
+      "title": "Diary of a Professional Commodity Trader: Lessons from 21 Weeks of Real Trading",
+      "url": "https://www.wiley-vch.de/en/areas-interest/finance-economics-law/diary-of-a-professional-commodity-trader-978-0-470-52145-8",
+      "verification_level": "metadata_verified",
+      "exclusion_reason": "Bibliography, program listing or limited access only; no detailed principle inferred."
+    },
+    {
+      "source_id": "GL-S007",
+      "title": "Come into My Trading Room: A Complete Guide to Trading",
+      "url": "https://www.elder.com/product-page/come-into-my-trading-room",
+      "verification_level": "metadata_verified",
+      "exclusion_reason": "Bibliography, program listing or limited access only; no detailed principle inferred."
+    },
+    {
+      "source_id": "GL-S008",
+      "title": "The New Trading for a Living",
+      "url": "https://www.elder.com/product-page/the-new-trading-for-a-living",
+      "verification_level": "metadata_verified",
+      "exclusion_reason": "Bibliography, program listing or limited access only; no detailed principle inferred."
+    },
+    {
+      "source_id": "GL-S009",
+      "title": "Entries & Exits: Visits to Sixteen Trading Rooms",
+      "url": "https://www.elder.com/product-page/entries-exits-visits-to-16-trading-rooms",
+      "verification_level": "metadata_verified",
+      "exclusion_reason": "Bibliography, program listing or limited access only; no detailed principle inferred."
+    },
+    {
+      "source_id": "GL-S011",
+      "title": "Current Markets / Monthly Webinar 与 Scans of the S&P（官方订阅入口）",
+      "url": "https://www.elder.com/pricing-plans/plans-pricing",
+      "verification_level": "metadata_verified",
+      "exclusion_reason": "Bibliography, program listing or limited access only; no detailed principle inferred."
+    },
+    {
+      "source_id": "GL-S012",
+      "title": "You Retire, You Die / Paul Tudor Jones — Lessons From 50 Years in Markets（Invest Like the Best Ep.470）",
+      "url": "https://colossus.com/episode/you-retire-you-die/",
+      "verification_level": "metadata_verified",
+      "exclusion_reason": "Bibliography, program listing or limited access only; no detailed principle inferred."
+    },
+    {
+      "source_id": "GL-S013",
+      "title": "Paul Tudor Jones: We Are Going To Be Broke — Squawk Pod 10/22/24",
+      "url": "https://podcasts.apple.com/us/podcast/paul-tudor-jones-we-are-going-to-be-broke-10-22-24/id1480890290?i=1000674029668",
+      "verification_level": "metadata_verified",
+      "exclusion_reason": "Bibliography, program listing or limited access only; no detailed principle inferred."
+    },
+    {
+      "source_id": "R-S001",
+      "title": "Reminiscences of a Stock Operator／《股票作手回忆录》",
+      "url": "https://www.gutenberg.org/ebooks/60979",
+      "verification_level": "content_verified",
+      "exclusion_reason": "Full text obtained but only sampled; Lefevre literary narrative is not Livermore authored trade log. No new chapter rule distilled in this version."
+    },
+    {
+      "source_id": "R-S002",
+      "title": "How to Trade In Stocks（McGraw Hill电子版）",
+      "url": "https://www.mheducation.com/highered/mhp/product/how-trade-stocks.html",
+      "verification_level": "metadata_verified",
+      "exclusion_reason": "Bibliography, program listing or limited access only; no detailed principle inferred."
+    },
+    {
+      "source_id": "R-S003",
+      "title": "The Alchemy of Finance／《金融炼金术》作者官网书目",
+      "url": "https://www.georgesoros.com/1987/10/19/the_alchemy_of_finance/",
+      "verification_level": "metadata_verified",
+      "exclusion_reason": "Bibliography, program listing or limited access only; no detailed principle inferred."
+    },
+    {
+      "source_id": "R-S005",
+      "title": "The Alchemy of Finance, 2nd Edition：Wiley书目与目录线索",
+      "url": "https://www.wiley.com/en-us/the-alchemy-of-finance-2nd-edition-p-9780471445494",
+      "verification_level": "discovery_only",
+      "exclusion_reason": "Unverified discovery lead; quarantined."
+    },
+    {
+      "source_id": "R-S006",
+      "title": "Market Wizards: The Next Generation",
+      "url": "https://www.harriman-house.com/authors/jack-d-schwager/market-wizards-the-next-generation/9781804093641",
+      "verification_level": "metadata_verified",
+      "exclusion_reason": "Bibliography, program listing or limited access only; no detailed principle inferred."
+    },
+    {
+      "source_id": "R-S007",
+      "title": "Lessons Learned From Market Wizards (With Jack Schwager)",
+      "url": "https://www.schwab.com/learn/story/lessons-learned-from-market-wizards-with-jack-schwager",
+      "verification_level": "metadata_verified",
+      "exclusion_reason": "Bibliography, program listing or limited access only; no detailed principle inferred."
+    },
+    {
+      "source_id": "R-S008",
+      "title": "我和小明（原账号帖子）",
+      "url": "https://tgb.cn/a/1ykBGTOOa5F",
+      "verification_level": "metadata_verified",
+      "exclusion_reason": "Bibliography, program listing or limited access only; no detailed principle inferred."
+    }
+  ],
+  "local_rule_references": [
+    {
+      "url": "https://www.sse.com.cn/aboutus/mediacenter/hotandd/c/c_20240412_10753188.shtml",
+      "verified_on": "2026-10-21",
+      "scope": "Historical disclosure reform notice; current arrangements require subsequent-notice check"
+    },
+    {
+      "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/fund/trading/c/c_20260424_10817739.shtml",
+      "verified_on": "2026-10-21",
+      "scope": "Notice specifies effective date and deferred provisions; page summary status may be stale; not a full legal applicability review"
+    }
+  ],
+  "source_rechecks": {
+    "macro": [
+      "D-S008",
+      "K-S001",
+      "K-S006",
+      "R-S004"
+    ],
+    "domestic": [
+      "CN-S002",
+      "CN-S003",
+      "CN-S006",
+      "CN-S010",
+      "CN-S011",
+      "CN-S015"
+    ],
+    "global": [
+      {
+        "source_id": "US-S004",
+        "url": "https://www.newtraderu.com/2014/07/16/my-interview-with-two-market-wizards-mark-minervini-david-ryan/",
+        "publication_date": "2014-07-16",
+        "date_basis": "原站URL日期；当前正文有采访与回答",
+        "actual_speakers": [
+          "David Ryan",
+          "Mark Minervini"
+        ],
+        "interviewer": "Steve Burns",
+        "verified_method": "2026-10-21 web打开并读取两人分区问答正文"
+      },
+      {
+        "source_id": "US-S010",
+        "url": "https://tradingmarkets.com/recent/canslims_market_wizard_a_conversation_with_david_ryan-677201",
+        "publication_date": "2009-03-13",
+        "date_basis": "正文日期",
+        "actual_speakers": [
+          "David Ryan"
+        ],
+        "interviewer": "David Penn",
+        "verified_method": "2026-10-21 web打开并读取原站采访"
+      },
+      {
+        "source_id": "GL-S002",
+        "url": "https://lindaraschke.net/wp-content/uploads/2026/01/rituals.pdf",
+        "publication_date": "2000-08",
+        "actual_speakers": [
+          "Linda Bradford Raschke"
+        ],
+        "interviewer": "Mark Etzkorn",
+        "verified_method": "读取既有PDF快照第6页及各页印刷页码",
+        "local_snapshot": "work/trader_research/public_pdf_snapshots/GL-S002.pdf",
+        "expected_sha256": "f0804fb801b54dea514c4603504ee577b28549fdef834b0a150c7b90aadb5bc4",
+        "locator_correction": {
+          "old_library_locator": "PDF 7页；刊物页56–62；PDF第2页作者署名，第6页记录与夜间准备讨论",
+          "verified_pdf_page_count": 7,
+          "printed_pages_in_pdf_order": [
+            56,
+            57,
+            58,
+            60,
+            62,
+            64,
+            65
+          ],
+          "used_locator": "PDF第6页=刊物第64页，执行/资金管理/晚间准备问答",
+          "primary_database_modified": false
+        }
+      },
+      {
+        "source_id": "GL-S003",
+        "url": "https://lindaraschke.net/wp-content/uploads/2026/01/raschke0204.pdf",
+        "publication_date": "2004-02",
+        "event_date": "2003-11",
+        "event_date_precision": "月；文中描述11月初",
+        "actual_speakers": [
+          "Linda Bradford Raschke"
+        ],
+        "interviewer": "Mark Etzkorn",
+        "verified_method": "读取既有PDF快照第3、10页",
+        "local_snapshot": "work/trader_research/public_pdf_snapshots/GL-S003.pdf",
+        "expected_sha256": "25ed7dee45739179a3e8374e0df8dfaa8e27c381b0866e9f0ee07acee5543ca9"
+      },
+      {
+        "source_id": "GL-S005",
+        "url": "https://www.peterlbrandt.com/wp-content/uploads/2025/11/Factor-Update-November-8-2025.pdf",
+        "publication_date": "2025-11-08",
+        "event_date": "2025-11-07",
+        "author": "Peter L. Brandt / Factor LLC",
+        "verified_method": "读取既有PDF快照第1–2页",
+        "local_snapshot": "work/trader_research/public_pdf_snapshots/GL-S005.pdf",
+        "expected_sha256": "8e48eae406a5f321ee4470d9ad66a898eb68d433efcac4d250c74182f8f9d208"
+      },
+      {
+        "source_id": "GL-S006",
+        "url": "https://www.peterlbrandt.com/wp-content/uploads/2026/06/httpswww.peterlbrandt.comwp-contentuploads202606Factor-Update-June-13-2026-1.pdf",
+        "publication_date": "2026-06-12",
+        "issued_date": "2026-06-11",
+        "report_title_date": "2026-06-13",
+        "data_as_of": "2026-06-11 close",
+        "date_warning": "不能用签发日替代已证实公开可得日；本轮没有完成历史版本可得性审计",
+        "author": "Peter L. Brandt / Factor LLC",
+        "verified_method": "读取既有PDF快照第1–2页；公开网页日期沿用已核验主库",
+        "local_snapshot": "work/trader_research/public_pdf_snapshots/GL-S006.pdf",
+        "expected_sha256": "5c8d4a6604867ce33102afb7b20289b7303ee94e90139b489b54828c57f02bab"
+      },
+      {
+        "source_id": "GL-S010",
+        "url": "https://catalogimages.wiley.com/images/db/pdf/9780471678052.excerpt.pdf",
+        "publication_date": null,
+        "interview_years": [
+          2003,
+          2004
+        ],
+        "author_interviewer_commentator": "Alexander Elder",
+        "case_trader": "Sherri Haskell",
+        "verified_method": "2026-10-21 web读取出版社18页试读；用于本卡的PDF第2–6页",
+        "date_warning": "采访/交易发生日期不等于出版或公开可得日期"
+      }
+    ]
+  },
+  "performance_audited": false,
+  "strategy_backtested": false,
+  "historical_availability_verified": false
+}

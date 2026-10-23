@@ -1,0 +1,176 @@
+{
+  "schema_version": "market-lens.expert-profile.v1",
+  "profile_id": "market-lens.skills.v1",
+  "experts": [
+    {
+      "id": "macro_environment",
+      "name": "宏观环境专家",
+      "focus": "达里奥与德鲁肯米勒框架：宏观传导、预期与风险暴露",
+      "skill_version": "1.0.0",
+      "original_skill_name": "dalio-druckenmiller-market",
+      "package": "dalio-druckenmiller-market.zip",
+      "package_sha256": "e4dd162b6ea267291c3bcf920ea145b761ccc98edb19546a6bec477720a31f68",
+      "files": [
+        {
+          "path": "macro-v1/dalio-druckenmiller-market/SKILL.md",
+          "sha256": "688dda744be2d0891ffff773cc3795e92fa7a2ca59a22566f78d589a0d108eb1",
+          "bytes": 7433,
+          "loaded_for_analysis": true
+        },
+        {
+          "path": "macro-v1/dalio-druckenmiller-market/agents/openai.yaml",
+          "sha256": "91b60bf843f272a88ace0e8c4b1593a0fc9ef2777506c8ab7c845ddb30961f5c",
+          "bytes": 364,
+          "loaded_for_analysis": false
+        },
+        {
+          "path": "macro-v1/dalio-druckenmiller-market/references/a-share-playbook.md",
+          "sha256": "ab7367f4a5cc549c2f69c1549a4b1c0e0fba15100809dc48981ea51d3e3b0518",
+          "bytes": 4907,
+          "loaded_for_analysis": true
+        },
+        {
+          "path": "macro-v1/dalio-druckenmiller-market/references/data-discipline.md",
+          "sha256": "51a5801c3f61fbf876d2a28ca4b0db900c6820a2f5ce92f7d3610cf27b1aed21",
+          "bytes": 5483,
+          "loaded_for_analysis": true
+        },
+        {
+          "path": "macro-v1/dalio-druckenmiller-market/references/principles.md",
+          "sha256": "80f6e54c91f0189ad61c074b036ff6d26ba3904f473f452c8ab18219028f65d6",
+          "bytes": 7828,
+          "loaded_for_analysis": true
+        },
+        {
+          "path": "macro-v1/dalio-druckenmiller-market/references/source-map.json",
+          "sha256": "c16d3892cc113f1123d1698729e0c76d81248876e7555ae2ad7d92957c528431",
+          "bytes": 8870,
+          "loaded_for_analysis": false
+        }
+      ]
+    },
+    {
+      "id": "market_structure",
+      "name": "A股波段专家",
+      "focus": "价格与资金、市场结构、候选条件和交易反证",
+      "skill_version": "2.0.0",
+      "original_skill_name": "dalio-druckenmiller-market",
+      "package": "a-share-market-skill-v2.zip",
+      "package_sha256": "b14a46677db815dd4400cec933219d5d53a0c4ef90bae18ed8a740a8e250b2c5",
+      "files": [
+        {
+          "path": "market-v2/dalio-druckenmiller-market/SKILL.md",
+          "sha256": "87d43316a935d833a0fb45ba6e2523dfe08ee84a89b276fbb2e397db13db5ee8",
+          "bytes": 6709,
+          "loaded_for_analysis": true
+        },
+        {
+          "path": "market-v2/dalio-druckenmiller-market/agents/openai.yaml",
+          "sha256": "6d08d95c479816e2c0c7b1757f9696708a4c718570e1d67d22a9baaf556573f9",
+          "bytes": 396,
+          "loaded_for_analysis": false
+        },
+        {
+          "path": "market-v2/dalio-druckenmiller-market/references/a-share-playbook.md",
+          "sha256": "573561b0b0795aab16374b69f30aa4bd0d9677e65fbe3a92306ce245dec4746a",
+          "bytes": 5035,
+          "loaded_for_analysis": true
+        },
+        {
+          "path": "market-v2/dalio-druckenmiller-market/references/data-discipline.md",
+          "sha256": "d0c6a596984cfc11fa4c54500d783e5de56d59af50c0d0221378c4fe6457de06",
+          "bytes": 5651,
+          "loaded_for_analysis": true
+        },
+        {
+          "path": "market-v2/dalio-druckenmiller-market/references/method-selection.md",
+          "sha256": "f342e5612904a4d91e910acdb27b7fdad36263cea1d20023183b65f9bf574d57",
+          "bytes": 5474,
+          "loaded_for_analysis": true
+        },
+        {
+          "path": "market-v2/dalio-druckenmiller-market/references/principles.md",
+          "sha256": "f15beaaaae91008dde32db9cd83ae9ace82b8b2daddfdf7db715f5b3d213cc03",
+          "bytes": 10065,
+          "loaded_for_analysis": true
+        },
+        {
+          "path": "market-v2/dalio-druckenmiller-market/references/source-map.json",
+          "sha256": "d7ea6ea97950275989a9b173dc6f2f4ac88f0adc296b5e61f0110130202afb50",
+          "bytes": 70994,
+          "loaded_for_analysis": false
+        },
+        {
+          "path": "market-v2/dalio-druckenmiller-market/references/trader-methods.md",
+          "sha256": "da52769ebc19be5c7e8a86b7a7fce5b08a350a5dbd0e82615566373ab8f0e040",
+          "bytes": 18887,
+          "loaded_for_analysis": true
+        }
+      ]
+    },
+    {
+      "id": "company_fundamentals",
+      "name": "林奇基本面专家",
+      "focus": "公司如何赚钱、盈利与估值依据、长期投资论点",
+      "skill_version": "未标版本",
+      "original_skill_name": "lynch-thinking",
+      "package": "lynch-thinking.zip",
+      "package_sha256": "76c0454e9ded8f62b72e77778194b5735bc80ebd266a6030272261fd4f3c1b3b",
+      "files": [
+        {
+          "path": "lynch/lynch-thinking/SKILL.md",
+          "sha256": "aaaf38b04d789f331fc5cdde220f8c6803847ad9bc48ed40ee839f040a63d180",
+          "bytes": 5590,
+          "loaded_for_analysis": true
+        },
+        {
+          "path": "lynch/lynch-thinking/agents/openai.yaml",
+          "sha256": "01c2d2b1a32cadf377f339576065d27d1373e83d78d84da213ad01beb0d3707c",
+          "bytes": 365,
+          "loaded_for_analysis": false
+        },
+        {
+          "path": "lynch/lynch-thinking/references/book-notes.md",
+          "sha256": "1bca58f6dd89b732fe2c48b1ec892882e7ff2f62c904c205d6b96a6e4c921f13",
+          "bytes": 6781,
+          "loaded_for_analysis": true
+        },
+        {
+          "path": "lynch/lynch-thinking/references/examples.md",
+          "sha256": "725f10e2286b711b68d9883291c5fcabd706f272c7496770dbfdc1d3bc501ed8",
+          "bytes": 2136,
+          "loaded_for_analysis": true
+        }
+      ]
+    }
+  ],
+  "knowledge": {
+    "path": "knowledge/verified-investment-summaries.jsonl",
+    "count": 15,
+    "source_ids": [
+      "D-S008",
+      "D-S009",
+      "D-S010",
+      "D-S011",
+      "D-S012",
+      "D-S013",
+      "D-S014",
+      "D-S015",
+      "D-S016",
+      "K-S001",
+      "K-S002",
+      "K-S003",
+      "K-S006",
+      "K-S010",
+      "K-S015"
+    ],
+    "sha256": "5bae201cc7a5ef51ae54b994fcbd840f0174548949c1888de39e94438479e26d",
+    "verification_level": "content_verified",
+    "kind": "editorial_method_summaries",
+    "package": "dalio-druckenmiller-kb-v2.zip",
+    "package_sha256": "0ee218d4763f8ba8b734d9e255768a03aea929a72864bd5b4bfc55801a86b22a",
+    "original_sources_sha256": "9eac2d2f820b411522b3eb2f798f68bcd26545cdbbb65a655b5d6ded8d0eda23",
+    "training_approved": false,
+    "pit_approved": false
+  }
+}

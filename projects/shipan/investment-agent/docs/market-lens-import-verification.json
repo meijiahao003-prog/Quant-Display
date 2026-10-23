@@ -1,0 +1,35 @@
+{
+  "source": "production snapshot captured by parent; no model call",
+  "analysis_asof": "2026-10-21T06:04:48.930Z",
+  "selected": {
+    "symbol": "510300",
+    "kind": "etf",
+    "name": "沪深300ETF华泰柏瑞"
+  },
+  "input_bytes": 56991,
+  "price_bars": 187,
+  "fund_bars": 185,
+  "material_characters": 47053,
+  "material_count": 18,
+  "experts": [
+    {
+      "id": "macro_environment",
+      "instruction_characters": 11553
+    },
+    {
+      "id": "market_structure",
+      "instruction_characters": 23699
+    },
+    {
+      "id": "company_fundamentals",
+      "instruction_characters": 6976
+    }
+  ],
+  "bundle_sha256": "f095c0f28740e0b3a740fb3d4662c070fae5a6ea9d2b1eb1045e15e6077b6b2e",
+  "profile_sha256": "da12b3b54fb2483cc45a76b964b803591133baad8e4e73f2559e4bb213cd0d96",
+  "price_material_characters": 10319,
+  "fund_material_characters": 15452,
+  "price_before_characters": 20015,
+  "fund_before_characters": 27618,
+  "no_model_call": true
+}

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>投资 Agent · 观市会审</title>
+  <link rel="stylesheet" href="/market-lens.css">
+  <script type="module" src="/market-lens.js"></script>
+</head>
+<body>
+  <a class="skip" href="#review">跳到会审资料</a>
+  <header><a class="brand" href="/" target="_blank" rel="noopener"><span>◈</span><div>投资专家圆桌<small>MARKET LENS × EXPERT COUNCIL</small></div></a><span class="local-tag">本地运行 · ChatGPT 登录</span></header>
+  <main>
+    <div class="eyebrow">ONE SNAPSHOT · THREE PERSPECTIVES</div>
+    <h1>把盘面交给专家，<br><span>把依据留在桌上。</span></h1>
+    <p class="lead">三位专家读取同一批价格与资金资料，独立分析后由主持人保留共识、分歧和缺口。</p>
+    <section class="panel connection" aria-labelledby="connection-title">
+      <div><h2 id="connection-title">连接状态</h2><p id="connection-state" role="status">正在检查本地 Agent…</p><p class="muted" id="channel-state">等待观市数据包，或手动导入。</p></div>
+      <div class="actions"><a class="button" href="/" target="_blank" rel="noopener">登录 / 验证连接 ↗</a><button id="recheck">重新检查</button></div>
+    </section>
+    <section class="experts" id="experts" aria-label="加载的专家方法包"><p class="muted">正在读取本地专家配置…</p></section>
+    <p class="source-note" id="profile-note"></p>
+    <section class="panel" id="review" aria-labelledby="review-title">
+      <div class="section-heading"><h2 id="review-title">本次研究资料</h2><label class="button file-button">导入观市数据包<input id="bundle-file" type="file" accept="application/json,.json"></label></div>
+      <div id="empty-bundle" class="empty">在观市选择标的并点击「送入投资 Agent」，或导入已导出的 JSON 数据包。</div>
+      <div id="bundle-detail" hidden>
+        <div class="instrument"><strong id="instrument-name"></strong><span id="instrument-meta"></span><b class="pill" id="data-mode"></b></div>
+        <dl class="data-grid"><div><dt>冻结时间 · 北京时间</dt><dd id="analysis-asof"></dd></div><div><dt>价格资料</dt><dd id="price-detail"></dd></div><div><dt>资金分时</dt><dd id="flow-detail"></dd></div><div><dt>批次</dt><dd id="bundle-id"></dd></div></dl>
+        <p id="data-limitations" class="notice"></p>
+        <h3>研究问题</h3><p id="question" class="question"></p>
+      </div>
+      <div class="launch-row"><label for="max-rounds">讨论上限<select id="max-rounds"><option value="1">1 轮</option><option value="2" selected>2 轮</option><option value="3">3 轮</option></select></label><button class="primary" id="start" disabled>开始三专家会审 ↗</button><button id="cancel" class="danger" hidden>停止本次会审</button></div>
+      <p class="small">点击开始后，资料将由本地 Codex 发送给你已登录的模型。接入的是方法包与知识库；本次操作不会训练模型或执行交易。</p>
+      <p class="error" id="error" role="alert" hidden></p>
+    </section>
+    <section id="results-section" class="panel" hidden aria-labelledby="results-title">
+      <div class="section-heading"><div><h2 id="results-title">会审进展</h2><p id="run-state" role="status"></p></div><a id="report" class="button" hidden>↓ 导出完整报告</a></div>
+      <div id="rounds"></div><div id="final" class="final" hidden></div>
+      <p class="small">结果只回传到发起本次会审的观市页面。若页面已关闭，可在本地圆桌历史中查看；浏览器显示的旧快照会保留冻结时间。</p>
+    </section>
+  </main>
+  <footer><span>观市 × 投资专家圆桌</span><span>事实不靠投票 · 缺口保持可见</span></footer>
+</body>
+</html>

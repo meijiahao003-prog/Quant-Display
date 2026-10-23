@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "timezone": "Asia/Shanghai",
+  "projectId": "shipan-local",
+  "sourcePageUrl": "/macro-source.html",
+  "dataLibraryFileId": "configure-local-macro-data",
+  "dataFilename": "宏观市场监测_一年数据与更新脚本.zip",
+  "handbookLibraryFileId": "configure-local-handbook",
+  "handbookFilename": "macro-market-research-framework-20261023.html",
+  "handbookDisplayPath": "/macro-handbook.html",
+  "macroEndpoint": "/api/macro",
+  "marketEndpoint": "/api/refresh",
+  "morningSteps": [
+    "按 Asia/Shanghai 计算本次日期。读取 sourcePageUrl 的当前内容、Agent Instructions、最新版数据包及研究手册；手册展示副本只供阅读，研究时以 Library 最新版为准。",
+    "按 Library 技能下载数据包，安全解压并保留 SQLite、raw 历史及版本。读取各域 README、覆盖报告和现有采集器，运行 run_update.py --mode all，不传写死的日期；源失败可按单域保存部分成功。不运行写死历史区间的 recover_flows.py；网络策略阻断时跳过该源，不绕过。",
+    "逐源核对所属期、实际源时间、取得时间、空值、唯一键和原件；日频数据按日更新，月季频只纳入新发布或修订。未发布、失败、陈旧和真实零值分别记录；盘前保留上一交易日价格，盘中不冒称收盘。不能把执行退出0当成全部成功。",
+    "合并成功数据，禁止空快照覆盖；重建 catalog，压缩并按版本保护替换同一数据包，更新 sourcePageUrl 的最新有效日期、覆盖缺口和本次变化。每月首次运行检查一年窗口与历史修订。",
+    "按当前研究手册的政策、资金价格、融资、增长通胀、外部环境、价格广度和风险偏好框架形成条件式结论。分别写已知事实、研究推断、待验证条件和失效风险；手册中的固定政策日历须核对当期官方公告。没有新发布不制造新证据，不以成交额、ETF份额或融资余额替代净现金流。",
+    "获取本次 Sites 服务访问权限，只向本 Site 使用 OAI-Sites-Authorization。先 GET /api/macro 读取当前 schema，按 reportDate 幂等 POST brief，并 GET 读回确认内容、生成时间和各源日期。sourcePageUrl 指向本资料页；handbookUrl 可指向本站 /macro-handbook.html；sources 保留资料与原始来源的实际日期。",
+    "只有宏观结论读回成功才认定宏观环节完成，然后按 GET /api/refresh 的协议刷新观市报价及各标的价格分时、日线和资金，持久保存并逐项读回。宏观环节失败仍可独立完成行情更新，但必须 POST failure 标明失败且保留上一份有效结论，不能声称联动全部成功。",
+    "在 sourcePageUrl 更新晨间联动状态并链接观市，简要报告结论生成日、源数据截止、今日行情覆盖和失败项。常规运行只更新数据与资料页，不修改源码或重新发布网站；不保存或输出访问凭据。"
+  ],
+  "intradaySteps": [
+    "先 GET /api/macro 检查今天晨间结论及最新执行状态；结论缺失、旧日或失败都必须如实报告，不能将旧结论改成今天，也不要并发重复启动全量宏观采集。",
+    "独立按 /api/refresh 协议更新全部16个标的，保留源日期，最多并发4个，每个请求75秒超时；首轮结束后只对失败或缺失重试一次，逐标的 GET 读回。",
+    "行情更新与宏观结论采用同一北京时间日期核验。宏观未就绪不阻塞行情，行情接口失败不清空宏观先导；任务结果同时报告宏观状态与行情覆盖。"
+  ],
+  "timing": {
+    "morning": "每天早上约08:00（Asia/Shanghai，弹性调度）",
+    "market": "周一至周五09:40—15:40每小时，节假日按真实源日期保留最近记录"
+  }
+}
